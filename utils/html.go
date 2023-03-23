@@ -47,7 +47,7 @@ func Clean(s string) string {
 	o = r2.ReplaceAllString(o, "$1 $3")
 
 	// Remove whitespace between values
-	r3 := regexp.MustCompile(`('|")([ ]{2,})(.*>)`)
+	r3 := regexp.MustCompile(`<.*('|")([ ]{2,})(.*>)`)
 	o = r3.ReplaceAllString(o, "$1 $3")
 
 	return o
