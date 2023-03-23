@@ -51,5 +51,5 @@ func render() {
 			Lang:      "en",
 		},
 	)
-	_, _ = min.String("text/html", output)
+	_ = Minify(output)
 }
