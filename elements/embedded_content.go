@@ -18,9 +18,7 @@ func Embed(props EmbedProps) string {
 		"global": RenderGlobalProps(props.GlobalProps),
 	}
 
-	t := Mx(`
-    <embed {{global}} />
-  `)
+	t := Mx(`<embed {{global}} />`)
 
 	s := Render(t, values)
 	return s
@@ -42,11 +40,7 @@ func Iframe(props IframeProps) string {
 		"global": RenderGlobalProps(props.GlobalProps),
 	}
 
-	t := Mx(`
-    <iframe {{global}}>
-		  {{innerhtml}}
-		</iframe>
-  `)
+	t := Mx(`<iframe {{global}}>{{innerhtml}}</iframe>`)
 
 	s := Render(t, values)
 	return s
@@ -68,11 +62,7 @@ func Object(props ObjectProps) string {
 		"global": RenderGlobalProps(props.GlobalProps),
 	}
 
-	t := Mx(`
-    <object {{global}}>
-		  {{innerhtml}}
-		</object>
-  `)
+	t := Mx(`<object {{global}}>{{innerhtml}}</object>`)
 
 	s := Render(t, values)
 	return s
@@ -94,11 +84,7 @@ func Picture(props PictureProps) string {
 		"global": RenderGlobalProps(props.GlobalProps),
 	}
 
-	t := Mx(`
-    <picture {{global}}>
-		  {{innerhtml}}
-		</picture>
-  `)
+	t := Mx(`<picture {{global}}>{{innerhtml}}</picture>`)
 
 	s := Render(t, values)
 	return s
@@ -121,9 +107,7 @@ func Source(props SourceProps) string {
 		"global": RenderGlobalProps(props.GlobalProps),
 	}
 
-	t := Mx(`
-    <source {{global}} />
-  `)
+	t := Mx(`<source {{global}} />`)
 
 	s := Render(t, values)
 	return s

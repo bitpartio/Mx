@@ -21,11 +21,7 @@ func Del(props DelProps) string {
 		"global": RenderGlobalProps(props.GlobalProps),
 	}
 
-	t := Mx(`
-    <del {{global}}>
-		  {{innerhtml}}
-		</del>
-  `)
+	t := Mx(`<del {{global}}>{{innerhtml}}</del>`)
 
 	s := Render(t, values)
 	return s
@@ -49,11 +45,7 @@ func Ins(props InsProps) string {
 		"global": RenderGlobalProps(props.GlobalProps),
 	}
 
-	t := Mx(`
-    <ins {{global}}>
-		  {{innerhtml}}
-		</ins>
-  `)
+	t := Mx(`<ins {{global}}>{{innerhtml}}</ins>`)
 
 	s := Render(t, values)
 	return s

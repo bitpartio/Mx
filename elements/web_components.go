@@ -23,11 +23,7 @@ func Slot(props SlotProps) string {
 		"global": RenderGlobalProps(props.GlobalProps),
 	}
 
-	t := Mx(`
-    <slot {{name}} {{global}}>
-		  {{innerhtml}}
-		</slot>
-  `)
+	t := Mx(`<slot {{name}} {{global}}>{{innerhtml}}</slot>`)
 
 	s := Render(t, values)
 	return s
@@ -50,11 +46,7 @@ func Template(props TemplateProps) string {
 		"global": RenderGlobalProps(props.GlobalProps),
 	}
 
-	t := Mx(`
-    <template {{global}}>
-		  {{innerhtml}}
-		</template>
-  `)
+	t := Mx(`<template {{global}}>{{innerhtml}}</template>`)
 
 	s := Render(t, values)
 	return s

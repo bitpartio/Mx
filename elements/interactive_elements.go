@@ -21,11 +21,7 @@ func Details(props DetailsProps) string {
 		"global": RenderGlobalProps(props.GlobalProps),
 	}
 
-	t := Mx(`
-    <details {{global}}>
-			{{innerhtml}}
-		</details>
-  `)
+	t := Mx(`<details {{global}}>{{innerhtml}}</details>`)
 
 	s := Render(t, values)
 	return s
@@ -47,11 +43,7 @@ func Dialog(props DialogProps) string {
 		"global": RenderGlobalProps(props.GlobalProps),
 	}
 
-	t := Mx(`
-    <dialog {{global}}>
-			{{innerhtml}}
-		</dialog>
-  `)
+	t := Mx(`<dialog {{global}}>{{innerhtml}}</dialog>`)
 
 	s := Render(t, values)
 	return s
@@ -74,11 +66,7 @@ func Summary(props SummaryProps) string {
 		"global": RenderGlobalProps(props.GlobalProps),
 	}
 
-	t := Mx(`
-    <summary {{global}}>
-			{{innerhtml}}
-		</summary>
-  `)
+	t := Mx(`<summary {{global}}>{{innerhtml}}</summary>`)
 
 	s := Render(t, values)
 	return s

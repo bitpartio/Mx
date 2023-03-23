@@ -20,11 +20,7 @@ func Body(props BodyProps) string {
 		"global": RenderGlobalProps(props.GlobalProps),
 	}
 
-	t := Mx(`
-    <body {{global}}>
-		  {{innerhtml}}
-		</body>
-  `)
+	t := Mx(`<body {{global}}>{{innerhtml}}</body>`)
 
 	s := Render(t, values)
 	return s

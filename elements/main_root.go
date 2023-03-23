@@ -25,11 +25,7 @@ func HTML(props HTMLProps) string {
 		"global": RenderGlobalProps(props.GlobalProps),
 	}
 
-	t := Mx(`
-    <html {{lang}} {{global}}>
-		  {{innerhtml}}
-		</html>
-  `)
+	t := Mx(`<html {{lang}} {{global}}>{{innerhtml}}</html>`)
 
 	s := Render(t, values)
 	return s

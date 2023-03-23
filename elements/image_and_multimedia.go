@@ -18,9 +18,7 @@ func Area(props AreaProps) string {
 		"global": RenderGlobalProps(props.GlobalProps),
 	}
 
-	t := Mx(`
-    <area {{global}} />
-  `)
+	t := Mx(`<area {{global}} />`)
 
 	s := Render(t, values)
 	return s
@@ -44,11 +42,7 @@ func Audio(props AudioProps) string {
 		"global": RenderGlobalProps(props.GlobalProps),
 	}
 
-	t := Mx(`
-    <audio {{global}}>
-		  {{innerhtml}}
-		</audio>
-  `)
+	t := Mx(`<audio {{global}}>{{innerhtml}}</audio>`)
 
 	s := Render(t, values)
 	return s
@@ -66,9 +60,7 @@ func Img(props ImgProps) string {
 		"global": RenderGlobalProps(props.GlobalProps),
 	}
 
-	t := Mx(`
-    <img {{global}} />
-  `)
+	t := Mx(`<img {{global}} />`)
 
 	s := Render(t, values)
 	return s
@@ -89,11 +81,7 @@ func Map(props MapProps) string {
 		"global": RenderGlobalProps(props.GlobalProps),
 	}
 
-	t := Mx(`
-    <map {{global}}>
-		  {{innerhtml}}
-		</map>
-  `)
+	t := Mx(`<map {{global}}>{{innerhtml}}</map>`)
 
 	s := Render(t, values)
 	return s
@@ -114,9 +102,7 @@ func Track(props TrackProps) string {
 		"global": RenderGlobalProps(props.GlobalProps),
 	}
 
-	t := Mx(`
-    <track {{global}} />
-  `)
+	t := Mx(`<track {{global}} />`)
 
 	s := Render(t, values)
 	return s
@@ -139,11 +125,7 @@ func Video(props VideoProps) string {
 		"global": RenderGlobalProps(props.GlobalProps),
 	}
 
-	t := Mx(`
-    <video {{global}}>
-		  {{innerhtml}}
-		</video>
-  `)
+	t := Mx(`<video {{global}}>{{innerhtml}}</video>`)
 
 	s := Render(t, values)
 	return s

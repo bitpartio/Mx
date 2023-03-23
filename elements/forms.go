@@ -26,9 +26,7 @@ func Button(props ButtonProps) string {
 		"global": RenderGlobalProps(props.GlobalProps),
 	}
 
-	t := Mx(`
-    <button {{global}} {{disabled}}>{{innerhtml}}</button>
-  `)
+	t := Mx(`<button {{global}} {{disabled}}>{{innerhtml}}</button>`)
 
 	s := Render(t, values)
 	return s
@@ -50,11 +48,7 @@ func Datalist(props DatalistProps) string {
 		"global": RenderGlobalProps(props.GlobalProps),
 	}
 
-	t := Mx(`
-    <datalist {{global}}>
-		  {{innerhtml}}
-		</datalist>
-  `)
+	t := Mx(`<datalist {{global}}>{{innerhtml}}</datalist>`)
 
 	s := Render(t, values)
 	return s
@@ -76,11 +70,7 @@ func Fieldset(props FieldsetProps) string {
 		"global": RenderGlobalProps(props.GlobalProps),
 	}
 
-	t := Mx(`
-    <fieldset {{global}}>
-		  {{innerhtml}}
-		</fieldset>
-  `)
+	t := Mx(`<fieldset {{global}}>{{innerhtml}}</fieldset>`)
 
 	s := Render(t, values)
 	return s
@@ -102,11 +92,7 @@ func Form(props FormProps) string {
 		"global": RenderGlobalProps(props.GlobalProps),
 	}
 
-	t := Mx(`
-    <form {{global}}>
-		  {{innerhtml}}
-		</form>
-  `)
+	t := Mx(`<form {{global}}>{{innerhtml}}</form>`)
 
 	s := Render(t, values)
 	return s
@@ -129,9 +115,7 @@ func Input(props InputProps) string {
 		"global": RenderGlobalProps(props.GlobalProps),
 	}
 
-	t := Mx(`
-    <input {{global}} />
-  `)
+	t := Mx(`<input {{global}} />`)
 
 	s := Render(t, values)
 	return s
@@ -152,11 +136,7 @@ func Label(props LabelProps) string {
 		"global": RenderGlobalProps(props.GlobalProps),
 	}
 
-	t := Mx(`
-    <label {{global}}>
-		  {{innerhtml}}
-		</label>
-  `)
+	t := Mx(`<label {{global}}>{{innerhtml}}</label>`)
 
 	s := Render(t, values)
 	return s
@@ -177,11 +157,7 @@ func Legend(props LegendProps) string {
 		"global": RenderGlobalProps(props.GlobalProps),
 	}
 
-	t := Mx(`
-    <legend {{global}}>
-		  {{innerhtml}}
-		</legend>
-  `)
+	t := Mx(`<legend {{global}}>{{innerhtml}}</legend>`)
 
 	s := Render(t, values)
 	return s
@@ -203,11 +179,7 @@ func Meter(props MeterProps) string {
 		"global": RenderGlobalProps(props.GlobalProps),
 	}
 
-	t := Mx(`
-    <meter {{global}}>
-		  {{innerhtml}}
-		</meter>
-  `)
+	t := Mx(`<meter {{global}}>{{innerhtml}}</meter>`)
 
 	s := Render(t, values)
 	return s
@@ -228,11 +200,7 @@ func Optgroup(props OptgroupProps) string {
 		"global": RenderGlobalProps(props.GlobalProps),
 	}
 
-	t := Mx(`
-    <optgroup {{global}}>
-		  {{innerhtml}}
-		</optgroup>
-  `)
+	t := Mx(`<optgroup {{global}}>{{innerhtml}}</optgroup>`)
 
 	s := Render(t, values)
 	return s
@@ -255,9 +223,7 @@ func Option(props OptionProps) string {
 		"global": RenderGlobalProps(props.GlobalProps),
 	}
 
-	t := Mx(`
-    <option {{global}}>{{innerhtml}}</option>
-  `)
+	t := Mx(`<option {{global}}>{{innerhtml}}</option>`)
 
 	s := Render(t, values)
 	return s
@@ -279,9 +245,7 @@ func Output(props OutputProps) string {
 		"global": RenderGlobalProps(props.GlobalProps),
 	}
 
-	t := Mx(`
-    <output {{global}}>{{innerhtml}}</output>
-  `)
+	t := Mx(`<output {{global}}>{{innerhtml}}</output>`)
 
 	s := Render(t, values)
 	return s
@@ -303,9 +267,7 @@ func Progress(props ProgressProps) string {
 		"global": RenderGlobalProps(props.GlobalProps),
 	}
 
-	t := Mx(`
-    <progress {{global}}>{{innerhtml}}</progress>
-  `)
+	t := Mx(`<progress {{global}}>{{innerhtml}}</progress>`)
 
 	s := Render(t, values)
 	return s
@@ -326,11 +288,7 @@ func Select(props SelectProps) string {
 		"global": RenderGlobalProps(props.GlobalProps),
 	}
 
-	t := Mx(`
-    <select {{global}}>
-		  {{innerhtml}}
-		</select>
-  `)
+	t := Mx(`<select {{global}}>{{innerhtml}}</select>`)
 
 	s := Render(t, values)
 	return s
@@ -353,11 +311,7 @@ func Textarea(props TextareaProps) string {
 		"global": RenderGlobalProps(props.GlobalProps),
 	}
 
-	t := Mx(`
-    <textarea {{global}}>
-		  {{innerhtml}}
-		</textarea>
-  `)
+	t := Mx(`<textarea {{global}}>{{innerhtml}}</textarea>`)
 
 	s := Render(t, values)
 	return s

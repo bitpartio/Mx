@@ -19,11 +19,7 @@ func Caption(props CaptionProps) string {
 		"global": RenderGlobalProps(props.GlobalProps),
 	}
 
-	t := Mx(`
-    <caption {{global}}>
-		  {{innerhtml}}
-		</caption>
-  `)
+	t := Mx(`<caption {{global}}>{{innerhtml}}</caption>`)
 
 	s := Render(t, values)
 	return s
@@ -42,9 +38,7 @@ func Col(props ColProps) string {
 		"global": RenderGlobalProps(props.GlobalProps),
 	}
 
-	t := Mx(`
-    <col {{global}} />
-  `)
+	t := Mx(`<col {{global}} />`)
 
 	s := Render(t, values)
 	return s
@@ -65,11 +59,7 @@ func Colgroup(props ColgroupProps) string {
 		"global": RenderGlobalProps(props.GlobalProps),
 	}
 
-	t := Mx(`
-    <colgroup {{global}}>
-		  {{innerhtml}}
-		</colgroup>
-  `)
+	t := Mx(`<colgroup {{global}}>{{innerhtml}}</colgroup>`)
 
 	s := Render(t, values)
 	return s
@@ -92,11 +82,7 @@ func Table(props TableProps) string {
 		"global": RenderGlobalProps(props.GlobalProps),
 	}
 
-	t := Mx(`
-    <table {{global}}>
-		  {{innerhtml}}
-		</table>
-  `)
+	t := Mx(`<table {{global}}>{{innerhtml}}</table>`)
 
 	s := Render(t, values)
 	return s
@@ -118,11 +104,7 @@ func Tbody(props TbodyProps) string {
 		"global": RenderGlobalProps(props.GlobalProps),
 	}
 
-	t := Mx(`
-    <tbody {{global}}>
-		  {{innerhtml}}
-		</tbody>
-  `)
+	t := Mx(`<tbody {{global}}>{{innerhtml}}</tbody>`)
 
 	s := Render(t, values)
 	return s
@@ -144,9 +126,7 @@ func Td(props TdProps) string {
 		"global": RenderGlobalProps(props.GlobalProps),
 	}
 
-	t := Mx(`
-    <td {{global}}>{{innerhtml}}</td>
-  `)
+	t := Mx(`<td {{global}}>{{innerhtml}}</td>`)
 
 	s := Render(t, values)
 	return s
@@ -167,11 +147,7 @@ func Tfoot(props TfootProps) string {
 		"global": RenderGlobalProps(props.GlobalProps),
 	}
 
-	t := Mx(`
-    <tfoot {{global}}>
-		  {{innerhtml}}
-		</tfoot> `)
-
+	t := Mx(`<tfoot {{global}}>{{innerhtml}}</tfoot>`)
 	s := Render(t, values)
 	return s
 }
@@ -192,9 +168,7 @@ func Th(props ThProps) string {
 		"global": RenderGlobalProps(props.GlobalProps),
 	}
 
-	t := Mx(`
-    <th {{global}}>{{innerhtml}}</th>
-  `)
+	t := Mx(`<th {{global}}>{{innerhtml}}</th>`)
 
 	s := Render(t, values)
 	return s
@@ -215,11 +189,7 @@ func Thead(props TheadProps) string {
 		"global": RenderGlobalProps(props.GlobalProps),
 	}
 
-	t := Mx(`
-    <thead {{global}}>
-		  {{innerhtml}}
-		</thead>
-  `)
+	t := Mx(`<thead {{global}}>{{innerhtml}}</thead>`)
 
 	s := Render(t, values)
 	return s
@@ -242,11 +212,7 @@ func Tr(props TrProps) string {
 		"global": RenderGlobalProps(props.GlobalProps),
 	}
 
-	t := Mx(`
-    <tr {{global}}>
-		  {{innerhtml}}
-		</tr>
-  `)
+	t := Mx(`<tr {{global}}>{{innerhtml}}</tr>`)
 
 	s := Render(t, values)
 	return s

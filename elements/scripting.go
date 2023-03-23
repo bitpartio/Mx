@@ -20,11 +20,7 @@ func Canvas(props CanvasProps) string {
 		"global": RenderGlobalProps(props.GlobalProps),
 	}
 
-	t := Mx(`
-    <canvas {{lang}} {{global}}>
-		  {{innerhtml}}
-		</canvas>
-  `)
+	t := Mx(`<canvas {{lang}} {{global}}>{{innerhtml}}</canvas>`)
 
 	s := Render(t, values)
 	return s
@@ -46,11 +42,7 @@ func Noscript(props NoscriptProps) string {
 		"global": RenderGlobalProps(props.GlobalProps),
 	}
 
-	t := Mx(`
-    <noscript {{lang}} {{global}}>
-		  {{innerhtml}}
-		</noscript>
-  `)
+	t := Mx(`<noscript {{lang}} {{global}}>{{innerhtml}}</noscript>`)
 
 	s := Render(t, values)
 	return s
@@ -74,11 +66,7 @@ func Script(props ScriptProps) string {
 		"global": RenderGlobalProps(props.GlobalProps),
 	}
 
-	t := Mx(`
-    <script {{lang}} {{global}}>
-		  {{innerhtml}}
-		</script>
-  `)
+	t := Mx(`<script {{lang}} {{global}}>{{innerhtml}}</script>`)
 
 	s := Render(t, values)
 	return s

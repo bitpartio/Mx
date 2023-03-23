@@ -20,11 +20,7 @@ func Address(props AddressProps) string {
 		"global": RenderGlobalProps(props.GlobalProps),
 	}
 
-	t := Mx(`
-    <address {{global}}>
-		  {{innerhtml}}
-		</address>
-  `)
+	t := Mx(`<address {{global}}>{{innerhtml}}</address>`)
 
 	s := Render(t, values)
 	return s
@@ -50,11 +46,7 @@ func Article(props ArticleProps) string {
 		"global": RenderGlobalProps(props.GlobalProps),
 	}
 
-	t := Mx(`
-    <article {{global}}>
-		  {{innerhtml}}
-		</article>
-  `)
+	t := Mx(`<article {{global}}>{{innerhtml}}</article>`)
 
 	s := Render(t, values)
 	return s
@@ -77,11 +69,7 @@ func Aside(props AsideProps) string {
 		"global": RenderGlobalProps(props.GlobalProps),
 	}
 
-	t := Mx(`
-    <aside {{global}}>
-		  {{innerhtml}}
-		</aside>
-  `)
+	t := Mx(`<aside {{global}}>{{innerhtml}}</aside>`)
 
 	s := Render(t, values)
 	return s
@@ -105,11 +93,7 @@ func Footer(props FooterProps) string {
 		"global": RenderGlobalProps(props.GlobalProps),
 	}
 
-	t := Mx(`
-    <footer {{global}}>
-		  {{innerhtml}}
-		</footer>
-  `)
+	t := Mx(`<footer {{global}}>{{innerhtml}}</footer>`)
 
 	s := Render(t, values)
 	return s
@@ -132,11 +116,7 @@ func Header(props HeaderProps) string {
 		"global": RenderGlobalProps(props.GlobalProps),
 	}
 
-	t := Mx(`
-    <header {{global}}>
-		  {{innerhtml}}
-		</header>
-  `)
+	t := Mx(`<header {{global}}>{{innerhtml}}</header>`)
 
 	s := Render(t, values)
 	return s
@@ -158,11 +138,7 @@ func H1(props HProps) string {
 		"global": RenderGlobalProps(props.GlobalProps),
 	}
 
-	t := Mx(`
-    <h1 {{global}}>
-		  {{innerhtml}}
-		</h1>
-  `)
+	t := Mx(`<h1 {{global}}>{{innerhtml}}</h1>`)
 
 	s := Render(t, values)
 	return s
@@ -175,11 +151,7 @@ func H2(props HProps) string {
 		"global": RenderGlobalProps(props.GlobalProps),
 	}
 
-	t := Mx(`
-    <h2 {{global}}>
-		  {{innerhtml}}
-		</h2>
-  `)
+	t := Mx(`<h2 {{global}}>{{innerhtml}}</h2>`)
 
 	s := Render(t, values)
 	return s
@@ -192,11 +164,7 @@ func H3(props HProps) string {
 		"global": RenderGlobalProps(props.GlobalProps),
 	}
 
-	t := Mx(`
-    <h3 {{global}}>
-		  {{innerhtml}}
-		</h3>
-  `)
+	t := Mx(`<h3 {{global}}>{{innerhtml}}</h3>`)
 
 	s := Render(t, values)
 	return s
@@ -209,11 +177,7 @@ func H4(props HProps) string {
 		"global": RenderGlobalProps(props.GlobalProps),
 	}
 
-	t := Mx(`
-    <h4 {{global}}>
-		  {{innerhtml}}
-		</h4>
-  `)
+	t := Mx(`<h4 {{global}}>{{innerhtml}}</h4>`)
 
 	s := Render(t, values)
 	return s
@@ -226,11 +190,7 @@ func H5(props HProps) string {
 		"global": RenderGlobalProps(props.GlobalProps),
 	}
 
-	t := Mx(`
-    <h5 {{global}}>
-		  {{innerhtml}}
-		</h5>
-  `)
+	t := Mx(`<h5 {{global}}>{{innerhtml}}</h5>`)
 
 	s := Render(t, values)
 	return s
@@ -243,11 +203,7 @@ func H6(props HProps) string {
 		"global": RenderGlobalProps(props.GlobalProps),
 	}
 
-	t := Mx(`
-    <h6 {{global}}>
-		  {{innerhtml}}
-		</h6>
-  `)
+	t := Mx(`<h6 {{global}}>{{innerhtml}}</h6>`)
 
 	s := Render(t, values)
 	return s
@@ -271,11 +227,7 @@ func Main(props MainProps) string {
 		"global": RenderGlobalProps(props.GlobalProps),
 	}
 
-	t := Mx(`
-    <main {{global}}>
-		  {{innerhtml}}
-		</main>
-  `)
+	t := Mx(`<main {{global}}>{{innerhtml}}</main>`)
 
 	s := Render(t, values)
 	return s
@@ -299,11 +251,7 @@ func Nav(props NavProps) string {
 		"global": RenderGlobalProps(props.GlobalProps),
 	}
 
-	t := Mx(`
-    <nav {{global}}>
-		  {{innerhtml}}
-		</nav>
-  `)
+	t := Mx(`<nav {{global}}>{{innerhtml}}</nav>`)
 
 	s := Render(t, values)
 	return s
@@ -326,11 +274,7 @@ func Section(props SectionProps) string {
 		"global": RenderGlobalProps(props.GlobalProps),
 	}
 
-	t := Mx(`
-    <section {{global}}>
-		  {{innerhtml}}
-		</section>
-  `)
+	t := Mx(`<section {{global}}>{{innerhtml}}</section>`)
 
 	s := Render(t, values)
 	return s

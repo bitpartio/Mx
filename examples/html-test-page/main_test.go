@@ -28,7 +28,7 @@ func render() {
 		},
 	)
 
-	hr := Hr(HrProps{GlobalProps{}})
+	hr := Hr(HrProps{})
 	hello := B(BProps{InnerHTML: "Bold Hello"})
 	header := Header(
 		HeaderProps{

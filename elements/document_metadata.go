@@ -2,7 +2,9 @@ package elements
 
 // Ref: https://developer.mozilla.org/en-US/docs/Web/HTML/Element#document_metadata
 
-import . "github.com/bitpartio/gomx/utils"
+import (
+	. "github.com/bitpartio/gomx/utils"
+)
 
 /*
  * Specifies the base URL to use for all relative URLs in a document. There
@@ -17,9 +19,7 @@ func Base(props BaseProps) string {
 		"global": RenderGlobalProps(props.GlobalProps),
 	}
 
-	t := Mx(`
-    <base {{global}} />
-  `)
+	t := Mx(`<base {{global}} />`)
 
 	s := Render(t, values)
 	return s
@@ -41,11 +41,7 @@ func Head(props HeadProps) string {
 		"global": RenderGlobalProps(props.GlobalProps),
 	}
 
-	t := Mx(`
-    <head {{global}}>
-		  {{innerhtml}}
-		</head>
-  `)
+	t := Mx(`<head {{global}}>{{innerhtml}}</head>`)
 
 	s := Render(t, values)
 	return s
@@ -66,9 +62,7 @@ func Link(props LinkProps) string {
 		"global": RenderGlobalProps(props.GlobalProps),
 	}
 
-	t := Mx(`
-    <link {{global}} />
-  `)
+	t := Mx(`<link {{global}} />`)
 
 	s := Render(t, values)
 	return s
@@ -80,16 +74,16 @@ func Link(props LinkProps) string {
  */
 type MetaProps struct {
 	GlobalProps
+	Charset string
 }
 
 func Meta(props MetaProps) string {
 	values := map[string]interface{}{
-		"global": RenderGlobalProps(props.GlobalProps),
+		"global":  RenderGlobalProps(props.GlobalProps),
+		"charset": BuildProp("charset", props.Charset),
 	}
 
-	t := Mx(`
-    <meta {{global}} />
-  `)
+	t := Mx(`<meta {{global}} {{charset}} />`)
 
 	s := Render(t, values)
 	return s
@@ -112,11 +106,7 @@ func Style(props StyleProps) string {
 		"global": RenderGlobalProps(props.GlobalProps),
 	}
 
-	t := Mx(`
-    <style {{global}}>
-		  {{innerhtml}}
-		</style>
-  `)
+	t := Mx(`<style {{global}}>{{innerhtml}}</style>`)
 
 	s := Render(t, values)
 	return s
@@ -138,11 +128,7 @@ func Title(props TitleProps) string {
 		"global": RenderGlobalProps(props.GlobalProps),
 	}
 
-	t := Mx(`
-    <title {{global}}>
-		  {{innerhtml}}
-		</title>
-  `)
+	t := Mx(`<title {{global}}>{{innerhtml}}</title>`)
 
 	s := Render(t, values)
 	return s

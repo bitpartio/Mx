@@ -23,11 +23,7 @@ func Blockquote(props BlockquoteProps) string {
 		"global": RenderGlobalProps(props.GlobalProps),
 	}
 
-	t := Mx(`
-    <blockquote {{global}}>
-		  {{innerhtml}}
-		</blockquote>
-  `)
+	t := Mx(`<blockquote {{global}}>{{innerhtml}}</blockquote>`)
 
 	s := Render(t, values)
 	return s
@@ -49,9 +45,7 @@ func Dd(props DdProps) string {
 		"global": RenderGlobalProps(props.GlobalProps),
 	}
 
-	t := Mx(`
-    <dd {{global}}>{{innerhtml}}</dd>
-  `)
+	t := Mx(`<dd {{global}}>{{innerhtml}}</dd>`)
 
 	s := Render(t, values)
 	return s
@@ -75,11 +69,7 @@ func Div(props DivProps) string {
 		"global": RenderGlobalProps(props.GlobalProps),
 	}
 
-	t := Mx(`
-    <div {{global}}>
-		  {{innerhtml}}
-		</div>
-  `)
+	t := Mx(`<div {{global}}>{{innerhtml}}</div>`)
 
 	s := Render(t, values)
 	return s
@@ -103,11 +93,7 @@ func Dl(props DlProps) string {
 		"global": RenderGlobalProps(props.GlobalProps),
 	}
 
-	t := Mx(`
-    <dl {{global}}>
-		  {{innerhtml}}
-		</dl>
-  `)
+	t := Mx(`<dl {{global}}>{{innerhtml}}</dl>`)
 
 	s := Render(t, values)
 	return s
@@ -131,9 +117,7 @@ func Dt(props DtProps) string {
 		"global": RenderGlobalProps(props.GlobalProps),
 	}
 
-	t := Mx(`
-    <dt {{global}}>{{innerhtml}}</dt>
-  `)
+	t := Mx(`<dt {{global}}>{{innerhtml}}</dt>`)
 
 	s := Render(t, values)
 	return s
@@ -155,9 +139,7 @@ func Figcaption(props FigcaptionProps) string {
 		"global": RenderGlobalProps(props.GlobalProps),
 	}
 
-	t := Mx(`
-    <figcaption {{global}}>{{innerhtml}}</figcaption>
-  `)
+	t := Mx(`<figcaption {{global}}>{{innerhtml}}</figcaption>`)
 
 	s := Render(t, values)
 	return s
@@ -180,11 +162,7 @@ func Figure(props FigureProps) string {
 		"global": RenderGlobalProps(props.GlobalProps),
 	}
 
-	t := Mx(`
-    <figure {{global}}>
-		  {{innerhtml}}
-		</figure>
-  `)
+	t := Mx(`<figure {{global}}>{{innerhtml}}</figure>`)
 
 	s := Render(t, values)
 	return s
@@ -204,9 +182,7 @@ func Hr(props HrProps) string {
 		"global": RenderGlobalProps(props.GlobalProps),
 	}
 
-	t := Mx(`
-    <hr {{global}} />
-  `)
+	t := Mx(`<hr {{global}} />`)
 
 	s := Render(t, values)
 	return s
@@ -231,9 +207,7 @@ func Li(props LiProps) string {
 		"global": RenderGlobalProps(props.GlobalProps),
 	}
 
-	t := Mx(`
-    <li {{global}}>{{innerhtml}}</li>
-  `)
+	t := Mx(`<li {{global}}>{{innerhtml}}</li>`)
 
 	s := Render(t, values)
 	return s
@@ -256,11 +230,7 @@ func Menu(props MenuProps) string {
 		"global": RenderGlobalProps(props.GlobalProps),
 	}
 
-	t := Mx(`
-    <menu {{global}}>
-		  {{innerhtml}}
-		</menu>
-  `)
+	t := Mx(`<menu {{global}}>{{innerhtml}}</menu>`)
 
 	s := Render(t, values)
 	return s
@@ -282,11 +252,7 @@ func Ol(props OlProps) string {
 		"global": RenderGlobalProps(props.GlobalProps),
 	}
 
-	t := Mx(`
-    <ol {{global}}>
-		  {{innerhtml}}
-		</ol>
-  `)
+	t := Mx(`<ol {{global}}>{{innerhtml}}</ol>`)
 
 	s := Render(t, values)
 	return s
@@ -310,11 +276,7 @@ func P(props PProps) string {
 		"global": RenderGlobalProps(props.GlobalProps),
 	}
 
-	t := Mx(`
-    <p {{global}}>
-		  {{innerhtml}}
-		</p>
-  `)
+	t := Mx(`<p {{global}}>{{innerhtml}}</p>`)
 
 	s := Render(t, values)
 	return s
@@ -338,11 +300,7 @@ func Pre(props PreProps) string {
 		"global": RenderGlobalProps(props.GlobalProps),
 	}
 
-	t := Mx(`
-    <pre {{global}}>
-		  {{innerhtml}}
-		</pre>
-  `)
+	t := Mx(`<pre {{global}}>{{innerhtml}}</pre>`)
 
 	s := Render(t, values)
 	return s
@@ -364,11 +322,7 @@ func Ul(props UlProps) string {
 		"global": RenderGlobalProps(props.GlobalProps),
 	}
 
-	t := Mx(`
-    <ul {{global}}>
-		  {{innerhtml}}
-		</ul>
-  `)
+	t := Mx(`<ul {{global}}>{{innerhtml}}</ul>`)
 
 	s := Render(t, values)
 	return s
