@@ -17,8 +17,8 @@ func render() {
 	button := Button(
 		ButtonProps{
 			GlobalProps: GlobalProps{
-				Autocapitalize: Props.Autocapitalize.Words,
-				Dir:            Props.Dir.Auto,
+				Autocapitalize: GlobalOptions.Autocapitalize.Words,
+				Dir:            GlobalOptions.Dir.Auto,
 				Data:           DataValues{"current": "", "second": "four"},
 				Aria:           AriaRoles{"current": "page"},
 				Htmx:           HtmxProps{"post": "/clicked"},

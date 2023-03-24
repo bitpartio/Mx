@@ -4,32 +4,162 @@ package elements
 
 import . "github.com/bitpartio/gomx/utils"
 
+func init() {
+	ButtonOptions = buttonOptions{
+		Formenctype: formenctypeOptions{
+			Url:       formenctypeOptionUrl,
+			Multipart: formenctypeOptionMultipart,
+			Text:      formenctypeOptionText,
+		},
+		Formmethod: formmethodOptions{
+			Get:  formmethodOptionGet,
+			Post: formmethodOptionPost,
+		},
+		Type: typeOptions{
+			Button: typeOptionButton,
+			Reset:  typeOptionReset,
+			Submit: typeOptionSubmit,
+		},
+	}
+}
+
 /*
  * An interactive element activated by a user with a mouse, keyboard,
  * finger, voice command, or other assistive technology. Once activated,
  * it then performs an action, such as submitting a form or opening a
  * dialog.
  */
-type ButtonProps struct {
-	GlobalProps
-	InnerHTML string
-	Disabled  bool
-}
-
 func Button(props ButtonProps) string {
+	autofocus := BuildBooleanProp("autofocus", props.Autofocus)
 	disabled := BuildBooleanProp("disabled", props.Disabled)
+	form := BuildProp("form", props.Form)
+	formaction := BuildProp("formaction", props.Formaction)
+	var formenctype string
+	if props.Formenctype != nil {
+		formenctype = BuildProp("formenctype", props.Formenctype().String())
+	}
+	var formmethod string
+	if props.Formmethod != nil {
+		formmethod = BuildProp("formmethod", props.Formmethod().String())
+	}
+	formnovalidate := BuildBooleanProp("formnovalidate", props.Formnovalidate)
+	formtarget := BuildProp("formtarget", props.Formtarget)
+	name := BuildProp("name", props.Name)
+	var typeOf string
+	if props.Type != nil {
+		typeOf = BuildProp("type", props.Type().String())
+	}
+	value := BuildProp("value", props.Value)
 
 	values := map[string]interface{}{
-		"innerhtml": props.InnerHTML,
-		"disabled":  disabled,
+		"innerhtml":      props.InnerHTML,
+		"autofocus":      autofocus,
+		"disabled":       disabled,
+		"form":           form,
+		"formaction":     formaction,
+		"formenctype":    formenctype,
+		"formmethod":     formmethod,
+		"formnovalidate": formnovalidate,
+		"formtarget":     formtarget,
+		"name":           name,
+		"type":           typeOf,
+		"value":          value,
 
 		"global": RenderGlobalProps(props.GlobalProps),
 	}
 
-	t := Mx(`<button {{global}} {{disabled}}>{{innerhtml}}</button>`)
+	t := Mx(`<button {{global}} {{autofocus}} {{disabled}} {{form}} {{formaction}} {{formenctype}} {{formmethod}} {{formnovalidate}} {{formtarget}} {{name}} {{type}} {{value}}>{{innerhtml}}</button>`)
 
 	s := Render(t, values)
 	return s
+}
+
+type ButtonProps struct {
+	GlobalProps
+	InnerHTML      string
+	Autofocus      bool
+	Disabled       bool
+	Form           string
+	Formaction     string
+	Formenctype    func() formenctypeOption
+	Formmethod     func() formmethodOption
+	Formnovalidate bool
+	Formtarget     string
+	Name           string
+	Type           func() typeOption
+	Value          string
+}
+
+type buttonOptions struct {
+	Formenctype formenctypeOptions
+	Formmethod  formmethodOptions
+	Type        typeOptions
+}
+
+var ButtonOptions buttonOptions
+
+/* Formenctype */
+type formenctypeOption struct{ string }
+
+func (o formenctypeOption) String() string { return o.string }
+
+func formenctypeOptionUrl() formenctypeOption {
+	return formenctypeOption{"application/x-www-form-urlencoded"}
+}
+
+func formenctypeOptionMultipart() formenctypeOption {
+	return formenctypeOption{"multipart/form-data"}
+}
+
+func formenctypeOptionText() formenctypeOption {
+	return formenctypeOption{"text/plain"}
+}
+
+type formenctypeOptions struct {
+	Url       func() formenctypeOption
+	Multipart func() formenctypeOption
+	Text      func() formenctypeOption
+}
+
+/* Formmethod */
+type formmethodOption struct{ string }
+
+func (o formmethodOption) String() string { return o.string }
+
+func formmethodOptionGet() formmethodOption {
+	return formmethodOption{"get"}
+}
+
+func formmethodOptionPost() formmethodOption {
+	return formmethodOption{"post"}
+}
+
+type formmethodOptions struct {
+	Get  func() formmethodOption
+	Post func() formmethodOption
+}
+
+/* Type */
+type typeOption struct{ string }
+
+func (o typeOption) String() string { return o.string }
+
+func typeOptionButton() typeOption {
+	return typeOption{"button"}
+}
+
+func typeOptionReset() typeOption {
+	return typeOption{"reset"}
+}
+
+func typeOptionSubmit() typeOption {
+	return typeOption{"submit"}
+}
+
+type typeOptions struct {
+	Button func() typeOption
+	Reset  func() typeOption
+	Submit func() typeOption
 }
 
 /*

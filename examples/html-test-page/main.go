@@ -11,8 +11,8 @@ import (
 func main() {
 	page := buildHtmlTestPage()
 
-	// s := Minify(page)
-	s := Clean(page)
+	s := Minify(page)
+	// s := Clean(page)
 
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Content-Type", "text/html; charset=utf-8")

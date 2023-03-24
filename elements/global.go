@@ -15,17 +15,17 @@ import (
  * Props
  *   All properties collected into a single struct
  */
-type props struct {
+type globalOptions struct {
 	Autocapitalize autocapitalizeOptions
 	Dir            dirOptions
 	Hidden         hiddenOptions
 }
 
-var Props props
+var GlobalOptions globalOptions
 
 // Initialize
 func init() {
-	Props = props{
+	GlobalOptions = globalOptions{
 		Autocapitalize: autocapitalizeOptions{
 			On:         autocapitalizeOptionOn,
 			Sentences:  autocapitalizeOptionSentences,
