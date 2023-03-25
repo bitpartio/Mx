@@ -2,32 +2,213 @@ package elements
 
 // Ref: https://developer.mozilla.org/en-US/docs/Web/HTML/Element#inline_text_semantics
 
-import . "github.com/bitpartio/gomx/utils"
+import (
+	. "github.com/bitpartio/gomx/utils"
+)
+
+func init() {
+	AOptions = aOptions{
+		Referrerpolicy: referrerpolicyOptions{
+			NoReferrer:          referrerpolicyOptionNoReferrer,
+			NoReferrerDowngrade: referrerpolicyOptionNoReferrerDowngrade,
+			Origin:              referrerpolicyOptionOrigin,
+			CrossOrigin:         referrerpolicyOptionCrossOrigin,
+			SameOrigin:          referrerpolicyOptionSameOrigin,
+			StrictOrigin:        referrerpolicyOptionStrictOrigin,
+			StrictCrossOrigin:   referrerpolicyOptionStrictCrossOrigin,
+			Unsafe:              referrerpolicyOptionUnsafe,
+		},
+		Rel: aRelOptions{
+			Alternate:  aRelOptionAlternate,
+			Author:     aRelOptionAuthor,
+			Bookmark:   aRelOptionBookmark,
+			External:   aRelOptionExternal,
+			Help:       aRelOptionHelp,
+			License:    aRelOptionLicense,
+			Next:       aRelOptionNext,
+			NoFollow:   aRelOptionNoFollow,
+			NoOpener:   aRelOptionNoOpener,
+			NoReferrer: aRelOptionNoReferrer,
+			Prev:       aRelOptionPrev,
+			Search:     aRelOptionSearch,
+			Tag:        aRelOptionTag,
+		},
+	}
+}
 
 /*
  * Together with its href attribute, creates a hyperlink to web pages,
  * files, email addresses, locations in the same page, or anything else
  * a URL can address.
  */
-type AProps struct {
-	GlobalProps
-	InnerHTML string
-	Href      string
-}
-
 func A(props AProps) string {
+	var referrerpolicy string
+	if props.Referrerpolicy != nil {
+		referrerpolicy = BuildProp("referrerpolicy", props.Referrerpolicy().String())
+	}
+
+	var rel string
+	if len(props.Rel) > 0 {
+		relStrings := make([]string, len(props.Rel))
+		for k, rel := range props.Rel {
+			relStrings[k] = rel().String()
+		}
+
+		rel = BuildPropList("rel", relStrings)
+	}
+
 	values := map[string]interface{}{
-		"innerhtml": props.InnerHTML,
-		"href":      BuildProp("href", props.Href),
+		"innerhtml":      props.InnerHTML,
+		"download":       BuildProp("download", props.Download),
+		"href":           BuildProp("href", props.Href),
+		"hreflang":       BuildProp("hreflang", props.Hreflang),
+		"ping":           BuildPropList("ping", props.Ping),
+		"referrerpolicy": referrerpolicy,
+		"rel":            rel,
+		"target":         BuildProp("target", props.Target),
+		"type":           BuildProp("type", props.Type),
 
 		"global": RenderGlobalProps(props.GlobalProps),
 	}
 
-	t := Mx(`<a {{global}} {{href}}>{{innerhtml}}</a>`)
+	t := Mx(`<a {{global}} {{download}} {{href}} {{hreflang}} {{ping}} {{referrerpolicy}} {{rel}} {{target}} {{type}}>{{innerhtml}}</a>`)
 
 	s := Render(t, values)
 	return s
 }
+
+type AProps struct {
+	GlobalProps
+	InnerHTML      string
+	Download       string
+	Href           string
+	Hreflang       string // Limited values but too complex for enum. Ref: https://datatracker.ietf.org/doc/html/rfc5646
+	Ping           []string
+	Referrerpolicy func() referrerpolicyOption
+	Rel            []func() aRelOption
+	Target         string
+	Type           string // Limited values but too complex for enum. Ref: https://www.iana.org/assignments/media-types/media-types.xhtml
+}
+
+type aOptions struct {
+	Referrerpolicy referrerpolicyOptions
+	Rel            aRelOptions
+}
+
+var AOptions aOptions
+
+/* Referrerpolicy */
+type referrerpolicyOption struct{ string }
+
+func (o referrerpolicyOption) String() string { return o.string }
+
+func referrerpolicyOptionNoReferrer() referrerpolicyOption {
+	return referrerpolicyOption{"no-referrer"}
+}
+
+func referrerpolicyOptionNoReferrerDowngrade() referrerpolicyOption {
+	return referrerpolicyOption{"no-referrer-when-downgrade"}
+}
+
+func referrerpolicyOptionOrigin() referrerpolicyOption {
+	return referrerpolicyOption{"origin"}
+}
+
+func referrerpolicyOptionCrossOrigin() referrerpolicyOption {
+	return referrerpolicyOption{"origin-when-cross-origin"}
+}
+
+func referrerpolicyOptionSameOrigin() referrerpolicyOption {
+	return referrerpolicyOption{"same-origin"}
+}
+
+func referrerpolicyOptionStrictOrigin() referrerpolicyOption {
+	return referrerpolicyOption{"strict-origin"}
+}
+
+func referrerpolicyOptionStrictCrossOrigin() referrerpolicyOption {
+	return referrerpolicyOption{"same-origin-when-cross-origin"}
+}
+
+func referrerpolicyOptionUnsafe() referrerpolicyOption {
+	return referrerpolicyOption{"unsafe-url"}
+}
+
+type referrerpolicyOptions struct {
+	NoReferrer          func() referrerpolicyOption
+	NoReferrerDowngrade func() referrerpolicyOption
+	Origin              func() referrerpolicyOption
+	CrossOrigin         func() referrerpolicyOption
+	SameOrigin          func() referrerpolicyOption
+	StrictOrigin        func() referrerpolicyOption
+	StrictCrossOrigin   func() referrerpolicyOption
+	Unsafe              func() referrerpolicyOption
+}
+
+/* Rel */
+type aRelOption struct{ string }
+
+func (o aRelOption) String() string { return o.string }
+
+func aRelOptionAlternate() aRelOption {
+	return aRelOption{"alternate"}
+}
+
+func aRelOptionAuthor() aRelOption {
+	return aRelOption{"author"}
+}
+
+func aRelOptionBookmark() aRelOption {
+	return aRelOption{"bookmark"}
+}
+func aRelOptionExternal() aRelOption {
+	return aRelOption{"external"}
+}
+func aRelOptionHelp() aRelOption {
+	return aRelOption{"help"}
+}
+func aRelOptionLicense() aRelOption {
+	return aRelOption{"license"}
+}
+func aRelOptionNext() aRelOption {
+	return aRelOption{"next"}
+}
+func aRelOptionNoFollow() aRelOption {
+	return aRelOption{"nofollow"}
+}
+func aRelOptionNoOpener() aRelOption {
+	return aRelOption{"noopener"}
+}
+func aRelOptionNoReferrer() aRelOption {
+	return aRelOption{"noreferrer"}
+}
+func aRelOptionPrev() aRelOption {
+	return aRelOption{"prev"}
+}
+func aRelOptionSearch() aRelOption {
+	return aRelOption{"search"}
+}
+func aRelOptionTag() aRelOption {
+	return aRelOption{"tag"}
+}
+
+type aRelOptions struct {
+	Alternate  func() aRelOption
+	Author     func() aRelOption
+	Bookmark   func() aRelOption
+	External   func() aRelOption
+	Help       func() aRelOption
+	License    func() aRelOption
+	Next       func() aRelOption
+	NoFollow   func() aRelOption
+	NoOpener   func() aRelOption
+	NoReferrer func() aRelOption
+	Prev       func() aRelOption
+	Search     func() aRelOption
+	Tag        func() aRelOption
+}
+
+type ARelOptions []func() aRelOption
 
 /*
  * Represents an abbreviation or acronym.

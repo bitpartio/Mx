@@ -16,6 +16,21 @@ func BuildProp(name, prop string) string {
 	return ""
 }
 
+// BuildPropList
+func BuildPropList(name string, props []string) string {
+	if len(props) > 0 {
+		prop := strings.Join(props, " ")
+		var s strings.Builder
+		s.WriteString(name)
+		s.WriteString(`="`)
+		s.WriteString(prop)
+		s.WriteString(`"`)
+		return s.String()
+	}
+
+	return ""
+}
+
 // BuildBooleanProp
 func BuildBooleanProp(name string, prop bool) (s string) {
 	if prop == true {
@@ -66,22 +81,6 @@ func BuildID(id string) string {
 		var b strings.Builder
 		b.WriteString(`id="`)
 		b.WriteString(id)
-		b.WriteString(`"`)
-		s = b.String()
-		return s
-	}
-
-	return ""
-}
-
-// BuildClass
-func BuildClass(class []string) string {
-	s := ""
-	if len(class) > 0 {
-		c := strings.Join(class, " ")
-		var b strings.Builder
-		b.WriteString(`class="`)
-		b.WriteString(c)
 		b.WriteString(`"`)
 		s = b.String()
 		return s

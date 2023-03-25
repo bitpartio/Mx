@@ -15,6 +15,108 @@ import (
  * Props
  *   All properties collected into a single struct
  */
+type GlobalProps struct {
+	Accesskey             []rune
+	Aria                  AriaRoles
+	Htmx                  HtmxProps
+	Autocapitalize        func() autocapitalizeOption
+	Autofocus             bool
+	Class                 []string
+	Contenteditable       bool
+	Data                  DataValues
+	Dir                   func() dirOption
+	Draggable             bool
+	Enterkeyhint          string
+	Exportparts           []string
+	Hidden                func() hiddenOption
+	ID                    string
+	Inert                 string
+	Inputmode             string
+	Is                    string
+	Itemid                string
+	Itemprop              string
+	Itemref               string
+	Itemscope             string
+	Itemtype              string
+	Lang                  string
+	Nonce                 string
+	Part                  string
+	Slot                  string
+	Spellcheck            string
+	Style                 string
+	Tabindex              string
+	Title                 string
+	Translate             string
+	Virtualkeyboardpolicy string
+	// Events
+	Onabort             string
+	Onautocomplete      string
+	Onautocompleteerror string
+	Onblur              string
+	Oncancel            string
+	Oncanplay           string
+	Oncanplaythrough    string
+	Onchange            string
+	Onclick             string
+	Onclose             string
+	Oncontextmenu       string
+	Oncuechange         string
+	Ondblclick          string
+	Ondrag              string
+	Ondragend           string
+	Ondragenter         string
+	Ondragleave         string
+	Ondragover          string
+	Ondragstart         string
+	Ondrop              string
+	Ondurationchange    string
+	Onemptied           string
+	Onended             string
+	Onerror             string
+	Onfocus             string
+	Oninput             string
+	Oninvalid           string
+	Onkeydown           string
+	Onkeypress          string
+	Onkeyup             string
+	Onload              string
+	Onloadeddata        string
+	Onloadedmetadata    string
+	Onloadstart         string
+	Onmousedown         string
+	Onmouseenter        string
+	Onmouseleave        string
+	Onmousemove         string
+	Onmouseout          string
+	Onmouseover         string
+	Onmouseup           string
+	Onmousewheel        string
+	Onpause             string
+	Onplay              string
+	Onplaying           string
+	Onprogress          string
+	Onratechange        string
+	Onreset             string
+	Onresize            string
+	Onscroll            string
+	Onseeked            string
+	Onseeking           string
+	Onselect            string
+	Onshow              string
+	Onsort              string
+	Onstalled           string
+	Onsubmit            string
+	Onsuspend           string
+	Ontimeupdate        string
+	Ontoggle            string
+	Onvolumechange      string
+	Onwaiting           string
+}
+
+/*
+ * Options
+ *   Encapsulate options into predetermined functions
+ */
 type globalOptions struct {
 	Autocapitalize autocapitalizeOptions
 	Dir            dirOptions
@@ -137,104 +239,6 @@ type hiddenOptions struct {
 	UntilFound func() hiddenOption
 }
 
-type GlobalProps struct {
-	Accesskey             []rune
-	Aria                  AriaRoles
-	Htmx                  HtmxProps
-	Autocapitalize        func() autocapitalizeOption
-	Autofocus             bool
-	Class                 []string
-	Contenteditable       bool
-	Data                  DataValues
-	Dir                   func() dirOption
-	Draggable             bool
-	Enterkeyhint          string
-	Exportparts           []string
-	Hidden                func() hiddenOption
-	ID                    string
-	Inert                 string
-	Inputmode             string
-	Is                    string
-	Itemid                string
-	Itemprop              string
-	Itemref               string
-	Itemscope             string
-	Itemtype              string
-	Lang                  string
-	Nonce                 string
-	Part                  string
-	Slot                  string
-	Spellcheck            string
-	Style                 string
-	Tabindex              string
-	Title                 string
-	Translate             string
-	Virtualkeyboardpolicy string
-	// Events
-	Onabort             string
-	Onautocomplete      string
-	Onautocompleteerror string
-	Onblur              string
-	Oncancel            string
-	Oncanplay           string
-	Oncanplaythrough    string
-	Onchange            string
-	Onclick             string
-	Onclose             string
-	Oncontextmenu       string
-	Oncuechange         string
-	Ondblclick          string
-	Ondrag              string
-	Ondragend           string
-	Ondragenter         string
-	Ondragleave         string
-	Ondragover          string
-	Ondragstart         string
-	Ondrop              string
-	Ondurationchange    string
-	Onemptied           string
-	Onended             string
-	Onerror             string
-	Onfocus             string
-	Oninput             string
-	Oninvalid           string
-	Onkeydown           string
-	Onkeypress          string
-	Onkeyup             string
-	Onload              string
-	Onloadeddata        string
-	Onloadedmetadata    string
-	Onloadstart         string
-	Onmousedown         string
-	Onmouseenter        string
-	Onmouseleave        string
-	Onmousemove         string
-	Onmouseout          string
-	Onmouseover         string
-	Onmouseup           string
-	Onmousewheel        string
-	Onpause             string
-	Onplay              string
-	Onplaying           string
-	Onprogress          string
-	Onratechange        string
-	Onreset             string
-	Onresize            string
-	Onscroll            string
-	Onseeked            string
-	Onseeking           string
-	Onselect            string
-	Onshow              string
-	Onsort              string
-	Onstalled           string
-	Onsubmit            string
-	Onsuspend           string
-	Ontimeupdate        string
-	Ontoggle            string
-	Onvolumechange      string
-	Onwaiting           string
-}
-
 /*
  * BuildGlobalProps
  */
@@ -245,7 +249,7 @@ func BuildGlobalProps(props GlobalProps) map[string]interface{} {
 	values["id"] = BuildProp("id", props.ID)
 
 	// class
-	values["class"] = BuildClass(props.Class)
+	values["class"] = BuildPropList("class", props.Class)
 
 	// autocapitalize
 	if props.Autocapitalize != nil {

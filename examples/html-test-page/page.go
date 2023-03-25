@@ -43,6 +43,23 @@ func buildHtmlTestPage() string {
 			P(PProps{InnerHTML: "This is a test paragraph."}),
 			H6(HProps{InnerHTML: "This is 6th level heading"}),
 			P(PProps{InnerHTML: "This is a test paragraph."}),
+			H2(HProps{InnerHTML: "Basic block level elements"}),
+			P(PProps{
+				InnerHTML: Stack(
+					"This is a normal paragraph (",
+					Code(CodeProps{InnerHTML: "p"}),
+					"element). To add some length to it, let us mention that this page was primarily written for testing the effect of",
+					Strong(StrongProps{InnerHTML: "user style sheets"}),
+					". You can use it for various other purposes as well, like just checking how your browser displays various HTML elements.",
+				),
+			}),
+			P(PProps{
+				InnerHTML: Stack(
+					"This is another paragraph. ",
+					Mark(MarkProps{InnerHTML: "I think it needs to be added that the set of elements tested is not exhaustive in any sense."}),
+					"I have selected those elements for which it can make sense to write user style sheet rules, in my opinion.",
+				),
+			}),
 		)},
 	)
 

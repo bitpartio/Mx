@@ -30,10 +30,6 @@ func init() {
  * dialog.
  */
 func Button(props ButtonProps) string {
-	autofocus := BuildBooleanProp("autofocus", props.Autofocus)
-	disabled := BuildBooleanProp("disabled", props.Disabled)
-	form := BuildProp("form", props.Form)
-	formaction := BuildProp("formaction", props.Formaction)
 	var formenctype string
 	if props.Formenctype != nil {
 		formenctype = BuildProp("formenctype", props.Formenctype().String())
@@ -42,28 +38,24 @@ func Button(props ButtonProps) string {
 	if props.Formmethod != nil {
 		formmethod = BuildProp("formmethod", props.Formmethod().String())
 	}
-	formnovalidate := BuildBooleanProp("formnovalidate", props.Formnovalidate)
-	formtarget := BuildProp("formtarget", props.Formtarget)
-	name := BuildProp("name", props.Name)
 	var typeOf string
 	if props.Type != nil {
 		typeOf = BuildProp("type", props.Type().String())
 	}
-	value := BuildProp("value", props.Value)
 
 	values := map[string]interface{}{
 		"innerhtml":      props.InnerHTML,
-		"autofocus":      autofocus,
-		"disabled":       disabled,
-		"form":           form,
-		"formaction":     formaction,
+		"autofocus":      BuildBooleanProp("autofocus", props.Autofocus),
+		"disabled":       BuildBooleanProp("disabled", props.Disabled),
+		"form":           BuildProp("form", props.Form),
+		"formaction":     BuildProp("formaction", props.Formaction),
 		"formenctype":    formenctype,
 		"formmethod":     formmethod,
-		"formnovalidate": formnovalidate,
-		"formtarget":     formtarget,
-		"name":           name,
+		"formnovalidate": BuildBooleanProp("formnovalidate", props.Formnovalidate),
+		"formtarget":     BuildProp("formtarget", props.Formtarget),
+		"name":           BuildProp("name", props.Name),
 		"type":           typeOf,
-		"value":          value,
+		"value":          BuildProp("value", props.Value),
 
 		"global": RenderGlobalProps(props.GlobalProps),
 	}
