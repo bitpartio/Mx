@@ -10,14 +10,15 @@ import . "github.com/bitpartio/gomx/utils"
  */
 type BodyProps struct {
 	GlobalProps
+
 	InnerHTML string
 }
 
 func Body(props BodyProps) string {
 	values := map[string]interface{}{
-		"innerhtml": props.InnerHTML,
+		"global": BuildGlobalProps(props.GlobalProps),
 
-		"global": RenderGlobalProps(props.GlobalProps),
+		"innerhtml": props.InnerHTML,
 	}
 
 	t := Mx(`<body {{global}}>{{innerhtml}}</body>`)

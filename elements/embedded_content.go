@@ -15,7 +15,7 @@ type EmbedProps struct {
 
 func Embed(props EmbedProps) string {
 	values := map[string]interface{}{
-		"global": RenderGlobalProps(props.GlobalProps),
+		"global": BuildGlobalProps(props.GlobalProps),
 	}
 
 	t := Mx(`<embed {{global}} />`)
@@ -29,15 +29,16 @@ func Embed(props EmbedProps) string {
  * into the current one.
  */
 type IframeProps struct {
-	InnerHTML string
 	GlobalProps
+
+	InnerHTML string
 }
 
 func Iframe(props IframeProps) string {
 	values := map[string]interface{}{
-		"innerhtml": props.InnerHTML,
+		"global": BuildGlobalProps(props.GlobalProps),
 
-		"global": RenderGlobalProps(props.GlobalProps),
+		"innerhtml": props.InnerHTML,
 	}
 
 	t := Mx(`<iframe {{global}}>{{innerhtml}}</iframe>`)
@@ -51,15 +52,16 @@ func Iframe(props IframeProps) string {
  * nested browsing context, or a resource to be handled by a plugin.
  */
 type ObjectProps struct {
-	InnerHTML string
 	GlobalProps
+
+	InnerHTML string
 }
 
 func Object(props ObjectProps) string {
 	values := map[string]interface{}{
-		"innerhtml": props.InnerHTML,
+		"global": BuildGlobalProps(props.GlobalProps),
 
-		"global": RenderGlobalProps(props.GlobalProps),
+		"innerhtml": props.InnerHTML,
 	}
 
 	t := Mx(`<object {{global}}>{{innerhtml}}</object>`)
@@ -73,15 +75,16 @@ func Object(props ObjectProps) string {
  * alternative versions of an image for different display/device scenarios.
  */
 type PictureProps struct {
-	InnerHTML string
 	GlobalProps
+
+	InnerHTML string
 }
 
 func Picture(props PictureProps) string {
 	values := map[string]interface{}{
-		"innerhtml": props.InnerHTML,
+		"global": BuildGlobalProps(props.GlobalProps),
 
-		"global": RenderGlobalProps(props.GlobalProps),
+		"innerhtml": props.InnerHTML,
 	}
 
 	t := Mx(`<picture {{global}}>{{innerhtml}}</picture>`)
@@ -104,7 +107,7 @@ type SourceProps struct {
 
 func Source(props SourceProps) string {
 	values := map[string]interface{}{
-		"global": RenderGlobalProps(props.GlobalProps),
+		"global": BuildGlobalProps(props.GlobalProps),
 	}
 
 	t := Mx(`<source {{global}} />`)

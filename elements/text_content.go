@@ -13,14 +13,15 @@ import . "github.com/bitpartio/gomx/utils"
  */
 type BlockquoteProps struct {
 	GlobalProps
+
 	InnerHTML string
 }
 
 func Blockquote(props BlockquoteProps) string {
 	values := map[string]interface{}{
-		"innerhtml": props.InnerHTML,
+		"global": BuildGlobalProps(props.GlobalProps),
 
-		"global": RenderGlobalProps(props.GlobalProps),
+		"innerhtml": props.InnerHTML,
 	}
 
 	t := Mx(`<blockquote {{global}}>{{innerhtml}}</blockquote>`)
@@ -35,14 +36,15 @@ func Blockquote(props BlockquoteProps) string {
  */
 type DdProps struct {
 	GlobalProps
+
 	InnerHTML string
 }
 
 func Dd(props DdProps) string {
 	values := map[string]interface{}{
-		"innerhtml": props.InnerHTML,
+		"global": BuildGlobalProps(props.GlobalProps),
 
-		"global": RenderGlobalProps(props.GlobalProps),
+		"innerhtml": props.InnerHTML,
 	}
 
 	t := Mx(`<dd {{global}}>{{innerhtml}}</dd>`)
@@ -59,14 +61,15 @@ func Dd(props DdProps) string {
  */
 type DivProps struct {
 	GlobalProps
+
 	InnerHTML string
 }
 
 func Div(props DivProps) string {
 	values := map[string]interface{}{
-		"innerhtml": props.InnerHTML,
+		"global": BuildGlobalProps(props.GlobalProps),
 
-		"global": RenderGlobalProps(props.GlobalProps),
+		"innerhtml": props.InnerHTML,
 	}
 
 	t := Mx(`<div {{global}}>{{innerhtml}}</div>`)
@@ -83,14 +86,15 @@ func Div(props DivProps) string {
  */
 type DlProps struct {
 	GlobalProps
+
 	InnerHTML string
 }
 
 func Dl(props DlProps) string {
 	values := map[string]interface{}{
-		"innerhtml": props.InnerHTML,
+		"global": BuildGlobalProps(props.GlobalProps),
 
-		"global": RenderGlobalProps(props.GlobalProps),
+		"innerhtml": props.InnerHTML,
 	}
 
 	t := Mx(`<dl {{global}}>{{innerhtml}}</dl>`)
@@ -107,14 +111,15 @@ func Dl(props DlProps) string {
  */
 type DtProps struct {
 	GlobalProps
+
 	InnerHTML string
 }
 
 func Dt(props DtProps) string {
 	values := map[string]interface{}{
-		"innerhtml": props.InnerHTML,
+		"global": BuildGlobalProps(props.GlobalProps),
 
-		"global": RenderGlobalProps(props.GlobalProps),
+		"innerhtml": props.InnerHTML,
 	}
 
 	t := Mx(`<dt {{global}}>{{innerhtml}}</dt>`)
@@ -129,14 +134,15 @@ func Dt(props DtProps) string {
  */
 type FigcaptionProps struct {
 	GlobalProps
+
 	InnerHTML string
 }
 
 func Figcaption(props FigcaptionProps) string {
 	values := map[string]interface{}{
-		"innerhtml": props.InnerHTML,
+		"global": BuildGlobalProps(props.GlobalProps),
 
-		"global": RenderGlobalProps(props.GlobalProps),
+		"innerhtml": props.InnerHTML,
 	}
 
 	t := Mx(`<figcaption {{global}}>{{innerhtml}}</figcaption>`)
@@ -152,14 +158,15 @@ func Figcaption(props FigcaptionProps) string {
  */
 type FigureProps struct {
 	GlobalProps
+
 	InnerHTML string
 }
 
 func Figure(props FigureProps) string {
 	values := map[string]interface{}{
-		"innerhtml": props.InnerHTML,
+		"global": BuildGlobalProps(props.GlobalProps),
 
-		"global": RenderGlobalProps(props.GlobalProps),
+		"innerhtml": props.InnerHTML,
 	}
 
 	t := Mx(`<figure {{global}}>{{innerhtml}}</figure>`)
@@ -179,7 +186,7 @@ type HrProps struct {
 
 func Hr(props HrProps) string {
 	values := map[string]interface{}{
-		"global": RenderGlobalProps(props.GlobalProps),
+		"global": BuildGlobalProps(props.GlobalProps),
 	}
 
 	t := Mx(`<hr {{global}} />`)
@@ -197,14 +204,15 @@ func Hr(props HrProps) string {
  */
 type LiProps struct {
 	GlobalProps
+
 	InnerHTML string
 }
 
 func Li(props LiProps) string {
 	values := map[string]interface{}{
-		"innerhtml": props.InnerHTML,
+		"global": BuildGlobalProps(props.GlobalProps),
 
-		"global": RenderGlobalProps(props.GlobalProps),
+		"innerhtml": props.InnerHTML,
 	}
 
 	t := Mx(`<li {{global}}>{{innerhtml}}</li>`)
@@ -220,14 +228,15 @@ func Li(props LiProps) string {
  */
 type MenuProps struct {
 	GlobalProps
+
 	InnerHTML string
 }
 
 func Menu(props MenuProps) string {
 	values := map[string]interface{}{
-		"innerhtml": props.InnerHTML,
+		"global": BuildGlobalProps(props.GlobalProps),
 
-		"global": RenderGlobalProps(props.GlobalProps),
+		"innerhtml": props.InnerHTML,
 	}
 
 	t := Mx(`<menu {{global}}>{{innerhtml}}</menu>`)
@@ -242,14 +251,15 @@ func Menu(props MenuProps) string {
  */
 type OlProps struct {
 	GlobalProps
+
 	InnerHTML string
 }
 
 func Ol(props OlProps) string {
 	values := map[string]interface{}{
-		"innerhtml": props.InnerHTML,
+		"global": BuildGlobalProps(props.GlobalProps),
 
-		"global": RenderGlobalProps(props.GlobalProps),
+		"innerhtml": props.InnerHTML,
 	}
 
 	t := Mx(`<ol {{global}}>{{innerhtml}}</ol>`)
@@ -266,14 +276,15 @@ func Ol(props OlProps) string {
  */
 type PProps struct {
 	GlobalProps
+
 	InnerHTML string
 }
 
 func P(props PProps) string {
 	values := map[string]interface{}{
-		"innerhtml": props.InnerHTML,
+		"global": BuildGlobalProps(props.GlobalProps),
 
-		"global": RenderGlobalProps(props.GlobalProps),
+		"innerhtml": props.InnerHTML,
 	}
 
 	t := Mx(`<p {{global}}>{{innerhtml}}</p>`)
@@ -290,14 +301,15 @@ func P(props PProps) string {
  */
 type PreProps struct {
 	GlobalProps
+
 	InnerHTML string
 }
 
 func Pre(props PreProps) string {
 	values := map[string]interface{}{
-		"innerhtml": props.InnerHTML,
+		"global": BuildGlobalProps(props.GlobalProps),
 
-		"global": RenderGlobalProps(props.GlobalProps),
+		"innerhtml": props.InnerHTML,
 	}
 
 	t := Mx(`<pre {{global}}>{{innerhtml}}</pre>`)
@@ -312,14 +324,15 @@ func Pre(props PreProps) string {
  */
 type UlProps struct {
 	GlobalProps
+
 	InnerHTML string
 }
 
 func Ul(props UlProps) string {
 	values := map[string]interface{}{
-		"innerhtml": props.InnerHTML,
+		"global": BuildGlobalProps(props.GlobalProps),
 
-		"global": RenderGlobalProps(props.GlobalProps),
+		"innerhtml": props.InnerHTML,
 	}
 
 	t := Mx(`<ul {{global}}>{{innerhtml}}</ul>`)

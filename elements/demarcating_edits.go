@@ -10,15 +10,16 @@ import . "github.com/bitpartio/gomx/utils"
  * deleted from the document.
  */
 type DelProps struct {
-	InnerHTML string
 	GlobalProps
+
+	InnerHTML string
 }
 
 func Del(props DelProps) string {
 	values := map[string]interface{}{
-		"innerhtml": props.InnerHTML,
+		"global": BuildGlobalProps(props.GlobalProps),
 
-		"global": RenderGlobalProps(props.GlobalProps),
+		"innerhtml": props.InnerHTML,
 	}
 
 	t := Mx(`<del {{global}}>{{innerhtml}}</del>`)
@@ -34,15 +35,16 @@ func Del(props DelProps) string {
  * purpose: to indicate text that has been added to the document.
  */
 type InsProps struct {
-	InnerHTML string
 	GlobalProps
+
+	InnerHTML string
 }
 
 func Ins(props InsProps) string {
 	values := map[string]interface{}{
-		"innerhtml": props.InnerHTML,
+		"global": BuildGlobalProps(props.GlobalProps),
 
-		"global": RenderGlobalProps(props.GlobalProps),
+		"innerhtml": props.InnerHTML,
 	}
 
 	t := Mx(`<ins {{global}}>{{innerhtml}}</ins>`)

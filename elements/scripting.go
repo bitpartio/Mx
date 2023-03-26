@@ -10,14 +10,15 @@ import . "github.com/bitpartio/gomx/utils"
  */
 type CanvasProps struct {
 	GlobalProps
+
 	InnerHTML string
 }
 
 func Canvas(props CanvasProps) string {
 	values := map[string]interface{}{
-		"innerhtml": props.InnerHTML,
+		"global": BuildGlobalProps(props.GlobalProps),
 
-		"global": RenderGlobalProps(props.GlobalProps),
+		"innerhtml": props.InnerHTML,
 	}
 
 	t := Mx(`<canvas {{lang}} {{global}}>{{innerhtml}}</canvas>`)
@@ -32,14 +33,15 @@ func Canvas(props CanvasProps) string {
  */
 type NoscriptProps struct {
 	GlobalProps
+
 	InnerHTML string
 }
 
 func Noscript(props NoscriptProps) string {
 	values := map[string]interface{}{
-		"innerhtml": props.InnerHTML,
+		"global": BuildGlobalProps(props.GlobalProps),
 
-		"global": RenderGlobalProps(props.GlobalProps),
+		"innerhtml": props.InnerHTML,
 	}
 
 	t := Mx(`<noscript {{lang}} {{global}}>{{innerhtml}}</noscript>`)
@@ -56,14 +58,15 @@ func Noscript(props NoscriptProps) string {
  */
 type ScriptProps struct {
 	GlobalProps
+
 	InnerHTML string
 }
 
 func Script(props ScriptProps) string {
 	values := map[string]interface{}{
-		"innerhtml": props.InnerHTML,
+		"global": BuildGlobalProps(props.GlobalProps),
 
-		"global": RenderGlobalProps(props.GlobalProps),
+		"innerhtml": props.InnerHTML,
 	}
 
 	t := Mx(`<script {{lang}} {{global}}>{{innerhtml}}</script>`)

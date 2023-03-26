@@ -11,16 +11,19 @@ import . "github.com/bitpartio/gomx/utils"
  */
 type SlotProps struct {
 	GlobalProps
+
+	Name string
+
 	InnerHTML string
-	Name      string
 }
 
 func Slot(props SlotProps) string {
 	values := map[string]interface{}{
-		"name":      BuildProp("name", props.Name),
-		"innerhtml": props.InnerHTML,
+		"global": BuildGlobalProps(props.GlobalProps),
 
-		"global": RenderGlobalProps(props.GlobalProps),
+		"name": BuildProp("name", props.Name),
+
+		"innerhtml": props.InnerHTML,
 	}
 
 	t := Mx(`<slot {{name}} {{global}}>{{innerhtml}}</slot>`)
@@ -36,14 +39,15 @@ func Slot(props SlotProps) string {
  */
 type TemplateProps struct {
 	GlobalProps
+
 	InnerHTML string
 }
 
 func Template(props TemplateProps) string {
 	values := map[string]interface{}{
-		"innerhtml": props.InnerHTML,
+		"global": BuildGlobalProps(props.GlobalProps),
 
-		"global": RenderGlobalProps(props.GlobalProps),
+		"innerhtml": props.InnerHTML,
 	}
 
 	t := Mx(`<template {{global}}>{{innerhtml}}</template>`)

@@ -10,14 +10,15 @@ import . "github.com/bitpartio/gomx/utils"
  */
 type AddressProps struct {
 	GlobalProps
+
 	InnerHTML string
 }
 
 func Address(props AddressProps) string {
 	values := map[string]interface{}{
-		"innerhtml": props.InnerHTML,
+		"global": BuildGlobalProps(props.GlobalProps),
 
-		"global": RenderGlobalProps(props.GlobalProps),
+		"innerhtml": props.InnerHTML,
 	}
 
 	t := Mx(`<address {{global}}>{{innerhtml}}</address>`)
@@ -35,15 +36,16 @@ func Address(props AddressProps) string {
  * gadget, or any other independent item of content.
  */
 type ArticleProps struct {
-	InnerHTML string
 	GlobalProps
+
+	InnerHTML string
 }
 
 func Article(props ArticleProps) string {
 	values := map[string]interface{}{
-		"innerhtml": props.InnerHTML,
+		"global": BuildGlobalProps(props.GlobalProps),
 
-		"global": RenderGlobalProps(props.GlobalProps),
+		"innerhtml": props.InnerHTML,
 	}
 
 	t := Mx(`<article {{global}}>{{innerhtml}}</article>`)
@@ -58,15 +60,16 @@ func Article(props ArticleProps) string {
  * as sidebars or call-out boxes.
  */
 type AsideProps struct {
-	InnerHTML string
 	GlobalProps
+
+	InnerHTML string
 }
 
 func Aside(props AsideProps) string {
 	values := map[string]interface{}{
-		"innerhtml": props.InnerHTML,
+		"global": BuildGlobalProps(props.GlobalProps),
 
-		"global": RenderGlobalProps(props.GlobalProps),
+		"innerhtml": props.InnerHTML,
 	}
 
 	t := Mx(`<aside {{global}}>{{innerhtml}}</aside>`)
@@ -82,15 +85,16 @@ func Aside(props AsideProps) string {
  * documents.
  */
 type FooterProps struct {
-	InnerHTML string
 	GlobalProps
+
+	InnerHTML string
 }
 
 func Footer(props FooterProps) string {
 	values := map[string]interface{}{
-		"innerhtml": props.InnerHTML,
+		"global": BuildGlobalProps(props.GlobalProps),
 
-		"global": RenderGlobalProps(props.GlobalProps),
+		"innerhtml": props.InnerHTML,
 	}
 
 	t := Mx(`<footer {{global}}>{{innerhtml}}</footer>`)
@@ -105,15 +109,16 @@ func Footer(props FooterProps) string {
  * a search form, an author name, and other elements.
  */
 type HeaderProps struct {
-	InnerHTML string
 	GlobalProps
+
+	InnerHTML string
 }
 
 func Header(props HeaderProps) string {
 	values := map[string]interface{}{
-		"innerhtml": props.InnerHTML,
+		"global": BuildGlobalProps(props.GlobalProps),
 
-		"global": RenderGlobalProps(props.GlobalProps),
+		"innerhtml": props.InnerHTML,
 	}
 
 	t := Mx(`<header {{global}}>{{innerhtml}}</header>`)
@@ -127,15 +132,16 @@ func Header(props HeaderProps) string {
  * level and <h6> is the lowest.
  */
 type HProps struct {
-	InnerHTML string
 	GlobalProps
+
+	InnerHTML string
 }
 
 func H1(props HProps) string {
 	values := map[string]interface{}{
-		"innerhtml": props.InnerHTML,
+		"global": BuildGlobalProps(props.GlobalProps),
 
-		"global": RenderGlobalProps(props.GlobalProps),
+		"innerhtml": props.InnerHTML,
 	}
 
 	t := Mx(`<h1 {{global}}>{{innerhtml}}</h1>`)
@@ -146,9 +152,9 @@ func H1(props HProps) string {
 
 func H2(props HProps) string {
 	values := map[string]interface{}{
-		"innerhtml": props.InnerHTML,
+		"global": BuildGlobalProps(props.GlobalProps),
 
-		"global": RenderGlobalProps(props.GlobalProps),
+		"innerhtml": props.InnerHTML,
 	}
 
 	t := Mx(`<h2 {{global}}>{{innerhtml}}</h2>`)
@@ -159,9 +165,9 @@ func H2(props HProps) string {
 
 func H3(props HProps) string {
 	values := map[string]interface{}{
-		"innerhtml": props.InnerHTML,
+		"global": BuildGlobalProps(props.GlobalProps),
 
-		"global": RenderGlobalProps(props.GlobalProps),
+		"innerhtml": props.InnerHTML,
 	}
 
 	t := Mx(`<h3 {{global}}>{{innerhtml}}</h3>`)
@@ -172,9 +178,9 @@ func H3(props HProps) string {
 
 func H4(props HProps) string {
 	values := map[string]interface{}{
-		"innerhtml": props.InnerHTML,
+		"global": BuildGlobalProps(props.GlobalProps),
 
-		"global": RenderGlobalProps(props.GlobalProps),
+		"innerhtml": props.InnerHTML,
 	}
 
 	t := Mx(`<h4 {{global}}>{{innerhtml}}</h4>`)
@@ -185,9 +191,9 @@ func H4(props HProps) string {
 
 func H5(props HProps) string {
 	values := map[string]interface{}{
-		"innerhtml": props.InnerHTML,
+		"global": BuildGlobalProps(props.GlobalProps),
 
-		"global": RenderGlobalProps(props.GlobalProps),
+		"innerhtml": props.InnerHTML,
 	}
 
 	t := Mx(`<h5 {{global}}>{{innerhtml}}</h5>`)
@@ -198,9 +204,9 @@ func H5(props HProps) string {
 
 func H6(props HProps) string {
 	values := map[string]interface{}{
-		"innerhtml": props.InnerHTML,
+		"global": BuildGlobalProps(props.GlobalProps),
 
-		"global": RenderGlobalProps(props.GlobalProps),
+		"innerhtml": props.InnerHTML,
 	}
 
 	t := Mx(`<h6 {{global}}>{{innerhtml}}</h6>`)
@@ -216,15 +222,16 @@ func H6(props HProps) string {
  * functionality of an application.
  */
 type MainProps struct {
-	InnerHTML string
 	GlobalProps
+
+	InnerHTML string
 }
 
 func Main(props MainProps) string {
 	values := map[string]interface{}{
-		"innerhtml": props.InnerHTML,
+		"global": BuildGlobalProps(props.GlobalProps),
 
-		"global": RenderGlobalProps(props.GlobalProps),
+		"innerhtml": props.InnerHTML,
 	}
 
 	t := Mx(`<main {{global}}>{{innerhtml}}</main>`)
@@ -240,15 +247,16 @@ func Main(props MainProps) string {
  * indexes
  */
 type NavProps struct {
-	InnerHTML string
 	GlobalProps
+
+	InnerHTML string
 }
 
 func Nav(props NavProps) string {
 	values := map[string]interface{}{
-		"innerhtml": props.InnerHTML,
+		"global": BuildGlobalProps(props.GlobalProps),
 
-		"global": RenderGlobalProps(props.GlobalProps),
+		"innerhtml": props.InnerHTML,
 	}
 
 	t := Mx(`<nav {{global}}>{{innerhtml}}</nav>`)
@@ -263,15 +271,16 @@ func Nav(props NavProps) string {
  * always have a heading, with very few exceptions.
  */
 type SectionProps struct {
-	InnerHTML string
 	GlobalProps
+
+	InnerHTML string
 }
 
 func Section(props SectionProps) string {
 	values := map[string]interface{}{
-		"innerhtml": props.InnerHTML,
+		"global": BuildGlobalProps(props.GlobalProps),
 
-		"global": RenderGlobalProps(props.GlobalProps),
+		"innerhtml": props.InnerHTML,
 	}
 
 	t := Mx(`<section {{global}}>{{innerhtml}}</section>`)

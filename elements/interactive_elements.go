@@ -11,14 +11,15 @@ import . "github.com/bitpartio/gomx/utils"
  */
 type DetailsProps struct {
 	GlobalProps
+
 	InnerHTML string
 }
 
 func Details(props DetailsProps) string {
 	values := map[string]interface{}{
-		"innerhtml": props.InnerHTML,
+		"global": BuildGlobalProps(props.GlobalProps),
 
-		"global": RenderGlobalProps(props.GlobalProps),
+		"innerhtml": props.InnerHTML,
 	}
 
 	t := Mx(`<details {{global}}>{{innerhtml}}</details>`)
@@ -33,14 +34,15 @@ func Details(props DetailsProps) string {
  */
 type DialogProps struct {
 	GlobalProps
+
 	InnerHTML string
 }
 
 func Dialog(props DialogProps) string {
 	values := map[string]interface{}{
-		"innerhtml": props.InnerHTML,
+		"global": BuildGlobalProps(props.GlobalProps),
 
-		"global": RenderGlobalProps(props.GlobalProps),
+		"innerhtml": props.InnerHTML,
 	}
 
 	t := Mx(`<dialog {{global}}>{{innerhtml}}</dialog>`)
@@ -56,14 +58,15 @@ func Dialog(props DialogProps) string {
  */
 type SummaryProps struct {
 	GlobalProps
+
 	InnerHTML string
 }
 
 func Summary(props SummaryProps) string {
 	values := map[string]interface{}{
-		"innerhtml": props.InnerHTML,
+		"global": BuildGlobalProps(props.GlobalProps),
 
-		"global": RenderGlobalProps(props.GlobalProps),
+		"innerhtml": props.InnerHTML,
 	}
 
 	t := Mx(`<summary {{global}}>{{innerhtml}}</summary>`)

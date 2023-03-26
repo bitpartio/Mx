@@ -44,7 +44,8 @@ func Button(props ButtonProps) string {
 	}
 
 	values := map[string]interface{}{
-		"innerhtml":      props.InnerHTML,
+		"global": BuildGlobalProps(props.GlobalProps),
+
 		"autofocus":      BuildBooleanProp("autofocus", props.Autofocus),
 		"disabled":       BuildBooleanProp("disabled", props.Disabled),
 		"form":           BuildProp("form", props.Form),
@@ -57,7 +58,7 @@ func Button(props ButtonProps) string {
 		"type":           typeOf,
 		"value":          BuildProp("value", props.Value),
 
-		"global": RenderGlobalProps(props.GlobalProps),
+		"innerhtml": props.InnerHTML,
 	}
 
 	t := Mx(`<button {{global}} {{autofocus}} {{disabled}} {{form}} {{formaction}} {{formenctype}} {{formmethod}} {{formnovalidate}} {{formtarget}} {{name}} {{type}} {{value}}>{{innerhtml}}</button>`)
@@ -68,7 +69,7 @@ func Button(props ButtonProps) string {
 
 type ButtonProps struct {
 	GlobalProps
-	InnerHTML      string
+
 	Autofocus      bool
 	Disabled       bool
 	Form           string
@@ -80,6 +81,8 @@ type ButtonProps struct {
 	Name           string
 	Type           func() typeOption
 	Value          string
+
+	InnerHTML string
 }
 
 type buttonOptions struct {
@@ -160,14 +163,15 @@ type typeOptions struct {
  */
 type DatalistProps struct {
 	GlobalProps
+
 	InnerHTML string
 }
 
 func Datalist(props DatalistProps) string {
 	values := map[string]interface{}{
-		"innerhtml": props.InnerHTML,
+		"global": BuildGlobalProps(props.GlobalProps),
 
-		"global": RenderGlobalProps(props.GlobalProps),
+		"innerhtml": props.InnerHTML,
 	}
 
 	t := Mx(`<datalist {{global}}>{{innerhtml}}</datalist>`)
@@ -182,14 +186,15 @@ func Datalist(props DatalistProps) string {
  */
 type FieldsetProps struct {
 	GlobalProps
+
 	InnerHTML string
 }
 
 func Fieldset(props FieldsetProps) string {
 	values := map[string]interface{}{
-		"innerhtml": props.InnerHTML,
+		"global": BuildGlobalProps(props.GlobalProps),
 
-		"global": RenderGlobalProps(props.GlobalProps),
+		"innerhtml": props.InnerHTML,
 	}
 
 	t := Mx(`<fieldset {{global}}>{{innerhtml}}</fieldset>`)
@@ -204,14 +209,15 @@ func Fieldset(props FieldsetProps) string {
  */
 type FormProps struct {
 	GlobalProps
+
 	InnerHTML string
 }
 
 func Form(props FormProps) string {
 	values := map[string]interface{}{
-		"innerhtml": props.InnerHTML,
+		"global": BuildGlobalProps(props.GlobalProps),
 
-		"global": RenderGlobalProps(props.GlobalProps),
+		"innerhtml": props.InnerHTML,
 	}
 
 	t := Mx(`<form {{global}}>{{innerhtml}}</form>`)
@@ -234,7 +240,7 @@ type InputProps struct {
 
 func Input(props InputProps) string {
 	values := map[string]interface{}{
-		"global": RenderGlobalProps(props.GlobalProps),
+		"global": BuildGlobalProps(props.GlobalProps),
 	}
 
 	t := Mx(`<input {{global}} />`)
@@ -248,14 +254,15 @@ func Input(props InputProps) string {
  */
 type LabelProps struct {
 	GlobalProps
+
 	InnerHTML string
 }
 
 func Label(props LabelProps) string {
 	values := map[string]interface{}{
-		"innerhtml": props.InnerHTML,
+		"global": BuildGlobalProps(props.GlobalProps),
 
-		"global": RenderGlobalProps(props.GlobalProps),
+		"innerhtml": props.InnerHTML,
 	}
 
 	t := Mx(`<label {{global}}>{{innerhtml}}</label>`)
@@ -269,14 +276,15 @@ func Label(props LabelProps) string {
  */
 type LegendProps struct {
 	GlobalProps
+
 	InnerHTML string
 }
 
 func Legend(props LegendProps) string {
 	values := map[string]interface{}{
-		"innerhtml": props.InnerHTML,
+		"global": BuildGlobalProps(props.GlobalProps),
 
-		"global": RenderGlobalProps(props.GlobalProps),
+		"innerhtml": props.InnerHTML,
 	}
 
 	t := Mx(`<legend {{global}}>{{innerhtml}}</legend>`)
@@ -291,14 +299,15 @@ func Legend(props LegendProps) string {
  */
 type MeterProps struct {
 	GlobalProps
+
 	InnerHTML string
 }
 
 func Meter(props MeterProps) string {
 	values := map[string]interface{}{
-		"innerhtml": props.InnerHTML,
+		"global": BuildGlobalProps(props.GlobalProps),
 
-		"global": RenderGlobalProps(props.GlobalProps),
+		"innerhtml": props.InnerHTML,
 	}
 
 	t := Mx(`<meter {{global}}>{{innerhtml}}</meter>`)
@@ -312,14 +321,15 @@ func Meter(props MeterProps) string {
  */
 type OptgroupProps struct {
 	GlobalProps
+
 	InnerHTML string
 }
 
 func Optgroup(props OptgroupProps) string {
 	values := map[string]interface{}{
-		"innerhtml": props.InnerHTML,
+		"global": BuildGlobalProps(props.GlobalProps),
 
-		"global": RenderGlobalProps(props.GlobalProps),
+		"innerhtml": props.InnerHTML,
 	}
 
 	t := Mx(`<optgroup {{global}}>{{innerhtml}}</optgroup>`)
@@ -335,14 +345,15 @@ func Optgroup(props OptgroupProps) string {
  */
 type OptionProps struct {
 	GlobalProps
+
 	InnerHTML string
 }
 
 func Option(props OptionProps) string {
 	values := map[string]interface{}{
-		"innerhtml": props.InnerHTML,
+		"global": BuildGlobalProps(props.GlobalProps),
 
-		"global": RenderGlobalProps(props.GlobalProps),
+		"innerhtml": props.InnerHTML,
 	}
 
 	t := Mx(`<option {{global}}>{{innerhtml}}</option>`)
@@ -357,14 +368,15 @@ func Option(props OptionProps) string {
  */
 type OutputProps struct {
 	GlobalProps
+
 	InnerHTML string
 }
 
 func Output(props OutputProps) string {
 	values := map[string]interface{}{
-		"innerhtml": props.InnerHTML,
+		"global": BuildGlobalProps(props.GlobalProps),
 
-		"global": RenderGlobalProps(props.GlobalProps),
+		"innerhtml": props.InnerHTML,
 	}
 
 	t := Mx(`<output {{global}}>{{innerhtml}}</output>`)
@@ -379,14 +391,15 @@ func Output(props OutputProps) string {
  */
 type ProgressProps struct {
 	GlobalProps
+
 	InnerHTML string
 }
 
 func Progress(props ProgressProps) string {
 	values := map[string]interface{}{
-		"innerhtml": props.InnerHTML,
+		"global": BuildGlobalProps(props.GlobalProps),
 
-		"global": RenderGlobalProps(props.GlobalProps),
+		"innerhtml": props.InnerHTML,
 	}
 
 	t := Mx(`<progress {{global}}>{{innerhtml}}</progress>`)
@@ -400,14 +413,15 @@ func Progress(props ProgressProps) string {
  */
 type SelectProps struct {
 	GlobalProps
+
 	InnerHTML string
 }
 
 func Select(props SelectProps) string {
 	values := map[string]interface{}{
-		"innerhtml": props.InnerHTML,
+		"global": BuildGlobalProps(props.GlobalProps),
 
-		"global": RenderGlobalProps(props.GlobalProps),
+		"innerhtml": props.InnerHTML,
 	}
 
 	t := Mx(`<select {{global}}>{{innerhtml}}</select>`)
@@ -423,14 +437,15 @@ func Select(props SelectProps) string {
  */
 type TextareaProps struct {
 	GlobalProps
+
 	InnerHTML string
 }
 
 func Textarea(props TextareaProps) string {
 	values := map[string]interface{}{
-		"innerhtml": props.InnerHTML,
+		"global": BuildGlobalProps(props.GlobalProps),
 
-		"global": RenderGlobalProps(props.GlobalProps),
+		"innerhtml": props.InnerHTML,
 	}
 
 	t := Mx(`<textarea {{global}}>{{innerhtml}}</textarea>`)

@@ -16,7 +16,7 @@ type BaseProps struct {
 
 func Base(props BaseProps) string {
 	values := map[string]interface{}{
-		"global": RenderGlobalProps(props.GlobalProps),
+		"global": BuildGlobalProps(props.GlobalProps),
 	}
 
 	t := Mx(`<base {{global}} />`)
@@ -30,15 +30,16 @@ func Base(props BaseProps) string {
  * like its title, scripts, and style sheets.
  */
 type HeadProps struct {
-	InnerHTML string
 	GlobalProps
+
+	InnerHTML string
 }
 
 func Head(props HeadProps) string {
 	values := map[string]interface{}{
-		"innerhtml": props.InnerHTML,
+		"global": BuildGlobalProps(props.GlobalProps),
 
-		"global": RenderGlobalProps(props.GlobalProps),
+		"innerhtml": props.InnerHTML,
 	}
 
 	t := Mx(`<head {{global}}>{{innerhtml}}</head>`)
@@ -59,7 +60,7 @@ type LinkProps struct {
 
 func Link(props LinkProps) string {
 	values := map[string]interface{}{
-		"global": RenderGlobalProps(props.GlobalProps),
+		"global": BuildGlobalProps(props.GlobalProps),
 	}
 
 	t := Mx(`<link {{global}} />`)
@@ -79,7 +80,8 @@ type MetaProps struct {
 
 func Meta(props MetaProps) string {
 	values := map[string]interface{}{
-		"global":  RenderGlobalProps(props.GlobalProps),
+		"global": BuildGlobalProps(props.GlobalProps),
+
 		"charset": BuildProp("charset", props.Charset),
 	}
 
@@ -95,15 +97,16 @@ func Meta(props MetaProps) string {
  * this element.
  */
 type StyleProps struct {
-	InnerHTML string
 	GlobalProps
+
+	InnerHTML string
 }
 
 func Style(props StyleProps) string {
 	values := map[string]interface{}{
-		"innerhtml": props.InnerHTML,
+		"global": BuildGlobalProps(props.GlobalProps),
 
-		"global": RenderGlobalProps(props.GlobalProps),
+		"innerhtml": props.InnerHTML,
 	}
 
 	t := Mx(`<style {{global}}>{{innerhtml}}</style>`)
@@ -117,15 +120,16 @@ func Style(props StyleProps) string {
  * page's tab. It only contains text; tags within the element are ignored.
  */
 type TitleProps struct {
-	InnerHTML string
 	GlobalProps
+
+	InnerHTML string
 }
 
 func Title(props TitleProps) string {
 	values := map[string]interface{}{
-		"innerhtml": props.InnerHTML,
+		"global": BuildGlobalProps(props.GlobalProps),
 
-		"global": RenderGlobalProps(props.GlobalProps),
+		"innerhtml": props.InnerHTML,
 	}
 
 	t := Mx(`<title {{global}}>{{innerhtml}}</title>`)

@@ -240,9 +240,9 @@ type hiddenOptions struct {
 }
 
 /*
- * BuildGlobalProps
+ * buildGlobalProps
  */
-func BuildGlobalProps(props GlobalProps) map[string]interface{} {
+func buildGlobalProps(props GlobalProps) map[string]interface{} {
 	values := make(map[string]interface{})
 
 	// id
@@ -274,10 +274,10 @@ func BuildGlobalProps(props GlobalProps) map[string]interface{} {
 }
 
 /*
- * RenderGlobalProps
+ * BuildGlobalProps
  */
-func RenderGlobalProps(props GlobalProps) string {
-	values := BuildGlobalProps(props)
+func BuildGlobalProps(props GlobalProps) string {
+	values := buildGlobalProps(props)
 
 	tags := []string{
 		"{{id}}",

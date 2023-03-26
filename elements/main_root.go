@@ -11,18 +11,21 @@ import . "github.com/bitpartio/gomx/utils"
  */
 type HTMLProps struct {
 	GlobalProps
+
+	Lang string
+
 	InnerHTML string
-	Lang      string
 }
 
 func HTML(props HTMLProps) string {
 	lang := BuildProp("lang", props.Lang)
 
 	values := map[string]interface{}{
-		"lang":      lang,
-		"innerhtml": props.InnerHTML,
+		"global": BuildGlobalProps(props.GlobalProps),
 
-		"global": RenderGlobalProps(props.GlobalProps),
+		"lang": lang,
+
+		"innerhtml": props.InnerHTML,
 	}
 
 	t := Mx(`<html {{lang}} {{global}}>{{innerhtml}}</html>`)

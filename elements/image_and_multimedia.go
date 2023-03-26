@@ -11,11 +11,15 @@ import . "github.com/bitpartio/gomx/utils"
  */
 type AreaProps struct {
 	GlobalProps
+
+	Alt string
 }
 
 func Area(props AreaProps) string {
 	values := map[string]interface{}{
-		"global": RenderGlobalProps(props.GlobalProps),
+		"global": BuildGlobalProps(props.GlobalProps),
+
+		"alt": BuildProp("alt", props.Alt),
 	}
 
 	t := Mx(`<area {{global}} />`)
@@ -32,14 +36,15 @@ func Area(props AreaProps) string {
  */
 type AudioProps struct {
 	GlobalProps
+
 	InnerHTML string
 }
 
 func Audio(props AudioProps) string {
 	values := map[string]interface{}{
-		"innerhtml": props.InnerHTML,
+		"global": BuildGlobalProps(props.GlobalProps),
 
-		"global": RenderGlobalProps(props.GlobalProps),
+		"innerhtml": props.InnerHTML,
 	}
 
 	t := Mx(`<audio {{global}}>{{innerhtml}}</audio>`)
@@ -57,7 +62,7 @@ type ImgProps struct {
 
 func Img(props ImgProps) string {
 	values := map[string]interface{}{
-		"global": RenderGlobalProps(props.GlobalProps),
+		"global": BuildGlobalProps(props.GlobalProps),
 	}
 
 	t := Mx(`<img {{global}} />`)
@@ -71,14 +76,15 @@ func Img(props ImgProps) string {
  */
 type MapProps struct {
 	GlobalProps
+
 	InnerHTML string
 }
 
 func Map(props MapProps) string {
 	values := map[string]interface{}{
-		"innerhtml": props.InnerHTML,
+		"global": BuildGlobalProps(props.GlobalProps),
 
-		"global": RenderGlobalProps(props.GlobalProps),
+		"innerhtml": props.InnerHTML,
 	}
 
 	t := Mx(`<map {{global}}>{{innerhtml}}</map>`)
@@ -99,7 +105,7 @@ type TrackProps struct {
 
 func Track(props TrackProps) string {
 	values := map[string]interface{}{
-		"global": RenderGlobalProps(props.GlobalProps),
+		"global": BuildGlobalProps(props.GlobalProps),
 	}
 
 	t := Mx(`<track {{global}} />`)
@@ -115,14 +121,15 @@ func Track(props TrackProps) string {
  */
 type VideoProps struct {
 	GlobalProps
+
 	InnerHTML string
 }
 
 func Video(props VideoProps) string {
 	values := map[string]interface{}{
-		"innerhtml": props.InnerHTML,
+		"global": BuildGlobalProps(props.GlobalProps),
 
-		"global": RenderGlobalProps(props.GlobalProps),
+		"innerhtml": props.InnerHTML,
 	}
 
 	t := Mx(`<video {{global}}>{{innerhtml}}</video>`)

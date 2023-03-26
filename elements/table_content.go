@@ -9,14 +9,15 @@ import . "github.com/bitpartio/gomx/utils"
  */
 type CaptionProps struct {
 	GlobalProps
+
 	InnerHTML string
 }
 
 func Caption(props CaptionProps) string {
 	values := map[string]interface{}{
-		"innerhtml": props.InnerHTML,
+		"global": BuildGlobalProps(props.GlobalProps),
 
-		"global": RenderGlobalProps(props.GlobalProps),
+		"innerhtml": props.InnerHTML,
 	}
 
 	t := Mx(`<caption {{global}}>{{innerhtml}}</caption>`)
@@ -35,7 +36,7 @@ type ColProps struct {
 
 func Col(props ColProps) string {
 	values := map[string]interface{}{
-		"global": RenderGlobalProps(props.GlobalProps),
+		"global": BuildGlobalProps(props.GlobalProps),
 	}
 
 	t := Mx(`<col {{global}} />`)
@@ -49,14 +50,15 @@ func Col(props ColProps) string {
  */
 type ColgroupProps struct {
 	GlobalProps
+
 	InnerHTML string
 }
 
 func Colgroup(props ColgroupProps) string {
 	values := map[string]interface{}{
-		"innerhtml": props.InnerHTML,
+		"global": BuildGlobalProps(props.GlobalProps),
 
-		"global": RenderGlobalProps(props.GlobalProps),
+		"innerhtml": props.InnerHTML,
 	}
 
 	t := Mx(`<colgroup {{global}}>{{innerhtml}}</colgroup>`)
@@ -72,14 +74,15 @@ func Colgroup(props ColgroupProps) string {
  */
 type TableProps struct {
 	GlobalProps
+
 	InnerHTML string
 }
 
 func Table(props TableProps) string {
 	values := map[string]interface{}{
-		"innerhtml": props.InnerHTML,
+		"global": BuildGlobalProps(props.GlobalProps),
 
-		"global": RenderGlobalProps(props.GlobalProps),
+		"innerhtml": props.InnerHTML,
 	}
 
 	t := Mx(`<table {{global}}>{{innerhtml}}</table>`)
@@ -94,14 +97,15 @@ func Table(props TableProps) string {
  */
 type TbodyProps struct {
 	GlobalProps
+
 	InnerHTML string
 }
 
 func Tbody(props TbodyProps) string {
 	values := map[string]interface{}{
-		"innerhtml": props.InnerHTML,
+		"global": BuildGlobalProps(props.GlobalProps),
 
-		"global": RenderGlobalProps(props.GlobalProps),
+		"innerhtml": props.InnerHTML,
 	}
 
 	t := Mx(`<tbody {{global}}>{{innerhtml}}</tbody>`)
@@ -116,14 +120,15 @@ func Tbody(props TbodyProps) string {
  */
 type TdProps struct {
 	GlobalProps
+
 	InnerHTML string
 }
 
 func Td(props TdProps) string {
 	values := map[string]interface{}{
-		"innerhtml": props.InnerHTML,
+		"global": BuildGlobalProps(props.GlobalProps),
 
-		"global": RenderGlobalProps(props.GlobalProps),
+		"innerhtml": props.InnerHTML,
 	}
 
 	t := Mx(`<td {{global}}>{{innerhtml}}</td>`)
@@ -137,14 +142,15 @@ func Td(props TdProps) string {
  */
 type TfootProps struct {
 	GlobalProps
+
 	InnerHTML string
 }
 
 func Tfoot(props TfootProps) string {
 	values := map[string]interface{}{
-		"innerhtml": props.InnerHTML,
+		"global": BuildGlobalProps(props.GlobalProps),
 
-		"global": RenderGlobalProps(props.GlobalProps),
+		"innerhtml": props.InnerHTML,
 	}
 
 	t := Mx(`<tfoot {{global}}>{{innerhtml}}</tfoot>`)
@@ -158,14 +164,15 @@ func Tfoot(props TfootProps) string {
  */
 type ThProps struct {
 	GlobalProps
+
 	InnerHTML string
 }
 
 func Th(props ThProps) string {
 	values := map[string]interface{}{
-		"innerhtml": props.InnerHTML,
+		"global": BuildGlobalProps(props.GlobalProps),
 
-		"global": RenderGlobalProps(props.GlobalProps),
+		"innerhtml": props.InnerHTML,
 	}
 
 	t := Mx(`<th {{global}}>{{innerhtml}}</th>`)
@@ -179,14 +186,15 @@ func Th(props ThProps) string {
  */
 type TheadProps struct {
 	GlobalProps
+
 	InnerHTML string
 }
 
 func Thead(props TheadProps) string {
 	values := map[string]interface{}{
-		"innerhtml": props.InnerHTML,
+		"global": BuildGlobalProps(props.GlobalProps),
 
-		"global": RenderGlobalProps(props.GlobalProps),
+		"innerhtml": props.InnerHTML,
 	}
 
 	t := Mx(`<thead {{global}}>{{innerhtml}}</thead>`)
@@ -202,14 +210,15 @@ func Thead(props TheadProps) string {
  */
 type TrProps struct {
 	GlobalProps
+
 	InnerHTML string
 }
 
 func Tr(props TrProps) string {
 	values := map[string]interface{}{
-		"innerhtml": props.InnerHTML,
+		"global": BuildGlobalProps(props.GlobalProps),
 
-		"global": RenderGlobalProps(props.GlobalProps),
+		"innerhtml": props.InnerHTML,
 	}
 
 	t := Mx(`<tr {{global}}>{{innerhtml}}</tr>`)
