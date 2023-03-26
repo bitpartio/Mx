@@ -5,7 +5,7 @@ import (
 	"log"
 	"net/http"
 
-	. "github.com/bitpartio/gomx/utils"
+	. "github.com/bitpartio/Mx/utils"
 )
 
 func main() {

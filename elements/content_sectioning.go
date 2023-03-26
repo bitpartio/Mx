@@ -2,7 +2,7 @@ package elements
 
 // Ref: https://developer.mozilla.org/en-US/docs/Web/HTML/Element#content_sectioning
 
-import . "github.com/bitpartio/gomx/utils"
+import . "github.com/bitpartio/Mx/utils"
 
 /*
  * Indicates that the enclosed HTML provides contact information for a

@@ -2,7 +2,7 @@ package elements
 
 // Ref: https://developer.mozilla.org/en-US/docs/Web/HTML/Element#table_content
 
-import . "github.com/bitpartio/gomx/utils"
+import . "github.com/bitpartio/Mx/utils"
 
 /*
  * Specifies the caption (or title) of a table.

@@ -2,7 +2,7 @@ package elements
 
 // Ref: https://developer.mozilla.org/en-US/docs/Web/HTML/Element#demarcating_edits
 
-import . "github.com/bitpartio/gomx/utils"
+import . "github.com/bitpartio/Mx/utils"
 
 /*
  * Represents a range of text that has been added to a document. You can use

@@ -2,7 +2,7 @@ package elements
 
 // Ref: https://developer.mozilla.org/en-US/docs/Web/HTML/Element#main_root
 
-import . "github.com/bitpartio/gomx/utils"
+import . "github.com/bitpartio/Mx/utils"
 
 /*
  * Represents the root (top-level element) of an HTML document, so it is

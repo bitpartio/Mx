@@ -2,7 +2,7 @@ package elements
 
 // Ref: https://developer.mozilla.org/en-US/docs/Web/HTML/Element#image_and_multimedia
 
-import . "github.com/bitpartio/gomx/utils"
+import . "github.com/bitpartio/Mx/utils"
 
 /*
  * Defines an area inside an image map that has predefined clickable areas.

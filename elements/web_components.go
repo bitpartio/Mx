@@ -1,6 +1,6 @@
 package elements
 
-import . "github.com/bitpartio/gomx/utils"
+import . "github.com/bitpartio/Mx/utils"
 
 // Reference: https://developer.mozilla.org/en-US/docs/Web/HTML/Element#web_components
 

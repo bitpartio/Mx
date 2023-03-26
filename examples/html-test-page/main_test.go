@@ -3,7 +3,7 @@ package main
 import (
 	"testing"
 
-	. "github.com/bitpartio/gomx/utils"
+	. "github.com/bitpartio/Mx/utils"
 )
 
 func BenchmarkRender(b *testing.B) {

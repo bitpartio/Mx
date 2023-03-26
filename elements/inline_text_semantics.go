@@ -3,7 +3,7 @@ package elements
 // Ref: https://developer.mozilla.org/en-US/docs/Web/HTML/Element#inline_text_semantics
 
 import (
-	. "github.com/bitpartio/gomx/utils"
+	. "github.com/bitpartio/Mx/utils"
 )
 
 func init() {

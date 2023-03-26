@@ -3,7 +3,7 @@ package elements
 import (
 	"strings"
 
-	. "github.com/bitpartio/gomx/utils"
+	. "github.com/bitpartio/Mx/utils"
 )
 
 // Better dev experience once Golang supports seamless instantiation.

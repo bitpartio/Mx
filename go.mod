@@ -1,4 +1,4 @@
-module github.com/bitpartio/gomx
+module github.com/bitpartio/Mx
 
 go 1.19
 

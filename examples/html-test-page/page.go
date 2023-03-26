@@ -1,8 +1,8 @@
 package main
 
 import (
-	. "github.com/bitpartio/gomx/elements"
-	. "github.com/bitpartio/gomx/utils"
+	. "github.com/bitpartio/Mx/elements"
+	. "github.com/bitpartio/Mx/utils"
 )
 
 func buildHtmlTestPage() string {

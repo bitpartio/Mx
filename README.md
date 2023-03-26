@@ -1,2 +1,2 @@
-# gomx
-An HTML markup library with HTMX support
+# Mx 
+An HTML markup server library with HTMX support written in Go
