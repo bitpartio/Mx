@@ -8,6 +8,8 @@ import (
 	. "github.com/bitpartio/Mx/utils"
 )
 
+// Ref #2: https://github.com/cbracco/html5-test-page
+
 func main() {
 	page := buildHtmlTestPage()
 
@@ -21,7 +23,7 @@ func main() {
 
 	http.HandleFunc("/basic", func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Content-Type", "text/html; charset=utf-8")
-		t, _ := ReadTemplate("templates/html.html")
+		t, _ := ReadTemplate("../../templates/html.html")
 		body := "Hello, World"
 		v := Values{"body": body}
 		b := Render(t, v)
