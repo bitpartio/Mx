@@ -2,7 +2,27 @@ package elements
 
 // Ref: https://developer.mozilla.org/en-US/docs/Web/HTML/Element#image_and_multimedia
 
-import . "github.com/bitpartio/Mx/utils"
+import (
+	"strconv"
+	"strings"
+
+	. "github.com/bitpartio/Mx/utils"
+)
+
+func init() {
+	AreaOptions = areaOptions{
+		Shape: shapeOptions{
+			Rect:   shapeOptionRect,
+			Circle: shapeOptionCircle,
+			Poly:   shapeOptionPoly,
+		},
+		Coords: coordsOptions{
+			Rect:   coordsOptionRect,
+			Circle: coordsOptionCircle,
+			Poly:   coordsOptionPoly,
+		},
+	}
+}
 
 /*
  * Defines an area inside an image map that has predefined clickable areas.
@@ -12,20 +32,123 @@ import . "github.com/bitpartio/Mx/utils"
 type AreaProps struct {
 	GlobalProps
 
-	Alt string
+	Alt    string
+	Coords coordsOption
+	Href   string
+	Shape  func() shapeOption
 }
 
 func Area(props AreaProps) string {
 	values := map[string]interface{}{
 		"global": BuildGlobalProps(props.GlobalProps),
 
-		"alt": BuildProp("alt", props.Alt),
+		"alt":    BuildProp("alt", props.Alt),
+		"coords": BuildProp("coords", props.Coords.String()),
+		"href":   BuildProp("href", props.Href),
+		"shape":  BuildProp("shape", props.Shape().String()),
 	}
 
-	t := Mx(`<area {{global}} />`)
+	t := Mx(`<area {{global}} {{alt}} {{coords}} {{href}} {{shape}}/>`)
 
 	s := Render(t, values)
 	return s
+}
+
+type areaOptions struct {
+	Coords coordsOptions
+	Shape  shapeOptions
+}
+
+var AreaOptions areaOptions
+
+/* Coords */
+type coordsOption struct{ string }
+
+func (o coordsOption) String() string { return o.string }
+
+func coordsOptionRect(coords ...int) coordsOption {
+	if len(coords) < 4 {
+		return coordsOption{""}
+	}
+
+	x1s := strconv.Itoa(coords[0])
+	y1s := strconv.Itoa(coords[1])
+	x2s := strconv.Itoa(coords[2])
+	y2s := strconv.Itoa(coords[3])
+
+	var s strings.Builder
+	s.WriteString(x1s)
+	s.WriteString(",")
+	s.WriteString(y1s)
+	s.WriteString(",")
+	s.WriteString(x2s)
+	s.WriteString(",")
+	s.WriteString(y2s)
+	return coordsOption{s.String()}
+}
+
+func coordsOptionCircle(coords ...int) coordsOption {
+	if len(coords) < 3 {
+		return coordsOption{""}
+	}
+
+	x1s := strconv.Itoa(coords[0])
+	y1s := strconv.Itoa(coords[1])
+	rs := strconv.Itoa(coords[2])
+
+	var s strings.Builder
+	s.WriteString(x1s)
+	s.WriteString(",")
+	s.WriteString(y1s)
+	s.WriteString(",")
+	s.WriteString(rs)
+	return coordsOption{s.String()}
+}
+
+func coordsOptionPoly(coords ...int) coordsOption {
+	if len(coords) < 2 {
+		return coordsOption{""}
+	}
+
+	var s strings.Builder
+	for c, coord := range coords {
+		cs := strconv.Itoa(coord)
+		s.WriteString(cs)
+		// Leave off , at the end
+		if c < len(coords)-1 {
+			s.WriteString(",")
+		}
+	}
+	return coordsOption{s.String()}
+}
+
+type coordsOptions struct {
+	Rect   func(coords ...int) coordsOption
+	Circle func(coords ...int) coordsOption
+	Poly   func(coords ...int) coordsOption
+}
+
+/* Shape */
+type shapeOption struct{ string }
+
+func (o shapeOption) String() string { return o.string }
+
+func shapeOptionRect() shapeOption {
+	return shapeOption{"rect"}
+}
+
+func shapeOptionCircle() shapeOption {
+	return shapeOption{"circle"}
+}
+
+func shapeOptionPoly() shapeOption {
+	return shapeOption{"poly"}
+}
+
+type shapeOptions struct {
+	Rect   func() shapeOption
+	Circle func() shapeOption
+	Poly   func() shapeOption
 }
 
 /*
