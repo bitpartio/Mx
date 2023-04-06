@@ -12,14 +12,20 @@ import (
  */
 type BaseProps struct {
 	GlobalProps
+
+	Href   string
+	Target string
 }
 
 func Base(props BaseProps) string {
 	values := map[string]interface{}{
 		"global": BuildGlobalProps(props.GlobalProps),
+
+		"href":   BuildProp("href", props.Href),
+		"target": BuildProp("target", props.Target),
 	}
 
-	t := Mx(`<base {{global}} />`)
+	t := Mx(`<base {{global}} {{href}} {{target}}/>`)
 
 	s := Render(t, values)
 	return s

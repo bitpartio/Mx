@@ -14,6 +14,8 @@ import . "github.com/bitpartio/Mx/utils"
 type BlockquoteProps struct {
 	GlobalProps
 
+	Cite string
+
 	InnerHTML string
 }
 
@@ -21,10 +23,12 @@ func Blockquote(props BlockquoteProps) string {
 	values := map[string]interface{}{
 		"global": BuildGlobalProps(props.GlobalProps),
 
+		"cite": BuildProp("cite", props.Cite),
+
 		"innerhtml": props.InnerHTML,
 	}
 
-	t := Mx(`<blockquote {{global}}>{{innerhtml}}</blockquote>`)
+	t := Mx(`<blockquote {{global}} {{cite}}>{{innerhtml}}</blockquote>`)
 
 	s := Render(t, values)
 	return s
