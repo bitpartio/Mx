@@ -11,6 +11,9 @@ import . "github.com/bitpartio/Mx/utils"
 type CanvasProps struct {
 	GlobalProps
 
+	Height string
+	Width  string
+
 	InnerHTML string
 }
 
@@ -18,10 +21,13 @@ func Canvas(props CanvasProps) string {
 	values := map[string]interface{}{
 		"global": BuildGlobalProps(props.GlobalProps),
 
+		"height": BuildProp("height", props.Height),
+		"width":  BuildProp("width", props.Width),
+
 		"innerhtml": props.InnerHTML,
 	}
 
-	t := Mx(`<canvas {{lang}} {{global}}>{{innerhtml}}</canvas>`)
+	t := Mx(`<canvas {{lang}} {{global}} {{height}} {{width}}>{{innerhtml}}</canvas>`)
 
 	s := Render(t, values)
 	return s
