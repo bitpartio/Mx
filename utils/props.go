@@ -1,6 +1,10 @@
 package utils
 
-import "strings"
+import (
+	"strconv"
+	"strings"
+	"time"
+)
 
 // BuildProp
 func BuildProp(name, prop string) string {
@@ -37,6 +41,27 @@ func BuildBooleanProp(name string, prop bool) (s string) {
 		s = name
 	}
 	return s
+}
+
+// BuildNumberProp
+func BuildNumberProp(name string, prop int) string {
+	var s strings.Builder
+	s.WriteString(name)
+	s.WriteString(`="`)
+	s.WriteString(strconv.Itoa(prop))
+	s.WriteString(`"`)
+	return s.String()
+}
+
+// BuildDateProp
+func BuildDateProp(name string, prop time.Time) string {
+
+	var s strings.Builder
+	s.WriteString(name)
+	s.WriteString(`="`)
+	s.WriteString(prop.Format(time.RFC3339))
+	s.WriteString(`"`)
+	return s.String()
 }
 
 // BuildProps

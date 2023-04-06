@@ -11,8 +11,8 @@ import . "github.com/bitpartio/Mx/utils"
 type CanvasProps struct {
 	GlobalProps
 
-	Height string
-	Width  string
+	Height int
+	Width  int
 
 	InnerHTML string
 }
@@ -21,8 +21,8 @@ func Canvas(props CanvasProps) string {
 	values := map[string]interface{}{
 		"global": BuildGlobalProps(props.GlobalProps),
 
-		"height": BuildProp("height", props.Height),
-		"width":  BuildProp("width", props.Width),
+		"height": BuildNumberProp("height", props.Height),
+		"width":  BuildNumberProp("width", props.Width),
 
 		"innerhtml": props.InnerHTML,
 	}

@@ -337,6 +337,8 @@ func Code(props CodeProps) string {
 type DataProps struct {
 	GlobalProps
 
+	Value string
+
 	InnerHTML string
 }
 
@@ -344,10 +346,12 @@ func Data(props DataProps) string {
 	values := map[string]interface{}{
 		"global": BuildGlobalProps(props.GlobalProps),
 
+		"value": BuildProp("value", props.Value),
+
 		"innerhtml": props.InnerHTML,
 	}
 
-	t := Mx(`<data {{global}}>{{innerhtml}}</data>`)
+	t := Mx(`<data {{global}} {{value}}>{{innerhtml}}</data>`)
 
 	s := Render(t, values)
 	return s

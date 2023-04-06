@@ -32,14 +32,18 @@ func Caption(props CaptionProps) string {
  */
 type ColProps struct {
 	GlobalProps
+
+	Span int
 }
 
 func Col(props ColProps) string {
 	values := map[string]interface{}{
 		"global": BuildGlobalProps(props.GlobalProps),
+
+		"span": BuildNumberProp("span", props.Span),
 	}
 
-	t := Mx(`<col {{global}} />`)
+	t := Mx(`<col {{global}} {{span}}/>`)
 
 	s := Render(t, values)
 	return s
@@ -51,6 +55,8 @@ func Col(props ColProps) string {
 type ColgroupProps struct {
 	GlobalProps
 
+	Span int
+
 	InnerHTML string
 }
 
@@ -58,10 +64,12 @@ func Colgroup(props ColgroupProps) string {
 	values := map[string]interface{}{
 		"global": BuildGlobalProps(props.GlobalProps),
 
+		"span": BuildNumberProp("span", props.Span),
+
 		"innerhtml": props.InnerHTML,
 	}
 
-	t := Mx(`<colgroup {{global}}>{{innerhtml}}</colgroup>`)
+	t := Mx(`<colgroup {{global}} {{span}}>{{innerhtml}}</colgroup>`)
 
 	s := Render(t, values)
 	return s

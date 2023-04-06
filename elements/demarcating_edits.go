@@ -2,7 +2,11 @@ package elements
 
 // Ref: https://developer.mozilla.org/en-US/docs/Web/HTML/Element#demarcating_edits
 
-import . "github.com/bitpartio/Mx/utils"
+import (
+	"time"
+
+	. "github.com/bitpartio/Mx/utils"
+)
 
 /*
  * Represents a range of text that has been added to a document. You can use
@@ -12,6 +16,9 @@ import . "github.com/bitpartio/Mx/utils"
 type DelProps struct {
 	GlobalProps
 
+	Cite     string
+	Datetime time.Time
+
 	InnerHTML string
 }
 
@@ -19,10 +26,13 @@ func Del(props DelProps) string {
 	values := map[string]interface{}{
 		"global": BuildGlobalProps(props.GlobalProps),
 
+		"cite":     BuildProp("cite", props.Cite),
+		"datetime": BuildDateProp("datetime", props.Datetime),
+
 		"innerhtml": props.InnerHTML,
 	}
 
-	t := Mx(`<del {{global}}>{{innerhtml}}</del>`)
+	t := Mx(`<del {{global}} {{cite}} {{datetime}}>{{innerhtml}}</del>`)
 
 	s := Render(t, values)
 	return s

@@ -12,6 +12,8 @@ import . "github.com/bitpartio/Mx/utils"
 type DetailsProps struct {
 	GlobalProps
 
+	Open bool
+
 	InnerHTML string
 }
 
@@ -19,10 +21,12 @@ func Details(props DetailsProps) string {
 	values := map[string]interface{}{
 		"global": BuildGlobalProps(props.GlobalProps),
 
+		"open": BuildBooleanProp("open", props.Open),
+
 		"innerhtml": props.InnerHTML,
 	}
 
-	t := Mx(`<details {{global}}>{{innerhtml}}</details>`)
+	t := Mx(`<details {{global}} {{open}}>{{innerhtml}}</details>`)
 
 	s := Render(t, values)
 	return s
