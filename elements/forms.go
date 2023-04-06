@@ -21,6 +21,29 @@ func init() {
 			Submit: typeOptionSubmit,
 		},
 	}
+	FormOptions = formOptions{
+		Autocomplete: autocompleteOptions{
+			On:  autocompleteOptionOn,
+			Off: autocompleteOptionOff,
+		},
+		Method: methodOptions{
+			Dialog: methodOptionDialog,
+			Get:    methodOptionGet,
+			Post:   methodOptionPost,
+		},
+		Rel: formRelOptions{
+			External:   formRelOptionExternal,
+			Help:       formRelOptionHelp,
+			License:    formRelOptionLicense,
+			Next:       formRelOptionNext,
+			NoFollow:   formRelOptionNoFollow,
+			NoOpener:   formRelOptionNoOpener,
+			NoReferrer: formRelOptionNoReferrer,
+			Opener:     formRelOptionOpener,
+			Prev:       formRelOptionPrev,
+			Search:     formRelOptionSearch,
+		},
+	}
 }
 
 /*
@@ -187,6 +210,10 @@ func Datalist(props DatalistProps) string {
 type FieldsetProps struct {
 	GlobalProps
 
+	Disabled bool
+	Form     string
+	Name     string
+
 	InnerHTML string
 }
 
@@ -194,10 +221,14 @@ func Fieldset(props FieldsetProps) string {
 	values := map[string]interface{}{
 		"global": BuildGlobalProps(props.GlobalProps),
 
+		"disabled": BuildBooleanProp("disabled", props.Disabled),
+		"form":     BuildProp("form", props.Form),
+		"name":     BuildProp("name", props.Name),
+
 		"innerhtml": props.InnerHTML,
 	}
 
-	t := Mx(`<fieldset {{global}}>{{innerhtml}}</fieldset>`)
+	t := Mx(`<fieldset {{global}} {{disabled} {{form}} {{name}}>{{innerhtml}}</fieldset>`)
 
 	s := Render(t, values)
 	return s
@@ -210,6 +241,16 @@ func Fieldset(props FieldsetProps) string {
 type FormProps struct {
 	GlobalProps
 
+	AcceptCharset string
+	Action        string
+	Autocomplete  func() autocompleteOption
+	Enctype       string
+	Method        func() methodOption
+	Novalidate    bool
+	Name          string
+	Rel           func() formRelOption
+	Target        string
+
 	InnerHTML string
 }
 
@@ -217,14 +258,124 @@ func Form(props FormProps) string {
 	values := map[string]interface{}{
 		"global": BuildGlobalProps(props.GlobalProps),
 
+		"accept-charset": BuildProp("accept-charset", props.AcceptCharset),
+		"action":         BuildProp("action", props.Action),
+		"autocomplete":   BuildProp("autocomplete", props.Autocomplete().String()),
+		"enctype":        BuildProp("enctype", props.Enctype),
+		"method":         BuildProp("method", props.Method().String()),
+		"novalidate":     BuildBooleanProp("novalidate", props.Novalidate),
+		"name":           BuildProp("name", props.Name),
+		"rel":            BuildProp("rel", props.Rel().String()),
+		"target":         BuildProp("target", props.Target),
+
 		"innerhtml": props.InnerHTML,
 	}
 
-	t := Mx(`<form {{global}}>{{innerhtml}}</form>`)
+	t := Mx(`<form {{global}} {{accept-charset}} {{action}} {{autocomplete}} {{enctype}} {{method}} {{novalidate}} {{name}} {{rel}} {{target}}>{{innerhtml}}</form>`)
 
 	s := Render(t, values)
 	return s
 }
+
+type formOptions struct {
+	Autocomplete autocompleteOptions
+	Method       methodOptions
+	Rel          formRelOptions
+}
+
+var FormOptions formOptions
+
+/* Autocomplete */
+type autocompleteOption struct{ string }
+
+func (o autocompleteOption) String() string { return o.string }
+
+func autocompleteOptionOff() autocompleteOption {
+	return autocompleteOption{"off"}
+}
+
+func autocompleteOptionOn() autocompleteOption {
+	return autocompleteOption{"on"}
+}
+
+type autocompleteOptions struct {
+	Off func() autocompleteOption
+	On  func() autocompleteOption
+}
+
+/* Method */
+type methodOption struct{ string }
+
+func (o methodOption) String() string { return o.string }
+
+func methodOptionDialog() methodOption {
+	return methodOption{"dialog"}
+}
+
+func methodOptionGet() methodOption {
+	return methodOption{"get"}
+}
+
+func methodOptionPost() methodOption {
+	return methodOption{"post"}
+}
+
+type methodOptions struct {
+	Dialog func() methodOption
+	Get    func() methodOption
+	Post   func() methodOption
+}
+
+/* Rel */
+type formRelOption struct{ string }
+
+func (o formRelOption) String() string { return o.string }
+
+func formRelOptionExternal() formRelOption {
+	return formRelOption{"external"}
+}
+func formRelOptionHelp() formRelOption {
+	return formRelOption{"help"}
+}
+func formRelOptionLicense() formRelOption {
+	return formRelOption{"license"}
+}
+func formRelOptionNext() formRelOption {
+	return formRelOption{"next"}
+}
+func formRelOptionNoFollow() formRelOption {
+	return formRelOption{"nofollow"}
+}
+func formRelOptionNoOpener() formRelOption {
+	return formRelOption{"noopener"}
+}
+func formRelOptionNoReferrer() formRelOption {
+	return formRelOption{"noreferrer"}
+}
+func formRelOptionOpener() formRelOption {
+	return formRelOption{"opener"}
+}
+func formRelOptionPrev() formRelOption {
+	return formRelOption{"prev"}
+}
+func formRelOptionSearch() formRelOption {
+	return formRelOption{"search"}
+}
+
+type formRelOptions struct {
+	External   func() formRelOption
+	Help       func() formRelOption
+	License    func() formRelOption
+	Next       func() formRelOption
+	NoFollow   func() formRelOption
+	NoOpener   func() formRelOption
+	NoReferrer func() formRelOption
+	Opener     func() formRelOption
+	Prev       func() formRelOption
+	Search     func() formRelOption
+}
+
+type FormRelOptions []func() formRelOption
 
 /*
  * Used to create interactive controls for web-based forms in order to
