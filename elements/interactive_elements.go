@@ -39,6 +39,8 @@ func Details(props DetailsProps) string {
 type DialogProps struct {
 	GlobalProps
 
+	Open bool
+
 	InnerHTML string
 }
 
@@ -46,10 +48,12 @@ func Dialog(props DialogProps) string {
 	values := map[string]interface{}{
 		"global": BuildGlobalProps(props.GlobalProps),
 
+		"open": BuildBooleanProp("open", props.Open),
+
 		"innerhtml": props.InnerHTML,
 	}
 
-	t := Mx(`<dialog {{global}}>{{innerhtml}}</dialog>`)
+	t := Mx(`<dialog {{global}} {{open}}>{{innerhtml}}</dialog>`)
 
 	s := Render(t, values)
 	return s
