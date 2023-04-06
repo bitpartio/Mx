@@ -11,11 +11,21 @@ import . "github.com/bitpartio/Mx/utils"
  */
 type EmbedProps struct {
 	GlobalProps
+
+	Height int
+	Src    string
+	Type   string
+	Width  int
 }
 
 func Embed(props EmbedProps) string {
 	values := map[string]interface{}{
 		"global": BuildGlobalProps(props.GlobalProps),
+
+		"height": BuildNumberProp("height", props.Height),
+		"src":    BuildProp("src", props.Src),
+		"type":   BuildProp("type", props.Type),
+		"width":  BuildNumberProp("width", props.Width),
 	}
 
 	t := Mx(`<embed {{global}} />`)
