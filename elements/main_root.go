@@ -12,23 +12,23 @@ import . "github.com/bitpartio/Mx/utils"
 type HTMLProps struct {
 	GlobalProps
 
-	Lang string
+	Lang  string
+	Xmlns string
 
 	InnerHTML string
 }
 
 func HTML(props HTMLProps) string {
-	lang := BuildProp("lang", props.Lang)
-
 	values := map[string]interface{}{
 		"global": BuildGlobalProps(props.GlobalProps),
 
-		"lang": lang,
+		"lang":  BuildProp("lang", props.Lang),
+		"xmlns": BuildProp("xmlns", props.Xmlns),
 
 		"innerhtml": props.InnerHTML,
 	}
 
-	t := Mx(`<html {{lang}} {{global}}>{{innerhtml}}</html>`)
+	t := Mx(`<html {{global}} {{lang}} {{xmlns}}>{{innerhtml}}</html>`)
 
 	s := Render(t, values)
 	return s
