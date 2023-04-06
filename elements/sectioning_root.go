@@ -59,7 +59,7 @@ func Body(props BodyProps) string {
 		"innerhtml": props.InnerHTML,
 	}
 
-	t := Mx(`<body {{global}}>{{innerhtml}}</body>`)
+	t := Mx(`<body {{global}} {{onafterprint}} {{onbeforeprint}} {{onbeforeunload}} {{onblur}} {{onerror}} {{onfocus}} {{onhashchange}} {{onlanguagechange}} {{onload}} {{onmessage}} {{onoffline}} {{ononline}} {{onpopstate}} {{onredo}} {{onresize}} {{onstorage}} {{onundo}} {{onunload}}>{{innerhtml}}</body>`)
 
 	s := Render(t, values)
 	return s
