@@ -4,6 +4,42 @@ package elements
 
 import . "github.com/bitpartio/Mx/utils"
 
+func init() {
+	IframeOptions = iframeOptions{
+		Loading: loadingOptions{
+			Eager: loadingOptionEager,
+			Lazy:  loadingOptionLazy,
+		},
+		Referrerpolicy: referrerpolicyOptions{
+			NoReferrer:          referrerpolicyOptionNoReferrer,
+			NoReferrerDowngrade: referrerpolicyOptionNoReferrerDowngrade,
+			Origin:              referrerpolicyOptionOrigin,
+			CrossOrigin:         referrerpolicyOptionCrossOrigin,
+			SameOrigin:          referrerpolicyOptionSameOrigin,
+			StrictOrigin:        referrerpolicyOptionStrictOrigin,
+			StrictCrossOrigin:   referrerpolicyOptionStrictCrossOrigin,
+			Unsafe:              referrerpolicyOptionUnsafe,
+		},
+		Sandbox: sandboxOptions{
+			Downlaods:                       sandboxOptionDownlaods,
+			DownlaodsWithoutUserInteraction: sandboxOptionDownlaodsWithoutUserInteraction,
+			Forms:                           sandboxOptionForms,
+			Modals:                          sandboxOptionModals,
+			OrientationLock:                 sandboxOptionOrientationLock,
+			PointerLock:                     sandboxOptionPointerLock,
+			Popups:                          sandboxOptionPopups,
+			PopupsToEscapeSandbox:           sandboxOptionPopupsToEscapeSandbox,
+			Presentation:                    sandboxOptionPresentation,
+			SameOrigin:                      sandboxOptionSameOrigin,
+			Scripts:                         sandboxOptionScripts,
+			StorageAccessByUserActivation:   sandboxOptionStorageAccessByUserActivation,
+			TopNavigation:                   sandboxOptionTopNavigation,
+			TopNavigationByUserActivation:   sandboxOptionTopNavigationByUserActivation,
+			TopNavigationToCustomProtocols:  sandboxOptionTopNavigationToCustomProtocols,
+		},
+	}
+}
+
 /*
  * Embeds external content at the specified point in the document. This
  * content is provided by an external application or other source of
@@ -41,21 +77,176 @@ func Embed(props EmbedProps) string {
 type IframeProps struct {
 	GlobalProps
 
+	Allow          string
+	Credentialless bool
+	Csp            string
+	Height         int
+	Loading        func() loadingOption
+	Name           string
+	Referrerpolicy func() referrerpolicyOption
+	Sandbox        []func() sandboxOption
+	Src            string
+	Srcdoc         string
+	Width          int
+
 	InnerHTML string
 }
 
 func Iframe(props IframeProps) string {
+	var loading string
+	if props.Loading != nil {
+		loading = props.Loading().String()
+	}
+
+	var referrerpolicy string
+	if props.Referrerpolicy != nil {
+		referrerpolicy = props.Referrerpolicy().String()
+	}
+
+	var sandbox string
+	if len(props.Sandbox) > 0 {
+		sandboxStrings := make([]string, len(props.Sandbox))
+		for k, sandbox := range props.Sandbox {
+			sandboxStrings[k] = sandbox().String()
+		}
+
+		sandbox = BuildPropList("rel", sandboxStrings)
+	}
+
 	values := map[string]interface{}{
 		"global": BuildGlobalProps(props.GlobalProps),
+
+		"allow":          BuildProp("allow", props.Allow),
+		"credentialless": BuildBooleanProp("credentialless", props.Credentialless),
+		"csp":            BuildProp("csp", props.Csp),
+		"height":         BuildNumberProp("height", props.Height),
+		"loading":        loading,
+		"name":           BuildProp("name", props.Name),
+		"referrerpolicy": referrerpolicy,
+		"sandbox":        sandbox,
+		"src":            BuildProp("src", props.Src),
+		"srcdoc":         BuildProp("srcdoc", props.Srcdoc),
+		"width":          BuildNumberProp("width", props.Width),
 
 		"innerhtml": props.InnerHTML,
 	}
 
-	t := Mx(`<iframe {{global}}>{{innerhtml}}</iframe>`)
+	t := Mx(`<iframe {{global}} {{allow}} {{credentialless}} {{csp}} {{height}} {{loading}} {{name}} {{referrerpolicy}} {{sandbox}} {{src}} {{srcdoc}} {{width}}>{{innerhtml}}</iframe>`)
 
 	s := Render(t, values)
 	return s
 }
+
+/* Loading */
+type loadingOption struct{ string }
+
+func (o loadingOption) String() string { return o.string }
+
+func loadingOptionEager() loadingOption {
+	return loadingOption{"eager"}
+}
+
+func loadingOptionLazy() loadingOption {
+	return loadingOption{"lazy"}
+}
+
+type loadingOptions struct {
+	Eager func() loadingOption
+	Lazy  func() loadingOption
+}
+
+/* Sandbox */
+type sandboxOption struct{ string }
+
+func (o sandboxOption) String() string { return o.string }
+
+func sandboxOptionDownlaods() sandboxOption {
+	return sandboxOption{"allow-downloads"}
+}
+
+func sandboxOptionDownlaodsWithoutUserInteraction() sandboxOption {
+	return sandboxOption{"allow-downloads-without-user-interaction"}
+}
+
+func sandboxOptionForms() sandboxOption {
+	return sandboxOption{"allow-forms"}
+}
+
+func sandboxOptionModals() sandboxOption {
+	return sandboxOption{"allow-modals"}
+}
+
+func sandboxOptionOrientationLock() sandboxOption {
+	return sandboxOption{"allow-orientation-lock"}
+}
+
+func sandboxOptionPointerLock() sandboxOption {
+	return sandboxOption{"allow-pointer-lock"}
+}
+
+func sandboxOptionPopups() sandboxOption {
+	return sandboxOption{"allow-popups"}
+}
+
+func sandboxOptionPopupsToEscapeSandbox() sandboxOption {
+	return sandboxOption{"allow-popups-to-escape-sandbox"}
+}
+
+func sandboxOptionPresentation() sandboxOption {
+	return sandboxOption{"allow-presentation"}
+}
+
+func sandboxOptionSameOrigin() sandboxOption {
+	return sandboxOption{"allow-same-origin"}
+}
+
+func sandboxOptionScripts() sandboxOption {
+	return sandboxOption{"allow-scripts"}
+}
+
+func sandboxOptionStorageAccessByUserActivation() sandboxOption {
+	return sandboxOption{"allow-storage-access-by-user-activation"}
+}
+
+func sandboxOptionTopNavigation() sandboxOption {
+	return sandboxOption{"allow-top-navigation"}
+}
+
+func sandboxOptionTopNavigationByUserActivation() sandboxOption {
+	return sandboxOption{"allow-top-navigation-by-custom-protocols"}
+}
+
+func sandboxOptionTopNavigationToCustomProtocols() sandboxOption {
+	return sandboxOption{"allow-top-navigation-to-custom-protocols"}
+}
+
+type sandboxOptions struct {
+	Downlaods                       func() sandboxOption
+	DownlaodsWithoutUserInteraction func() sandboxOption
+	Forms                           func() sandboxOption
+	Modals                          func() sandboxOption
+	OrientationLock                 func() sandboxOption
+	PointerLock                     func() sandboxOption
+	Popups                          func() sandboxOption
+	PopupsToEscapeSandbox           func() sandboxOption
+	Presentation                    func() sandboxOption
+	SameOrigin                      func() sandboxOption
+	Scripts                         func() sandboxOption
+	StorageAccessByUserActivation   func() sandboxOption
+	TopNavigation                   func() sandboxOption
+	TopNavigationByUserActivation   func() sandboxOption
+	TopNavigationToCustomProtocols  func() sandboxOption
+}
+
+type SandboxOptions []func() sandboxOption
+
+type iframeOptions struct {
+	Loading        loadingOptions
+	Referrerpolicy referrerpolicyOptions
+	Sandbox        sandboxOptions
+}
+
+var IframeOptions iframeOptions
 
 /*
  * Represents an external resource, which can be treated as an image, a
