@@ -54,7 +54,7 @@ func A(props AProps) string {
 			relStrings[k] = rel().String()
 		}
 
-		rel = BuildPropList("rel", relStrings)
+		rel = BuildPropListWithSpaces("rel", relStrings)
 	}
 
 	values := map[string]interface{}{
@@ -63,7 +63,7 @@ func A(props AProps) string {
 		"download":       BuildProp("download", props.Download),
 		"href":           BuildProp("href", props.Href),
 		"hreflang":       BuildProp("hreflang", props.Hreflang),
-		"ping":           BuildPropList("ping", props.Ping),
+		"ping":           BuildPropListWithSpaces("ping", props.Ping),
 		"referrerpolicy": referrerpolicy,
 		"rel":            rel,
 		"target":         BuildProp("target", props.Target),

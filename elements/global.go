@@ -249,7 +249,7 @@ func buildGlobalProps(props GlobalProps) map[string]interface{} {
 	values["id"] = BuildProp("id", props.ID)
 
 	// class
-	values["class"] = BuildPropList("class", props.Class)
+	values["class"] = BuildPropListWithSpaces("class", props.Class)
 
 	// autocapitalize
 	if props.Autocapitalize != nil {

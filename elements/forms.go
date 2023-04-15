@@ -5,6 +5,9 @@ package elements
 import . "github.com/bitpartio/Mx/utils"
 
 func init() {
+	Input = inputTypes{
+		Button: InputButton,
+	}
 	ButtonOptions = buttonOptions{
 		Formenctype: formenctypeOptions{
 			Url:       formenctypeOptionUrl,
@@ -385,11 +388,376 @@ type FormRelOptions []func() formRelOption
  * HTML due to the sheer number of combinations of input types and
  * attributes.
  */
-type InputProps struct {
+
+type inputTypes struct {
+	Button        func(props InputButtonProps) string
+	Checkbox      func(props InputCheckboxProps) string
+	Color         func(props InputColorProps) string
+	Date          func(props InputDateProps) string
+	DatetimeLocal func(props InputDatetimeLocalProps) string
+	Email         func(props InputEmailProps) string
+	File          func(props InputFileProps) string
+	Hidden        func(props InputHiddenProps) string
+	Image         func(props InputImageProps) string
+	Month         func(props InputMonthProps) string
+	Number        func(props InputNumberProps) string
+	Password      func(props InputPasswordProps) string
+	Radio         func(props InputRadioProps) string
+	Range         func(props InputRangeProps) string
+	Reset         func(props InputResetProps) string
+	Search        func(props InputSearchProps) string
+	Submit        func(props InputSubmitProps) string
+	Tel           func(props InputTelProps) string
+	Text          func(props InputTextProps) string
+	Time          func(props InputTimeProps) string
+	Url           func(props InputUrlProps) string
+	Week          func(props InputWeekProps) string
+}
+
+var Input inputTypes
+
+/* Input Button */
+type InputButtonProps struct {
 	GlobalProps
 }
 
-func Input(props InputProps) string {
+func InputButton(props InputButtonProps) string {
+	values := map[string]interface{}{
+		"global": BuildGlobalProps(props.GlobalProps),
+	}
+
+	t := Mx(`<input {{global}} />`)
+
+	s := Render(t, values)
+	return s
+}
+
+/* Input Checkbox */
+type InputCheckboxProps struct {
+	GlobalProps
+}
+
+func InputCheckbox(props InputCheckboxProps) string {
+	values := map[string]interface{}{
+		"global": BuildGlobalProps(props.GlobalProps),
+	}
+
+	t := Mx(`<input {{global}} />`)
+
+	s := Render(t, values)
+	return s
+}
+
+/* Input Color */
+type InputColorProps struct {
+	GlobalProps
+}
+
+func InputColor(props InputColorProps) string {
+	values := map[string]interface{}{
+		"global": BuildGlobalProps(props.GlobalProps),
+	}
+
+	t := Mx(`<input {{global}} />`)
+
+	s := Render(t, values)
+	return s
+}
+
+/* Input Date */
+type InputDateProps struct {
+	GlobalProps
+}
+
+func InputDate(props InputDateProps) string {
+	values := map[string]interface{}{
+		"global": BuildGlobalProps(props.GlobalProps),
+	}
+
+	t := Mx(`<input {{global}} />`)
+
+	s := Render(t, values)
+	return s
+}
+
+/* Input DatetimeLocal */
+type InputDatetimeLocalProps struct {
+	GlobalProps
+}
+
+func InputDatetimeLocal(props InputDatetimeLocalProps) string {
+	values := map[string]interface{}{
+		"global": BuildGlobalProps(props.GlobalProps),
+	}
+
+	t := Mx(`<input {{global}} />`)
+
+	s := Render(t, values)
+	return s
+}
+
+/* Input Email */
+type InputEmailProps struct {
+	GlobalProps
+}
+
+func InputEmail(props InputEmailProps) string {
+	values := map[string]interface{}{
+		"global": BuildGlobalProps(props.GlobalProps),
+	}
+
+	t := Mx(`<input {{global}} />`)
+
+	s := Render(t, values)
+	return s
+}
+
+/* Input File */
+type InputFileProps struct {
+	GlobalProps
+}
+
+func InputFile(props InputFileProps) string {
+	values := map[string]interface{}{
+		"global": BuildGlobalProps(props.GlobalProps),
+	}
+
+	t := Mx(`<input {{global}} />`)
+
+	s := Render(t, values)
+	return s
+}
+
+/* Input Hidden */
+type InputHiddenProps struct {
+	GlobalProps
+}
+
+func InputHidden(props InputHiddenProps) string {
+	values := map[string]interface{}{
+		"global": BuildGlobalProps(props.GlobalProps),
+	}
+
+	t := Mx(`<input {{global}} />`)
+
+	s := Render(t, values)
+	return s
+}
+
+/* Input Image */
+type InputImageProps struct {
+	GlobalProps
+}
+
+func InputImage(props InputImageProps) string {
+	values := map[string]interface{}{
+		"global": BuildGlobalProps(props.GlobalProps),
+	}
+
+	t := Mx(`<input {{global}} />`)
+
+	s := Render(t, values)
+	return s
+}
+
+/* Input Month */
+type InputMonthProps struct {
+	GlobalProps
+}
+
+func InputMonth(props InputMonthProps) string {
+	values := map[string]interface{}{
+		"global": BuildGlobalProps(props.GlobalProps),
+	}
+
+	t := Mx(`<input {{global}} />`)
+
+	s := Render(t, values)
+	return s
+}
+
+/* Input Number */
+type InputNumberProps struct {
+	GlobalProps
+}
+
+func InputNumber(props InputNumberProps) string {
+	values := map[string]interface{}{
+		"global": BuildGlobalProps(props.GlobalProps),
+	}
+
+	t := Mx(`<input {{global}} />`)
+
+	s := Render(t, values)
+	return s
+}
+
+/* Input Password */
+type InputPasswordProps struct {
+	GlobalProps
+}
+
+func InputPassword(props InputPasswordProps) string {
+	values := map[string]interface{}{
+		"global": BuildGlobalProps(props.GlobalProps),
+	}
+
+	t := Mx(`<input {{global}} />`)
+
+	s := Render(t, values)
+	return s
+}
+
+/* Input Radio */
+type InputRadioProps struct {
+	GlobalProps
+}
+
+func InputRadio(props InputRadioProps) string {
+	values := map[string]interface{}{
+		"global": BuildGlobalProps(props.GlobalProps),
+	}
+
+	t := Mx(`<input {{global}} />`)
+
+	s := Render(t, values)
+	return s
+}
+
+/* Input Range */
+type InputRangeProps struct {
+	GlobalProps
+}
+
+func InputRange(props InputRangeProps) string {
+	values := map[string]interface{}{
+		"global": BuildGlobalProps(props.GlobalProps),
+	}
+
+	t := Mx(`<input {{global}} />`)
+
+	s := Render(t, values)
+	return s
+}
+
+/* Input Reset */
+type InputResetProps struct {
+	GlobalProps
+}
+
+func InputReset(props InputResetProps) string {
+	values := map[string]interface{}{
+		"global": BuildGlobalProps(props.GlobalProps),
+	}
+
+	t := Mx(`<input {{global}} />`)
+
+	s := Render(t, values)
+	return s
+}
+
+/* Input Search */
+type InputSearchProps struct {
+	GlobalProps
+}
+
+func InputSearch(props InputSearchProps) string {
+	values := map[string]interface{}{
+		"global": BuildGlobalProps(props.GlobalProps),
+	}
+
+	t := Mx(`<input {{global}} />`)
+
+	s := Render(t, values)
+	return s
+}
+
+/* Input Submit */
+type InputSubmitProps struct {
+	GlobalProps
+}
+
+func InputSubmit(props InputSubmitProps) string {
+	values := map[string]interface{}{
+		"global": BuildGlobalProps(props.GlobalProps),
+	}
+
+	t := Mx(`<input {{global}} />`)
+
+	s := Render(t, values)
+	return s
+}
+
+/* Input Tel */
+type InputTelProps struct {
+	GlobalProps
+}
+
+func InputTel(props InputTelProps) string {
+	values := map[string]interface{}{
+		"global": BuildGlobalProps(props.GlobalProps),
+	}
+
+	t := Mx(`<input {{global}} />`)
+
+	s := Render(t, values)
+	return s
+}
+
+/* Input Text */
+type InputTextProps struct {
+	GlobalProps
+}
+
+func InputText(props InputTextProps) string {
+	values := map[string]interface{}{
+		"global": BuildGlobalProps(props.GlobalProps),
+	}
+
+	t := Mx(`<input {{global}} />`)
+
+	s := Render(t, values)
+	return s
+}
+
+/* Input Time */
+type InputTimeProps struct {
+	GlobalProps
+}
+
+func InputTime(props InputTimeProps) string {
+	values := map[string]interface{}{
+		"global": BuildGlobalProps(props.GlobalProps),
+	}
+
+	t := Mx(`<input {{global}} />`)
+
+	s := Render(t, values)
+	return s
+}
+
+/* Input Url */
+type InputUrlProps struct {
+	GlobalProps
+}
+
+func InputUrl(props InputUrlProps) string {
+	values := map[string]interface{}{
+		"global": BuildGlobalProps(props.GlobalProps),
+	}
+
+	t := Mx(`<input {{global}} />`)
+
+	s := Render(t, values)
+	return s
+}
+
+/* Input Week */
+type InputWeekProps struct {
+	GlobalProps
+}
+
+func InputWeek(props InputWeekProps) string {
 	values := map[string]interface{}{
 		"global": BuildGlobalProps(props.GlobalProps),
 	}

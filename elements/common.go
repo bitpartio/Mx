@@ -65,3 +65,21 @@ type crossoriginOptions struct {
 	Anonymous   func() crossoriginOption
 	Credentials func() crossoriginOption
 }
+
+/* Loading */
+type loadingOption struct{ string }
+
+func (o loadingOption) String() string { return o.string }
+
+func loadingOptionEager() loadingOption {
+	return loadingOption{"eager"}
+}
+
+func loadingOptionLazy() loadingOption {
+	return loadingOption{"lazy"}
+}
+
+type loadingOptions struct {
+	Eager func() loadingOption
+	Lazy  func() loadingOption
+}

@@ -62,6 +62,36 @@ func init() {
 			Auto:     preloadOptionAuto,
 		},
 	}
+	ImgOptions = imgOptions{
+		Crossorigin: crossoriginOptions{
+			Anonymous:   crossoriginOptionAnonymous,
+			Credentials: crossoriginOptionCredentials,
+		},
+		Decoding: decodingOptions{
+			Sync:  decodingOptionSync,
+			Async: decodingOptionAsync,
+			Auto:  decodingOptionAuto,
+		},
+		Fetchpriority: fetchpriorityOptions{
+			High: fetchpriorityOptionHigh,
+			Low:  fetchpriorityOptionLow,
+			Auto: fetchpriorityOptionAuto,
+		},
+		Loading: loadingOptions{
+			Eager: loadingOptionEager,
+			Lazy:  loadingOptionLazy,
+		},
+		Referrerpolicy: referrerpolicyOptions{
+			NoReferrer:          referrerpolicyOptionNoReferrer,
+			NoReferrerDowngrade: referrerpolicyOptionNoReferrerDowngrade,
+			Origin:              referrerpolicyOptionOrigin,
+			CrossOrigin:         referrerpolicyOptionCrossOrigin,
+			SameOrigin:          referrerpolicyOptionSameOrigin,
+			StrictOrigin:        referrerpolicyOptionStrictOrigin,
+			StrictCrossOrigin:   referrerpolicyOptionStrictCrossOrigin,
+			Unsafe:              referrerpolicyOptionUnsafe,
+		},
+	}
 }
 
 /*
@@ -97,7 +127,7 @@ func Area(props AreaProps) string {
 		"coords":         BuildProp("coords", props.Coords.String()),
 		"href":           BuildProp("href", props.Href),
 		"hreflang":       BuildProp("hreflang", props.Hreflang),
-		"ping":           BuildPropList("ping", props.Ping),
+		"ping":           BuildPropListWithSpaces("ping", props.Ping),
 		"referrerpolicy": referrerpolicy,
 		"shape":          BuildProp("shape", props.Shape().String()),
 		"target":         BuildProp("target", props.Target),
@@ -281,6 +311,7 @@ type AudioProps struct {
 	Autoplay              bool
 	Controls              bool
 	Controlslist          func() controlslistOption
+	Crossorigin           func() crossoriginOption
 	Disableremoteplayback bool
 	Loop                  bool
 	Muted                 bool
@@ -297,6 +328,7 @@ func Audio(props AudioProps) string {
 		"autoplay":              BuildBooleanProp("autoplay", props.Autoplay),
 		"controls":              BuildBooleanProp("controls", props.Controls),
 		"controlslist":          BuildProp("controlslist", props.Controlslist().String()),
+		"crossorigin":           BuildProp("crossorigin", props.Crossorigin().String()),
 		"disableremoteplayback": BuildBooleanProp("disableremoteplayback", props.Disableremoteplayback),
 		"loop":                  BuildBooleanProp("loop", props.Loop),
 		"muted":                 BuildBooleanProp("muted", props.Muted),
@@ -358,7 +390,7 @@ type preloadOptions struct {
 	Auto     func() preloadOption
 }
 
-// * Audio Options */
+/* Audio Options */
 type audioOptions struct {
 	Controlslist controlslistOptions
 	Crossorigin  crossoriginOptions
@@ -371,34 +403,120 @@ var AudioOptions audioOptions
  * Embeds an image into the document.
  */
 type ImgProps struct {
+	Alt            string
+	Crossorigin    func() crossoriginOption
+	Decoding       func() decodingOption
+	Elementtiming  string
+	Fetchpriority  func() fetchpriorityOption
+	Height         int
+	Ismap          bool
+	Loading        func() loadingOption
+	Referrerpolicy func() referrerpolicyOption
+	Sizes          []string
+	Src            string
+	Srcset         []string
+	Width          int
+	Usemap         string
+
 	GlobalProps
 }
 
 func Img(props ImgProps) string {
 	values := map[string]interface{}{
-		"global": BuildGlobalProps(props.GlobalProps),
+		"global":         BuildGlobalProps(props.GlobalProps),
+		"alt":            BuildProp("alt", props.Alt),
+		"crossorigin":    BuildProp("crossorigin", props.Crossorigin().String()),
+		"decoding":       BuildProp("decoding", props.Decoding().String()),
+		"elementtiming":  BuildProp("elementtiming", props.Elementtiming),
+		"fetchpriority":  BuildProp("fetchpriority", props.Fetchpriority().String()),
+		"height":         BuildNumberProp("height", props.Height),
+		"ismap":          BuildBooleanProp("ismap", props.Ismap),
+		"loading":        BuildProp("loading", props.Loading().String()),
+		"referrerpolicy": BuildProp("referrerpolicy", props.Referrerpolicy().String()),
+		"sizes":          BuildPropListWithCommas("referrerpolicy", props.Sizes),
+		"src":            BuildProp("src", props.Src),
+		"srcset":         BuildPropListWithCommas("srcset", props.Srcset),
+		"width":          BuildNumberProp("width", props.Width),
+		"usemap":         BuildProp("usemap", props.Usemap),
 	}
 
-	t := Mx(`<img {{global}} />`)
+	t := Mx(`<img {{global}} {{alt}} {{crossorigin}} {{decoding}} {{elementtiming}} {{fetchpriority}} {{height}} {{ismap}} {{loading}} {{referrerpolicy}} {{sizes}} {{src}} {{srcset}} {{width}} {{usemap}}/>`)
 
 	s := Render(t, values)
 	return s
 }
 
-/*
- * Used with <area> elements to define an image map (a clickable link area).
- */
-type MapProps struct {
-	GlobalProps
+/* decoding */
+type decodingOption struct{ string }
 
-	InnerHTML string
+func (o decodingOption) String() string { return o.string }
+
+func decodingOptionSync() decodingOption {
+	return decodingOption{"sync"}
 }
 
-func Map(props MapProps) string {
-	values := map[string]interface{}{
-		"global": BuildGlobalProps(props.GlobalProps),
+func decodingOptionAsync() decodingOption {
+	return decodingOption{"async"}
+}
 
-		"innerhtml": props.InnerHTML,
+func decodingOptionAuto() decodingOption {
+	return decodingOption{"auto"}
+}
+
+type decodingOptions struct {
+	Sync  func() decodingOption
+	Async func() decodingOption
+	Auto  func() decodingOption
+}
+
+/* fetchpriority */
+type fetchpriorityOption struct{ string }
+
+func (o fetchpriorityOption) String() string { return o.string }
+
+func fetchpriorityOptionHigh() fetchpriorityOption {
+	return fetchpriorityOption{"high"}
+}
+
+func fetchpriorityOptionLow() fetchpriorityOption {
+	return fetchpriorityOption{"low"}
+}
+
+func fetchpriorityOptionAuto() fetchpriorityOption {
+	return fetchpriorityOption{"auto"}
+}
+
+type fetchpriorityOptions struct {
+	High func() fetchpriorityOption
+	Low  func() fetchpriorityOption
+	Auto func() fetchpriorityOption
+}
+
+/* Img Options */
+type imgOptions struct {
+	Crossorigin    crossoriginOptions
+	Decoding       decodingOptions
+	Fetchpriority  fetchpriorityOptions
+	Loading        loadingOptions
+	Referrerpolicy referrerpolicyOptions
+}
+
+var ImgOptions imgOptions
+
+/*
+ * used with <area> elements to define an image map (a clickable link area).
+ */
+type mapProps struct {
+	GlobalProps
+
+	innerhtml string
+}
+
+func Map(props mapProps) string {
+	values := map[string]interface{}{
+		"global": buildGlobalProps(props.GlobalProps),
+
+		"innerhtml": props.innerhtml,
 	}
 
 	t := Mx(`<map {{global}}>{{innerhtml}}</map>`)

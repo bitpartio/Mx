@@ -110,7 +110,7 @@ func Iframe(props IframeProps) string {
 			sandboxStrings[k] = sandbox().String()
 		}
 
-		sandbox = BuildPropList("rel", sandboxStrings)
+		sandbox = BuildPropListWithSpaces("rel", sandboxStrings)
 	}
 
 	values := map[string]interface{}{
@@ -135,24 +135,6 @@ func Iframe(props IframeProps) string {
 
 	s := Render(t, values)
 	return s
-}
-
-/* Loading */
-type loadingOption struct{ string }
-
-func (o loadingOption) String() string { return o.string }
-
-func loadingOptionEager() loadingOption {
-	return loadingOption{"eager"}
-}
-
-func loadingOptionLazy() loadingOption {
-	return loadingOption{"lazy"}
-}
-
-type loadingOptions struct {
-	Eager func() loadingOption
-	Lazy  func() loadingOption
 }
 
 /* Sandbox */
