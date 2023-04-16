@@ -2,11 +2,36 @@ package elements
 
 // Ref: https://developer.mozilla.org/en-US/docs/Web/HTML/Element#forms
 
-import . "github.com/bitpartio/Mx/utils"
+import (
+	"time"
+
+	. "github.com/bitpartio/Mx/utils"
+)
 
 func init() {
 	Input = inputTypes{
-		Button: InputButton,
+		Button:        InputButton,
+		Checkbox:      InputCheckbox,
+		Color:         InputColor,
+		Date:          InputDate,
+		DatetimeLocal: InputDatetimeLocal,
+		Email:         InputEmail,
+		File:          InputFile,
+		Hidden:        InputHidden,
+		Image:         InputImage,
+		Month:         InputMonth,
+		Number:        InputNumber,
+		Password:      InputPassword,
+		Radio:         InputRadio,
+		Range:         InputRange,
+		Reset:         InputReset,
+		Search:        InputSearch,
+		Submit:        InputSubmit,
+		Tel:           InputTel,
+		Text:          InputText,
+		Time:          InputTime,
+		Url:           InputUrl,
+		Week:          InputWeek,
 	}
 	ButtonOptions = buttonOptions{
 		Formenctype: formenctypeOptions{
@@ -25,9 +50,9 @@ func init() {
 		},
 	}
 	FormOptions = formOptions{
-		Autocomplete: autocompleteOptions{
-			On:  autocompleteOptionOn,
-			Off: autocompleteOptionOff,
+		Autocomplete: autocompleteFormOptions{
+			On:  autocompleteFormOptionOn,
+			Off: autocompleteFormOptionOff,
 		},
 		Method: methodOptions{
 			Dialog: methodOptionDialog,
@@ -45,6 +70,68 @@ func init() {
 			Opener:     formRelOptionOpener,
 			Prev:       formRelOptionPrev,
 			Search:     formRelOptionSearch,
+		},
+	}
+	InputOptions = inputOptions{
+		Autocomplete: autocompleteInputOptions{
+			Off:                      autocompleteInputOptionOff,
+			On:                       autocompleteInputOptionOn,
+			Name:                     autocompleteInputOptionName,
+			HonorificPrefix:          autocompleteInputOptionHonorificPrefix,
+			GivenName:                autocompleteInputOptionGivenName,
+			AdditionalName:           autocompleteInputOptionAdditionalName,
+			FamilyName:               autocompleteInputOptionFamilyName,
+			HonorificSuffix:          autocompleteInputOptionHonorificSuffix,
+			Nickname:                 autocompleteInputOptionNickname,
+			Email:                    autocompleteInputOptionEmail,
+			Username:                 autocompleteInputOptionUsername,
+			NewPassword:              autocompleteInputOptionNewPassword,
+			CurrentPassword:          autocompleteInputOptionCurrentPassword,
+			OneTimeCode:              autocompleteInputOptionOneTimeCode,
+			OrganizationTitle:        autocompleteInputOptionOrganizationTitle,
+			Organization:             autocompleteInputOptionOrganization,
+			StreetAddress:            autocompleteInputOptionStreetAddress,
+			AddressLine1:             autocompleteInputOptionAddressLine1,
+			AddressLine2:             autocompleteInputOptionAddressLine2,
+			AddressLine3:             autocompleteInputOptionAddressLine3,
+			AddressLevel1:            autocompleteInputOptionAddressLevel1,
+			AddressLevel2:            autocompleteInputOptionAddressLevel2,
+			AddressLevel3:            autocompleteInputOptionAddressLevel3,
+			AddressLevel4:            autocompleteInputOptionAddressLevel4,
+			Country:                  autocompleteInputOptionCountry,
+			CountryName:              autocompleteInputOptionCountryName,
+			PostalCode:               autocompleteInputOptionPostalCode,
+			CreditCardName:           autocompleteInputOptionCreditCardName,
+			CreditCardGivenName:      autocompleteInputOptionCreditCardGivenName,
+			CreditCardAdditionalName: autocompleteInputOptionCreditCardAdditionalName,
+			CreditCardFamilyName:     autocompleteInputOptionCreditCardFamilyName,
+			CreditCardNumber:         autocompleteInputOptionCreditCardNumber,
+			CreditCardExp:            autocompleteInputOptionCreditCardExp,
+			CreditCardExpMonth:       autocompleteInputOptionCreditCardExpMonth,
+			CreditCardExpYear:        autocompleteInputOptionCreditCardExpYear,
+			CreditCardSecurityCode:   autocompleteInputOptionCreditCardSecurityCode,
+			CreditCardType:           autocompleteInputOptionCreditCardType,
+			TransactionCurrency:      autocompleteInputOptionTransactionCurrency,
+			TransactionAmount:        autocompleteInputOptionTransactionAmount,
+			Language:                 autocompleteInputOptionLanguage,
+			Birthday:                 autocompleteInputOptionBirthday,
+			BirthdayDay:              autocompleteInputOptionBirthdayDay,
+			BirthdayMonth:            autocompleteInputOptionBirthdayMonth,
+			BirthdayYear:             autocompleteInputOptionBirthdayYear,
+			Sex:                      autocompleteInputOptionSex,
+			Telephone:                autocompleteInputOptionTelephone,
+			TelephoneCountryCode:     autocompleteInputOptionTelephoneCountryCode,
+			TelephoneNational:        autocompleteInputOptionTelephoneNational,
+			TelephoneAreaCode:        autocompleteInputOptionTelephoneAreaCode,
+			TelephoneLocal:           autocompleteInputOptionTelephoneLocal,
+			TelephoneExtension:       autocompleteInputOptionTelephoneExtension,
+			IMPP:                     autocompleteInputOptionIMPP,
+			Url:                      autocompleteInputOptionUrl,
+			Photo:                    autocompleteInputOptionPhoto,
+		},
+		Capture: captureOptions{
+			Env:  captureOptionEnv,
+			User: captureOptionUser,
 		},
 	}
 }
@@ -246,7 +333,7 @@ type FormProps struct {
 
 	AcceptCharset string
 	Action        string
-	Autocomplete  func() autocompleteOption
+	Autocomplete  func() autocompleteFormOption
 	Enctype       string
 	Method        func() methodOption
 	Novalidate    bool
@@ -281,7 +368,7 @@ func Form(props FormProps) string {
 }
 
 type formOptions struct {
-	Autocomplete autocompleteOptions
+	Autocomplete autocompleteFormOptions
 	Method       methodOptions
 	Rel          formRelOptions
 }
@@ -289,21 +376,21 @@ type formOptions struct {
 var FormOptions formOptions
 
 /* Autocomplete */
-type autocompleteOption struct{ string }
+type autocompleteFormOption struct{ string }
 
-func (o autocompleteOption) String() string { return o.string }
+func (o autocompleteFormOption) String() string { return o.string }
 
-func autocompleteOptionOff() autocompleteOption {
-	return autocompleteOption{"off"}
+func autocompleteFormOptionOff() autocompleteFormOption {
+	return autocompleteFormOption{"off"}
 }
 
-func autocompleteOptionOn() autocompleteOption {
-	return autocompleteOption{"on"}
+func autocompleteFormOptionOn() autocompleteFormOption {
+	return autocompleteFormOption{"on"}
 }
 
-type autocompleteOptions struct {
-	Off func() autocompleteOption
-	On  func() autocompleteOption
+type autocompleteFormOptions struct {
+	Off func() autocompleteFormOption
+	On  func() autocompleteFormOption
 }
 
 /* Method */
@@ -388,7 +475,6 @@ type FormRelOptions []func() formRelOption
  * HTML due to the sheer number of combinations of input types and
  * attributes.
  */
-
 type inputTypes struct {
 	Button        func(props InputButtonProps) string
 	Checkbox      func(props InputCheckboxProps) string
@@ -416,17 +502,259 @@ type inputTypes struct {
 
 var Input inputTypes
 
+type inputOptions struct {
+	Autocomplete autocompleteInputOptions
+	Capture      captureOptions
+}
+
+var InputOptions inputOptions
+
 /* Input Button */
 type InputButtonProps struct {
 	GlobalProps
+
+	Disabled bool
+	Form     string
+	Name     string
+	Value    string
+}
+
+/* Autocomplete */
+type autocompleteInputOption struct{ string }
+
+func (o autocompleteInputOption) String() string { return o.string }
+
+func autocompleteInputOptionOff() autocompleteInputOption {
+	return autocompleteInputOption{"off"}
+}
+func autocompleteInputOptionOn() autocompleteInputOption {
+	return autocompleteInputOption{"on"}
+}
+func autocompleteInputOptionName() autocompleteInputOption {
+	return autocompleteInputOption{"name"}
+}
+func autocompleteInputOptionHonorificPrefix() autocompleteInputOption {
+	return autocompleteInputOption{"honorific-prefix"}
+}
+func autocompleteInputOptionGivenName() autocompleteInputOption {
+	return autocompleteInputOption{"given-name"}
+}
+func autocompleteInputOptionAdditionalName() autocompleteInputOption {
+	return autocompleteInputOption{"additional-name"}
+}
+func autocompleteInputOptionFamilyName() autocompleteInputOption {
+	return autocompleteInputOption{"family-name"}
+}
+func autocompleteInputOptionHonorificSuffix() autocompleteInputOption {
+	return autocompleteInputOption{"honorific-suffix"}
+}
+func autocompleteInputOptionNickname() autocompleteInputOption {
+	return autocompleteInputOption{"nickname"}
+}
+func autocompleteInputOptionEmail() autocompleteInputOption {
+	return autocompleteInputOption{"email"}
+}
+func autocompleteInputOptionUsername() autocompleteInputOption {
+	return autocompleteInputOption{"username"}
+}
+func autocompleteInputOptionNewPassword() autocompleteInputOption {
+	return autocompleteInputOption{"new-password"}
+}
+func autocompleteInputOptionCurrentPassword() autocompleteInputOption {
+	return autocompleteInputOption{"current-password"}
+}
+func autocompleteInputOptionOneTimeCode() autocompleteInputOption {
+	return autocompleteInputOption{"one-time-code"}
+}
+func autocompleteInputOptionOrganizationTitle() autocompleteInputOption {
+	return autocompleteInputOption{"organization-title"}
+}
+func autocompleteInputOptionOrganization() autocompleteInputOption {
+	return autocompleteInputOption{"organization"}
+}
+func autocompleteInputOptionStreetAddress() autocompleteInputOption {
+	return autocompleteInputOption{"street-address"}
+}
+func autocompleteInputOptionAddressLine1() autocompleteInputOption {
+	return autocompleteInputOption{"address-line-1"}
+}
+func autocompleteInputOptionAddressLine2() autocompleteInputOption {
+	return autocompleteInputOption{"address-line-2"}
+}
+func autocompleteInputOptionAddressLine3() autocompleteInputOption {
+	return autocompleteInputOption{"address-line-3"}
+}
+func autocompleteInputOptionAddressLevel1() autocompleteInputOption {
+	return autocompleteInputOption{"address-level-1"}
+}
+func autocompleteInputOptionAddressLevel2() autocompleteInputOption {
+	return autocompleteInputOption{"address-level-2"}
+}
+func autocompleteInputOptionAddressLevel3() autocompleteInputOption {
+	return autocompleteInputOption{"address-level-3"}
+}
+func autocompleteInputOptionAddressLevel4() autocompleteInputOption {
+	return autocompleteInputOption{"address-level-4"}
+}
+func autocompleteInputOptionCountry() autocompleteInputOption {
+	return autocompleteInputOption{"country"}
+}
+func autocompleteInputOptionCountryName() autocompleteInputOption {
+	return autocompleteInputOption{"country-name"}
+}
+func autocompleteInputOptionPostalCode() autocompleteInputOption {
+	return autocompleteInputOption{"postal-code"}
+}
+func autocompleteInputOptionCreditCardName() autocompleteInputOption {
+	return autocompleteInputOption{"cc-name"}
+}
+func autocompleteInputOptionCreditCardGivenName() autocompleteInputOption {
+	return autocompleteInputOption{"cc-given-name"}
+}
+func autocompleteInputOptionCreditCardAdditionalName() autocompleteInputOption {
+	return autocompleteInputOption{"cc-additional-name"}
+}
+func autocompleteInputOptionCreditCardFamilyName() autocompleteInputOption {
+	return autocompleteInputOption{"cc-family-name"}
+}
+func autocompleteInputOptionCreditCardNumber() autocompleteInputOption {
+	return autocompleteInputOption{"cc-number"}
+}
+func autocompleteInputOptionCreditCardExp() autocompleteInputOption {
+	return autocompleteInputOption{"cc-exp"}
+}
+func autocompleteInputOptionCreditCardExpMonth() autocompleteInputOption {
+	return autocompleteInputOption{"cc-exp-month"}
+}
+func autocompleteInputOptionCreditCardExpYear() autocompleteInputOption {
+	return autocompleteInputOption{"cc-exp-year"}
+}
+func autocompleteInputOptionCreditCardSecurityCode() autocompleteInputOption {
+	return autocompleteInputOption{"cc-csc"}
+}
+func autocompleteInputOptionCreditCardType() autocompleteInputOption {
+	return autocompleteInputOption{"cc-type"}
+}
+func autocompleteInputOptionTransactionCurrency() autocompleteInputOption {
+	return autocompleteInputOption{"transaction-currency"}
+}
+func autocompleteInputOptionTransactionAmount() autocompleteInputOption {
+	return autocompleteInputOption{"transaction-amount"}
+}
+func autocompleteInputOptionLanguage() autocompleteInputOption {
+	return autocompleteInputOption{"language"}
+}
+func autocompleteInputOptionBirthday() autocompleteInputOption {
+	return autocompleteInputOption{"bday"}
+}
+func autocompleteInputOptionBirthdayDay() autocompleteInputOption {
+	return autocompleteInputOption{"bday-day"}
+}
+func autocompleteInputOptionBirthdayMonth() autocompleteInputOption {
+	return autocompleteInputOption{"bday-month"}
+}
+func autocompleteInputOptionBirthdayYear() autocompleteInputOption {
+	return autocompleteInputOption{"bday-year"}
+}
+func autocompleteInputOptionSex() autocompleteInputOption {
+	return autocompleteInputOption{"sex"}
+}
+func autocompleteInputOptionTelephone() autocompleteInputOption {
+	return autocompleteInputOption{"tel"}
+}
+func autocompleteInputOptionTelephoneCountryCode() autocompleteInputOption {
+	return autocompleteInputOption{"tel-country-code"}
+}
+func autocompleteInputOptionTelephoneNational() autocompleteInputOption {
+	return autocompleteInputOption{"tel-national"}
+}
+func autocompleteInputOptionTelephoneAreaCode() autocompleteInputOption {
+	return autocompleteInputOption{"tel-area-code"}
+}
+func autocompleteInputOptionTelephoneLocal() autocompleteInputOption {
+	return autocompleteInputOption{"tel-local"}
+}
+func autocompleteInputOptionTelephoneExtension() autocompleteInputOption {
+	return autocompleteInputOption{"tel-extension"}
+}
+func autocompleteInputOptionIMPP() autocompleteInputOption {
+	return autocompleteInputOption{"impp"}
+}
+func autocompleteInputOptionUrl() autocompleteInputOption {
+	return autocompleteInputOption{"url"}
+}
+func autocompleteInputOptionPhoto() autocompleteInputOption {
+	return autocompleteInputOption{"photo"}
+}
+
+type autocompleteInputOptions struct {
+	Off                      func() autocompleteInputOption
+	On                       func() autocompleteInputOption
+	Name                     func() autocompleteInputOption
+	HonorificPrefix          func() autocompleteInputOption
+	GivenName                func() autocompleteInputOption
+	AdditionalName           func() autocompleteInputOption
+	FamilyName               func() autocompleteInputOption
+	HonorificSuffix          func() autocompleteInputOption
+	Nickname                 func() autocompleteInputOption
+	Email                    func() autocompleteInputOption
+	Username                 func() autocompleteInputOption
+	NewPassword              func() autocompleteInputOption
+	CurrentPassword          func() autocompleteInputOption
+	OneTimeCode              func() autocompleteInputOption
+	OrganizationTitle        func() autocompleteInputOption
+	Organization             func() autocompleteInputOption
+	StreetAddress            func() autocompleteInputOption
+	AddressLine1             func() autocompleteInputOption
+	AddressLine2             func() autocompleteInputOption
+	AddressLine3             func() autocompleteInputOption
+	AddressLevel1            func() autocompleteInputOption
+	AddressLevel2            func() autocompleteInputOption
+	AddressLevel3            func() autocompleteInputOption
+	AddressLevel4            func() autocompleteInputOption
+	Country                  func() autocompleteInputOption
+	CountryName              func() autocompleteInputOption
+	PostalCode               func() autocompleteInputOption
+	CreditCardName           func() autocompleteInputOption
+	CreditCardGivenName      func() autocompleteInputOption
+	CreditCardAdditionalName func() autocompleteInputOption
+	CreditCardFamilyName     func() autocompleteInputOption
+	CreditCardNumber         func() autocompleteInputOption
+	CreditCardExp            func() autocompleteInputOption
+	CreditCardExpMonth       func() autocompleteInputOption
+	CreditCardExpYear        func() autocompleteInputOption
+	CreditCardSecurityCode   func() autocompleteInputOption
+	CreditCardType           func() autocompleteInputOption
+	TransactionCurrency      func() autocompleteInputOption
+	TransactionAmount        func() autocompleteInputOption
+	Language                 func() autocompleteInputOption
+	Birthday                 func() autocompleteInputOption
+	BirthdayDay              func() autocompleteInputOption
+	BirthdayMonth            func() autocompleteInputOption
+	BirthdayYear             func() autocompleteInputOption
+	Sex                      func() autocompleteInputOption
+	Telephone                func() autocompleteInputOption
+	TelephoneCountryCode     func() autocompleteInputOption
+	TelephoneNational        func() autocompleteInputOption
+	TelephoneAreaCode        func() autocompleteInputOption
+	TelephoneLocal           func() autocompleteInputOption
+	TelephoneExtension       func() autocompleteInputOption
+	IMPP                     func() autocompleteInputOption
+	Url                      func() autocompleteInputOption
+	Photo                    func() autocompleteInputOption
 }
 
 func InputButton(props InputButtonProps) string {
 	values := map[string]interface{}{
 		"global": BuildGlobalProps(props.GlobalProps),
+
+		"disabled": BuildBooleanProp("disabled", props.Disabled),
+		"form":     BuildProp("form", props.Form),
+		"name":     BuildProp("name", props.Name),
+		"value":    BuildProp("value", props.Value),
 	}
 
-	t := Mx(`<input {{global}} />`)
+	t := Mx(`<input type="button" {{global}} {{disabled}} {{form}} {{name}} {{value}}/>`)
 
 	s := Render(t, values)
 	return s
@@ -435,14 +763,26 @@ func InputButton(props InputButtonProps) string {
 /* Input Checkbox */
 type InputCheckboxProps struct {
 	GlobalProps
+
+	Checked  bool
+	Disabled bool
+	Form     string
+	Name     string
+	Value    string
 }
 
 func InputCheckbox(props InputCheckboxProps) string {
 	values := map[string]interface{}{
 		"global": BuildGlobalProps(props.GlobalProps),
+
+		"checked":  BuildBooleanProp("checked", props.Checked),
+		"disabled": BuildBooleanProp("disabled", props.Disabled),
+		"form":     BuildProp("form", props.Form),
+		"name":     BuildProp("name", props.Name),
+		"value":    BuildProp("value", props.Value),
 	}
 
-	t := Mx(`<input {{global}} />`)
+	t := Mx(`<input type="checkbox" {{global}} {{checked}} {{disabled}} {{form}} {{name}} {{value}}/>`)
 
 	s := Render(t, values)
 	return s
@@ -451,14 +791,28 @@ func InputCheckbox(props InputCheckboxProps) string {
 /* Input Color */
 type InputColorProps struct {
 	GlobalProps
+
+	Autocomplete func() autocompleteInputOption
+	Disabled     bool
+	Form         string
+	List         string
+	Name         string
+	Value        string
 }
 
 func InputColor(props InputColorProps) string {
 	values := map[string]interface{}{
 		"global": BuildGlobalProps(props.GlobalProps),
+
+		"autocomplete": BuildProp("autocomplete", props.Autocomplete().String()),
+		"disabled":     BuildBooleanProp("disabled", props.Disabled),
+		"form":         BuildProp("form", props.Form),
+		"list":         BuildProp("list", props.List),
+		"name":         BuildProp("name", props.Name),
+		"value":        BuildProp("value", props.Value),
 	}
 
-	t := Mx(`<input {{global}} />`)
+	t := Mx(`<input type="color" {{global}} {{autocomplete}} {{disabled}} {{form}} {{list}} {{name}} {{value}}/>`)
 
 	s := Render(t, values)
 	return s
@@ -467,14 +821,38 @@ func InputColor(props InputColorProps) string {
 /* Input Date */
 type InputDateProps struct {
 	GlobalProps
+
+	Autocomplete func() autocompleteInputOption
+	Disabled     bool
+	Form         string
+	List         string
+	Max          time.Time
+	Min          time.Time
+	Name         string
+	Readonly     bool
+	Required     bool
+	Step         int
+	Value        string
 }
 
 func InputDate(props InputDateProps) string {
 	values := map[string]interface{}{
 		"global": BuildGlobalProps(props.GlobalProps),
+
+		"autocomplete": BuildProp("autocomplete", props.Autocomplete().String()),
+		"disabled":     BuildBooleanProp("disabled", props.Disabled),
+		"form":         BuildProp("form", props.Form),
+		"list":         BuildProp("list", props.List),
+		"max":          BuildDateProp("max", props.Max),
+		"min":          BuildDateProp("max", props.Min),
+		"name":         BuildProp("name", props.Name),
+		"readonly":     BuildBooleanProp("readonly", props.Readonly),
+		"required":     BuildBooleanProp("required", props.Required),
+		"step":         BuildNumberProp("step", props.Step),
+		"value":        BuildProp("value", props.Value),
 	}
 
-	t := Mx(`<input {{global}} />`)
+	t := Mx(`<input type="date" {{global}} {{autocomplete}} {{disabled}} {{form}} {{list}} {{max}} {{min}} {{name}} {{readonly}} {{required}} {{step}} {{value}}/>`)
 
 	s := Render(t, values)
 	return s
@@ -483,14 +861,38 @@ func InputDate(props InputDateProps) string {
 /* Input DatetimeLocal */
 type InputDatetimeLocalProps struct {
 	GlobalProps
+
+	Autocomplete func() autocompleteInputOption
+	Disabled     bool
+	Form         string
+	List         string
+	Max          time.Time
+	Min          time.Time
+	Name         string
+	Readonly     bool
+	Required     bool
+	Step         int
+	Value        string
 }
 
 func InputDatetimeLocal(props InputDatetimeLocalProps) string {
 	values := map[string]interface{}{
 		"global": BuildGlobalProps(props.GlobalProps),
+
+		"autocomplete": BuildProp("autocomplete", props.Autocomplete().String()),
+		"disabled":     BuildBooleanProp("disabled", props.Disabled),
+		"form":         BuildProp("form", props.Form),
+		"list":         BuildProp("list", props.List),
+		"max":          BuildDateTimeProp("max", props.Max),
+		"min":          BuildDateTimeProp("max", props.Min),
+		"name":         BuildProp("name", props.Name),
+		"readonly":     BuildBooleanProp("readonly", props.Readonly),
+		"required":     BuildBooleanProp("required", props.Required),
+		"step":         BuildNumberProp("step", props.Step),
+		"value":        BuildProp("value", props.Value),
 	}
 
-	t := Mx(`<input {{global}} />`)
+	t := Mx(`<input type="datetime-local" {{global}} {{global}} {{autocomplete}} {{disabled}} {{form}} {{list}} {{max}} {{min}} {{name}} {{readonly}} {{required}} {{step}} {{value}}/>`)
 
 	s := Render(t, values)
 	return s
@@ -499,14 +901,42 @@ func InputDatetimeLocal(props InputDatetimeLocalProps) string {
 /* Input Email */
 type InputEmailProps struct {
 	GlobalProps
+
+	Autocomplete func() autocompleteInputOption
+	Disabled     bool
+	Form         string
+	List         string
+	Maxlength    int
+	Multiple     bool
+	Name         string
+	Pattern      string
+	Placeholder  string
+	Readonly     bool
+	Required     bool
+	Size         int
+	Value        string
 }
 
 func InputEmail(props InputEmailProps) string {
 	values := map[string]interface{}{
 		"global": BuildGlobalProps(props.GlobalProps),
+
+		"autocomplete": BuildProp("autocomplete", props.Autocomplete().String()),
+		"disabled":     BuildBooleanProp("disabled", props.Disabled),
+		"form":         BuildProp("form", props.Form),
+		"list":         BuildProp("list", props.List),
+		"maxlength":    BuildNumberProp("maxlength", props.Maxlength),
+		"multiple":     BuildBooleanProp("multiple", props.Multiple),
+		"name":         BuildProp("name", props.Name),
+		"pattern":      BuildProp("pattern", props.Pattern),
+		"placeholder":  BuildProp("placeholder", props.Placeholder),
+		"readonly":     BuildBooleanProp("readonly", props.Readonly),
+		"required":     BuildBooleanProp("required", props.Required),
+		"size":         BuildNumberProp("size", props.Size),
+		"Value":        BuildProp("value", props.Value),
 	}
 
-	t := Mx(`<input {{global}} />`)
+	t := Mx(`<input type="email" {{global}} {{autocomplete}} {{disabled}} {{form}} {{list}} {{maxlength}} {{multiple}} {{name}} {{pattern}} {{placeholder}} {{readonly}} {{required}} {{size}} {{value}}/>`)
 
 	s := Render(t, values)
 	return s
@@ -515,17 +945,59 @@ func InputEmail(props InputEmailProps) string {
 /* Input File */
 type InputFileProps struct {
 	GlobalProps
+
+	Accept       []string
+	Autocomplete func() autocompleteInputOption
+	Capture      func() captureOption
+	Disabled     bool
+	Form         string
+	List         string
+	Multiple     bool
+	Name         string
+	Readonly     bool
+	Required     bool
+	Value        string
 }
 
 func InputFile(props InputFileProps) string {
 	values := map[string]interface{}{
 		"global": BuildGlobalProps(props.GlobalProps),
+
+		"accept":       BuildPropListWithCommas("accept", props.Accept),
+		"autocomplete": BuildProp("autocomplete", props.Autocomplete().String()),
+		"capture":      BuildProp("capture", props.Capture().String()),
+		"disabled":     BuildBooleanProp("disabled", props.Disabled),
+		"form":         BuildProp("form", props.Form),
+		"list":         BuildProp("list", props.List),
+		"multiple":     BuildBooleanProp("multiple", props.Multiple),
+		"name":         BuildProp("name", props.Name),
+		"readonly":     BuildBooleanProp("readonly", props.Readonly),
+		"required":     BuildBooleanProp("required", props.Required),
+		"value":        BuildProp("value", props.Value),
 	}
 
-	t := Mx(`<input {{global}} />`)
+	t := Mx(`<input type="file" {{global}} {{accept}} {{autocomplete}} {{capture}} {{disabled}} {{form}} {{list}} {{multiple}} {{name}} {{readonly}} {{required}} {{value}}/>`)
 
 	s := Render(t, values)
 	return s
+}
+
+/* Capture */
+type captureOption struct{ string }
+
+func (o captureOption) String() string { return o.string }
+
+func captureOptionEnv() captureOption {
+	return captureOption{"environment"}
+}
+
+func captureOptionUser() captureOption {
+	return captureOption{"user"}
+}
+
+type captureOptions struct {
+	Env  func() captureOption
+	User func() captureOption
 }
 
 /* Input Hidden */
@@ -538,7 +1010,7 @@ func InputHidden(props InputHiddenProps) string {
 		"global": BuildGlobalProps(props.GlobalProps),
 	}
 
-	t := Mx(`<input {{global}} />`)
+	t := Mx(`<input type="hidden" {{global}} />`)
 
 	s := Render(t, values)
 	return s
@@ -554,7 +1026,7 @@ func InputImage(props InputImageProps) string {
 		"global": BuildGlobalProps(props.GlobalProps),
 	}
 
-	t := Mx(`<input {{global}} />`)
+	t := Mx(`<input type="image" {{global}} />`)
 
 	s := Render(t, values)
 	return s
@@ -570,7 +1042,7 @@ func InputMonth(props InputMonthProps) string {
 		"global": BuildGlobalProps(props.GlobalProps),
 	}
 
-	t := Mx(`<input {{global}} />`)
+	t := Mx(`<input type="month" {{global}} />`)
 
 	s := Render(t, values)
 	return s
@@ -586,7 +1058,7 @@ func InputNumber(props InputNumberProps) string {
 		"global": BuildGlobalProps(props.GlobalProps),
 	}
 
-	t := Mx(`<input {{global}} />`)
+	t := Mx(`<input type="number" {{global}} />`)
 
 	s := Render(t, values)
 	return s
@@ -602,7 +1074,7 @@ func InputPassword(props InputPasswordProps) string {
 		"global": BuildGlobalProps(props.GlobalProps),
 	}
 
-	t := Mx(`<input {{global}} />`)
+	t := Mx(`<input type="password" {{global}} />`)
 
 	s := Render(t, values)
 	return s
@@ -618,7 +1090,7 @@ func InputRadio(props InputRadioProps) string {
 		"global": BuildGlobalProps(props.GlobalProps),
 	}
 
-	t := Mx(`<input {{global}} />`)
+	t := Mx(`<input type="radio" {{global}} />`)
 
 	s := Render(t, values)
 	return s
@@ -634,7 +1106,7 @@ func InputRange(props InputRangeProps) string {
 		"global": BuildGlobalProps(props.GlobalProps),
 	}
 
-	t := Mx(`<input {{global}} />`)
+	t := Mx(`<input type="range" {{global}} />`)
 
 	s := Render(t, values)
 	return s
@@ -650,7 +1122,7 @@ func InputReset(props InputResetProps) string {
 		"global": BuildGlobalProps(props.GlobalProps),
 	}
 
-	t := Mx(`<input {{global}} />`)
+	t := Mx(`<input type="reset" {{global}} />`)
 
 	s := Render(t, values)
 	return s
@@ -666,7 +1138,7 @@ func InputSearch(props InputSearchProps) string {
 		"global": BuildGlobalProps(props.GlobalProps),
 	}
 
-	t := Mx(`<input {{global}} />`)
+	t := Mx(`<input type="search" {{global}} />`)
 
 	s := Render(t, values)
 	return s
@@ -682,7 +1154,7 @@ func InputSubmit(props InputSubmitProps) string {
 		"global": BuildGlobalProps(props.GlobalProps),
 	}
 
-	t := Mx(`<input {{global}} />`)
+	t := Mx(`<input type="submit" {{global}} />`)
 
 	s := Render(t, values)
 	return s
@@ -698,7 +1170,7 @@ func InputTel(props InputTelProps) string {
 		"global": BuildGlobalProps(props.GlobalProps),
 	}
 
-	t := Mx(`<input {{global}} />`)
+	t := Mx(`<input type="tel" {{global}} />`)
 
 	s := Render(t, values)
 	return s
@@ -714,7 +1186,7 @@ func InputText(props InputTextProps) string {
 		"global": BuildGlobalProps(props.GlobalProps),
 	}
 
-	t := Mx(`<input {{global}} />`)
+	t := Mx(`<input type="text" {{global}} />`)
 
 	s := Render(t, values)
 	return s
@@ -730,7 +1202,7 @@ func InputTime(props InputTimeProps) string {
 		"global": BuildGlobalProps(props.GlobalProps),
 	}
 
-	t := Mx(`<input {{global}} />`)
+	t := Mx(`<input type="time" {{global}} />`)
 
 	s := Render(t, values)
 	return s
@@ -746,7 +1218,7 @@ func InputUrl(props InputUrlProps) string {
 		"global": BuildGlobalProps(props.GlobalProps),
 	}
 
-	t := Mx(`<input {{global}} />`)
+	t := Mx(`<input type="url" {{global}} />`)
 
 	s := Render(t, values)
 	return s
@@ -762,7 +1234,7 @@ func InputWeek(props InputWeekProps) string {
 		"global": BuildGlobalProps(props.GlobalProps),
 	}
 
-	t := Mx(`<input {{global}} />`)
+	t := Mx(`<input type="week" {{global}} />`)
 
 	s := Render(t, values)
 	return s

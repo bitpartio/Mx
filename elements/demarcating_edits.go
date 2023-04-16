@@ -27,7 +27,7 @@ func Del(props DelProps) string {
 		"global": BuildGlobalProps(props.GlobalProps),
 
 		"cite":     BuildProp("cite", props.Cite),
-		"datetime": BuildDateProp("datetime", props.Datetime),
+		"datetime": BuildDateTimeProp("datetime", props.Datetime),
 
 		"innerhtml": props.InnerHTML,
 	}

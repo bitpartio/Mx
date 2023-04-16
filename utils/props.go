@@ -21,9 +21,9 @@ func BuildProp(name, prop string) string {
 }
 
 // BuildPropList
-func BuildPropList(name string, props []string) string {
+func BuildPropList(name string, props []string, joiner string) string {
 	if len(props) > 0 {
-		prop := strings.Join(props, " ")
+		prop := strings.Join(props, joiner)
 		var s strings.Builder
 		s.WriteString(name)
 		s.WriteString(`="`)
@@ -33,6 +33,16 @@ func BuildPropList(name string, props []string) string {
 	}
 
 	return ""
+}
+
+// BuildPropListWithCommas
+func BuildPropListWithCommas(name string, props []string) string {
+	return BuildPropList(name, props, ", ")
+}
+
+// BuildPropListWithSpaces
+func BuildPropListWithSpaces(name string, props []string) string {
+	return BuildPropList(name, props, " ")
 }
 
 // BuildBooleanProp
@@ -53,15 +63,24 @@ func BuildNumberProp(name string, prop int) string {
 	return s.String()
 }
 
-// BuildDateProp
-func BuildDateProp(name string, prop time.Time) string {
-
+// BuildChronosProp
+func BuildChronosProp(name string, prop time.Time, format string) string {
 	var s strings.Builder
 	s.WriteString(name)
 	s.WriteString(`="`)
-	s.WriteString(prop.Format(time.RFC3339))
+	s.WriteString(prop.Format(format))
 	s.WriteString(`"`)
 	return s.String()
+}
+
+// BuildDateProp
+func BuildDateProp(name string, prop time.Time) string {
+	return BuildChronosProp(name, prop, "2006-01-02")
+}
+
+// BuildDateTimeProp
+func BuildDateTimeProp(name string, prop time.Time) string {
+	return BuildChronosProp(name, prop, time.RFC3339)
 }
 
 // BuildProps
