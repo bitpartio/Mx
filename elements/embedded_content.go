@@ -58,10 +58,10 @@ func Embed(props EmbedProps) string {
 	values := map[string]interface{}{
 		"global": BuildGlobalProps(props.GlobalProps),
 
-		"height": BuildNumberProp("height", props.Height),
+		"height": BuildIntProp("height", props.Height),
 		"src":    BuildProp("src", props.Src),
 		"type":   BuildProp("type", props.Type),
-		"width":  BuildNumberProp("width", props.Width),
+		"width":  BuildIntProp("width", props.Width),
 	}
 
 	t := Mx(`<embed {{global}} />`)
@@ -119,14 +119,14 @@ func Iframe(props IframeProps) string {
 		"allow":          BuildProp("allow", props.Allow),
 		"credentialless": BuildBooleanProp("credentialless", props.Credentialless),
 		"csp":            BuildProp("csp", props.Csp),
-		"height":         BuildNumberProp("height", props.Height),
+		"height":         BuildIntProp("height", props.Height),
 		"loading":        loading,
 		"name":           BuildProp("name", props.Name),
 		"referrerpolicy": referrerpolicy,
 		"sandbox":        sandbox,
 		"src":            BuildProp("src", props.Src),
 		"srcdoc":         BuildProp("srcdoc", props.Srcdoc),
-		"width":          BuildNumberProp("width", props.Width),
+		"width":          BuildIntProp("width", props.Width),
 
 		"innerhtml": props.InnerHTML,
 	}

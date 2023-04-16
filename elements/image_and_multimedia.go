@@ -429,14 +429,14 @@ func Img(props ImgProps) string {
 		"decoding":       BuildProp("decoding", props.Decoding().String()),
 		"elementtiming":  BuildProp("elementtiming", props.Elementtiming),
 		"fetchpriority":  BuildProp("fetchpriority", props.Fetchpriority().String()),
-		"height":         BuildNumberProp("height", props.Height),
+		"height":         BuildIntProp("height", props.Height),
 		"ismap":          BuildBooleanProp("ismap", props.Ismap),
 		"loading":        BuildProp("loading", props.Loading().String()),
 		"referrerpolicy": BuildProp("referrerpolicy", props.Referrerpolicy().String()),
 		"sizes":          BuildPropListWithCommas("referrerpolicy", props.Sizes),
 		"src":            BuildProp("src", props.Src),
 		"srcset":         BuildPropListWithCommas("srcset", props.Srcset),
-		"width":          BuildNumberProp("width", props.Width),
+		"width":          BuildIntProp("width", props.Width),
 		"usemap":         BuildProp("usemap", props.Usemap),
 	}
 

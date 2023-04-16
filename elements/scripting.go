@@ -21,8 +21,8 @@ func Canvas(props CanvasProps) string {
 	values := map[string]interface{}{
 		"global": BuildGlobalProps(props.GlobalProps),
 
-		"height": BuildNumberProp("height", props.Height),
-		"width":  BuildNumberProp("width", props.Width),
+		"height": BuildIntProp("height", props.Height),
+		"width":  BuildIntProp("width", props.Width),
 
 		"innerhtml": props.InnerHTML,
 	}

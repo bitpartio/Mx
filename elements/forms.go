@@ -142,6 +142,24 @@ func init() {
  * it then performs an action, such as submitting a form or opening a
  * dialog.
  */
+type ButtonProps struct {
+	GlobalProps
+
+	Autofocus      bool
+	Disabled       bool
+	Form           string
+	Formaction     string
+	Formenctype    func() formenctypeOption
+	Formmethod     func() formmethodOption
+	Formnovalidate bool
+	Formtarget     string
+	Name           string
+	Type           func() typeOption
+	Value          string
+
+	InnerHTML string
+}
+
 func Button(props ButtonProps) string {
 	var formenctype string
 	if props.Formenctype != nil {
@@ -178,24 +196,6 @@ func Button(props ButtonProps) string {
 
 	s := Render(t, values)
 	return s
-}
-
-type ButtonProps struct {
-	GlobalProps
-
-	Autofocus      bool
-	Disabled       bool
-	Form           string
-	Formaction     string
-	Formenctype    func() formenctypeOption
-	Formmethod     func() formmethodOption
-	Formnovalidate bool
-	Formtarget     string
-	Name           string
-	Type           func() typeOption
-	Value          string
-
-	InnerHTML string
 }
 
 type buttonOptions struct {
@@ -345,17 +345,30 @@ type FormProps struct {
 }
 
 func Form(props FormProps) string {
+	var autocomplete string
+	if props.Autocomplete != nil {
+		autocomplete = BuildProp("autocomplete", props.Autocomplete().String())
+	}
+	var method string
+	if props.Method != nil {
+		method = BuildProp("method", props.Method().String())
+	}
+	var rel string
+	if props.Rel != nil {
+		rel = BuildProp("rel", props.Rel().String())
+	}
+
 	values := map[string]interface{}{
 		"global": BuildGlobalProps(props.GlobalProps),
 
 		"accept-charset": BuildProp("accept-charset", props.AcceptCharset),
 		"action":         BuildProp("action", props.Action),
-		"autocomplete":   BuildProp("autocomplete", props.Autocomplete().String()),
+		"autocomplete":   autocomplete,
 		"enctype":        BuildProp("enctype", props.Enctype),
-		"method":         BuildProp("method", props.Method().String()),
+		"method":         method,
 		"novalidate":     BuildBooleanProp("novalidate", props.Novalidate),
 		"name":           BuildProp("name", props.Name),
-		"rel":            BuildProp("rel", props.Rel().String()),
+		"rel":            rel,
 		"target":         BuildProp("target", props.Target),
 
 		"innerhtml": props.InnerHTML,
@@ -517,6 +530,22 @@ type InputButtonProps struct {
 	Form     string
 	Name     string
 	Value    string
+}
+
+func InputButton(props InputButtonProps) string {
+	values := map[string]interface{}{
+		"global": BuildGlobalProps(props.GlobalProps),
+
+		"disabled": BuildBooleanProp("disabled", props.Disabled),
+		"form":     BuildProp("form", props.Form),
+		"name":     BuildProp("name", props.Name),
+		"value":    BuildProp("value", props.Value),
+	}
+
+	t := Mx(`<input type="button" {{global}} {{disabled}} {{form}} {{name}} {{value}}/>`)
+
+	s := Render(t, values)
+	return s
 }
 
 /* Autocomplete */
@@ -744,22 +773,6 @@ type autocompleteInputOptions struct {
 	Photo                    func() autocompleteInputOption
 }
 
-func InputButton(props InputButtonProps) string {
-	values := map[string]interface{}{
-		"global": BuildGlobalProps(props.GlobalProps),
-
-		"disabled": BuildBooleanProp("disabled", props.Disabled),
-		"form":     BuildProp("form", props.Form),
-		"name":     BuildProp("name", props.Name),
-		"value":    BuildProp("value", props.Value),
-	}
-
-	t := Mx(`<input type="button" {{global}} {{disabled}} {{form}} {{name}} {{value}}/>`)
-
-	s := Render(t, values)
-	return s
-}
-
 /* Input Checkbox */
 type InputCheckboxProps struct {
 	GlobalProps
@@ -801,10 +814,15 @@ type InputColorProps struct {
 }
 
 func InputColor(props InputColorProps) string {
+	var autocomplete string
+	if props.Autocomplete != nil {
+		autocomplete = BuildProp("autocomplete", props.Autocomplete().String())
+	}
+
 	values := map[string]interface{}{
 		"global": BuildGlobalProps(props.GlobalProps),
 
-		"autocomplete": BuildProp("autocomplete", props.Autocomplete().String()),
+		"autocomplete": autocomplete,
 		"disabled":     BuildBooleanProp("disabled", props.Disabled),
 		"form":         BuildProp("form", props.Form),
 		"list":         BuildProp("list", props.List),
@@ -836,10 +854,15 @@ type InputDateProps struct {
 }
 
 func InputDate(props InputDateProps) string {
+	var autocomplete string
+	if props.Autocomplete != nil {
+		autocomplete = BuildProp("autocomplete", props.Autocomplete().String())
+	}
+
 	values := map[string]interface{}{
 		"global": BuildGlobalProps(props.GlobalProps),
 
-		"autocomplete": BuildProp("autocomplete", props.Autocomplete().String()),
+		"autocomplete": autocomplete,
 		"disabled":     BuildBooleanProp("disabled", props.Disabled),
 		"form":         BuildProp("form", props.Form),
 		"list":         BuildProp("list", props.List),
@@ -848,7 +871,7 @@ func InputDate(props InputDateProps) string {
 		"name":         BuildProp("name", props.Name),
 		"readonly":     BuildBooleanProp("readonly", props.Readonly),
 		"required":     BuildBooleanProp("required", props.Required),
-		"step":         BuildNumberProp("step", props.Step),
+		"step":         BuildIntProp("step", props.Step),
 		"value":        BuildProp("value", props.Value),
 	}
 
@@ -876,10 +899,15 @@ type InputDatetimeLocalProps struct {
 }
 
 func InputDatetimeLocal(props InputDatetimeLocalProps) string {
+	var autocomplete string
+	if props.Autocomplete != nil {
+		autocomplete = BuildProp("autocomplete", props.Autocomplete().String())
+	}
+
 	values := map[string]interface{}{
 		"global": BuildGlobalProps(props.GlobalProps),
 
-		"autocomplete": BuildProp("autocomplete", props.Autocomplete().String()),
+		"autocomplete": autocomplete,
 		"disabled":     BuildBooleanProp("disabled", props.Disabled),
 		"form":         BuildProp("form", props.Form),
 		"list":         BuildProp("list", props.List),
@@ -888,7 +916,7 @@ func InputDatetimeLocal(props InputDatetimeLocalProps) string {
 		"name":         BuildProp("name", props.Name),
 		"readonly":     BuildBooleanProp("readonly", props.Readonly),
 		"required":     BuildBooleanProp("required", props.Required),
-		"step":         BuildNumberProp("step", props.Step),
+		"step":         BuildIntProp("step", props.Step),
 		"value":        BuildProp("value", props.Value),
 	}
 
@@ -907,6 +935,7 @@ type InputEmailProps struct {
 	Form         string
 	List         string
 	Maxlength    int
+	Minlength    int
 	Multiple     bool
 	Name         string
 	Pattern      string
@@ -918,25 +947,31 @@ type InputEmailProps struct {
 }
 
 func InputEmail(props InputEmailProps) string {
+	var autocomplete string
+	if props.Autocomplete != nil {
+		autocomplete = BuildProp("autocomplete", props.Autocomplete().String())
+	}
+
 	values := map[string]interface{}{
 		"global": BuildGlobalProps(props.GlobalProps),
 
-		"autocomplete": BuildProp("autocomplete", props.Autocomplete().String()),
+		"autocomplete": autocomplete,
 		"disabled":     BuildBooleanProp("disabled", props.Disabled),
 		"form":         BuildProp("form", props.Form),
 		"list":         BuildProp("list", props.List),
-		"maxlength":    BuildNumberProp("maxlength", props.Maxlength),
+		"maxlength":    BuildIntProp("maxlength", props.Maxlength),
+		"minlength":    BuildIntProp("minlength", props.Minlength),
 		"multiple":     BuildBooleanProp("multiple", props.Multiple),
 		"name":         BuildProp("name", props.Name),
 		"pattern":      BuildProp("pattern", props.Pattern),
 		"placeholder":  BuildProp("placeholder", props.Placeholder),
 		"readonly":     BuildBooleanProp("readonly", props.Readonly),
 		"required":     BuildBooleanProp("required", props.Required),
-		"size":         BuildNumberProp("size", props.Size),
-		"Value":        BuildProp("value", props.Value),
+		"size":         BuildIntProp("size", props.Size),
+		"value":        BuildProp("value", props.Value),
 	}
 
-	t := Mx(`<input type="email" {{global}} {{autocomplete}} {{disabled}} {{form}} {{list}} {{maxlength}} {{multiple}} {{name}} {{pattern}} {{placeholder}} {{readonly}} {{required}} {{size}} {{value}}/>`)
+	t := Mx(`<input type="email" {{global}} {{autocomplete}} {{disabled}} {{form}} {{list}} {{maxlength}} {{minlength}} {{multiple}} {{name}} {{pattern}} {{placeholder}} {{readonly}} {{required}} {{size}} {{value}}/>`)
 
 	s := Render(t, values)
 	return s
@@ -960,12 +995,22 @@ type InputFileProps struct {
 }
 
 func InputFile(props InputFileProps) string {
+	var autocomplete string
+	if props.Autocomplete != nil {
+		autocomplete = BuildProp("autocomplete", props.Autocomplete().String())
+	}
+
+	var capture string
+	if props.Capture != nil {
+		capture = BuildProp("capture", props.Capture().String())
+	}
+
 	values := map[string]interface{}{
 		"global": BuildGlobalProps(props.GlobalProps),
 
 		"accept":       BuildPropListWithCommas("accept", props.Accept),
-		"autocomplete": BuildProp("autocomplete", props.Autocomplete().String()),
-		"capture":      BuildProp("capture", props.Capture().String()),
+		"autocomplete": autocomplete,
+		"capture":      capture,
 		"disabled":     BuildBooleanProp("disabled", props.Disabled),
 		"form":         BuildProp("form", props.Form),
 		"list":         BuildProp("list", props.List),
@@ -1003,14 +1048,31 @@ type captureOptions struct {
 /* Input Hidden */
 type InputHiddenProps struct {
 	GlobalProps
+
+	Autocomplete func() autocompleteInputOption
+	Disabled     bool
+	Form         string
+	Name         string
+	Value        string
 }
 
 func InputHidden(props InputHiddenProps) string {
-	values := map[string]interface{}{
-		"global": BuildGlobalProps(props.GlobalProps),
+	var autocomplete string
+	if props.Autocomplete != nil {
+		autocomplete = BuildProp("autocomplete", props.Autocomplete().String())
 	}
 
-	t := Mx(`<input type="hidden" {{global}} />`)
+	values := map[string]interface{}{
+		"global": BuildGlobalProps(props.GlobalProps),
+
+		"autocomplete": autocomplete,
+		"disabled":     BuildBooleanProp("disabled", props.Disabled),
+		"form":         BuildProp("form", props.Form),
+		"name":         BuildProp("name", props.Form),
+		"value":        BuildProp("value", props.Form),
+	}
+
+	t := Mx(`<input type="hidden" {{global}} {{autocomplete}} {{disabled}} {{form}} {{name}} {{value}}/>`)
 
 	s := Render(t, values)
 	return s
@@ -1019,14 +1081,63 @@ func InputHidden(props InputHiddenProps) string {
 /* Input Image */
 type InputImageProps struct {
 	GlobalProps
+
+	Alt            string
+	Autocomplete   func() autocompleteInputOption
+	Disabled       bool
+	Form           string
+	Formaction     string
+	Formenctype    func() formenctypeOption
+	Formmethod     func() formmethodOption
+	Formnovalidate bool
+	Formtarget     string
+	Height         int
+	List           string
+	Name           string
+	Readonly       bool
+	Required       bool
+	Src            string
+	Width          int
 }
 
 func InputImage(props InputImageProps) string {
-	values := map[string]interface{}{
-		"global": BuildGlobalProps(props.GlobalProps),
+	var autocomplete string
+	if props.Autocomplete != nil {
+		autocomplete = BuildProp("autocomplete", props.Autocomplete().String())
 	}
 
-	t := Mx(`<input type="image" {{global}} />`)
+	var formenctype string
+	if props.Formenctype != nil {
+		formenctype = BuildProp("formenctype", props.Formenctype().String())
+	}
+
+	var formmethod string
+	if props.Formmethod != nil {
+		formmethod = BuildProp("formmethod", props.Formmethod().String())
+	}
+
+	values := map[string]interface{}{
+		"global": BuildGlobalProps(props.GlobalProps),
+
+		"alt":            BuildProp("alt", props.Alt),
+		"autocomplete":   autocomplete,
+		"disabled":       BuildBooleanProp("disabled", props.Disabled),
+		"form":           BuildProp("form", props.Form),
+		"formaction":     BuildProp("formaction", props.Form),
+		"formenctype":    formenctype,
+		"formmethod":     formmethod,
+		"formnovalidate": BuildBooleanProp("formnovalidate", props.Formnovalidate),
+		"formtarget":     BuildProp("formtarget", props.Formtarget),
+		"height":         BuildIntProp("height", props.Height),
+		"list":           BuildProp("list", props.List),
+		"name":           BuildProp("name", props.Name),
+		"readonly":       BuildBooleanProp("readonly", props.Readonly),
+		"required":       BuildBooleanProp("required", props.Required),
+		"src":            BuildProp("src", props.Src),
+		"width":          BuildIntProp("width", props.Width),
+	}
+
+	t := Mx(`<input type="image" {{global}} {{alt}} {{autocomplete}} {{disabled}} {{form}} {{formaction}} {{formenctype}} {{formmethod}} {{formnovalidate}} {{formtarget}} {{height}} {{list}} {{name}} {{readonly}} {{required}}/>`)
 
 	s := Render(t, values)
 	return s
@@ -1035,14 +1146,43 @@ func InputImage(props InputImageProps) string {
 /* Input Month */
 type InputMonthProps struct {
 	GlobalProps
+
+	Autocomplete func() autocompleteInputOption
+	Disabled     bool
+	Form         string
+	List         string
+	Max          time.Time
+	Min          time.Time
+	Name         string
+	Readonly     bool
+	Required     bool
+	Step         int
+	Value        string
 }
 
 func InputMonth(props InputMonthProps) string {
-	values := map[string]interface{}{
-		"global": BuildGlobalProps(props.GlobalProps),
+	var autocomplete string
+	if props.Autocomplete != nil {
+		autocomplete = BuildProp("autocomplete", props.Autocomplete().String())
 	}
 
-	t := Mx(`<input type="month" {{global}} />`)
+	values := map[string]interface{}{
+		"global": BuildGlobalProps(props.GlobalProps),
+
+		"autocomplete": autocomplete,
+		"disabled":     BuildBooleanProp("disabled", props.Disabled),
+		"form":         BuildProp("form", props.Form),
+		"list":         BuildProp("list", props.List),
+		"max":          BuildDateMonthProp("max", props.Max),
+		"min":          BuildDateMonthProp("max", props.Min),
+		"name":         BuildProp("name", props.Name),
+		"readonly":     BuildBooleanProp("readonly", props.Readonly),
+		"required":     BuildBooleanProp("required", props.Required),
+		"step":         BuildIntProp("step", props.Step),
+		"value":        BuildProp("value", props.Value),
+	}
+
+	t := Mx(`<input type="month" {{global}} {{autocomplete}} {{disabled}} {{form}} {{list}} {{max}} {{min}} {{name}} {{readonly}} {{required}} {{step}} {{value}}/>`)
 
 	s := Render(t, values)
 	return s
@@ -1051,14 +1191,45 @@ func InputMonth(props InputMonthProps) string {
 /* Input Number */
 type InputNumberProps struct {
 	GlobalProps
+
+	Autocomplete func() autocompleteInputOption
+	Disabled     bool
+	Form         string
+	List         string
+	Max          float64
+	Min          float64
+	Name         string
+	Placeholder  string
+	Readonly     bool
+	Required     bool
+	Step         float64
+	Value        float64
 }
 
 func InputNumber(props InputNumberProps) string {
-	values := map[string]interface{}{
-		"global": BuildGlobalProps(props.GlobalProps),
+	var autocomplete string
+	if props.Autocomplete != nil {
+		autocomplete = BuildProp("autocomplete", props.Autocomplete().String())
 	}
 
-	t := Mx(`<input type="number" {{global}} />`)
+	values := map[string]interface{}{
+		"global": BuildGlobalProps(props.GlobalProps),
+
+		"autocomplete": autocomplete,
+		"disabled":     BuildBooleanProp("disabled", props.Disabled),
+		"form":         BuildProp("form", props.Form),
+		"list":         BuildProp("list", props.List),
+		"max":          BuildFloatProp("max", props.Max),
+		"min":          BuildFloatProp("min", props.Min),
+		"name":         BuildProp("name", props.Name),
+		"placeholder":  BuildProp("placeholder", props.Placeholder),
+		"readonly":     BuildBooleanProp("readonly", props.Readonly),
+		"required":     BuildBooleanProp("required", props.Required),
+		"step":         BuildFloatProp("step", props.Step),
+		"value":        BuildFloatProp("value", props.Value),
+	}
+
+	t := Mx(`<input type="number" {{global}} {{autocomplete}} {{disabled}} {{form}} {{list}} {{max}} {{min}} {{name}} {{placeholder}} {{readonly}} {{required}} {{step}} {{value}}/>`)
 
 	s := Render(t, values)
 	return s
@@ -1067,14 +1238,43 @@ func InputNumber(props InputNumberProps) string {
 /* Input Password */
 type InputPasswordProps struct {
 	GlobalProps
+
+	Autocomplete func() autocompleteInputOption
+	Disabled     bool
+	File         string
+	Maxlength    int
+	Minlength    int
+	Name         string
+	Pattern      string
+	Placeholder  string
+	Readonly     bool
+	Required     bool
+	Size         int
+	Value        string
 }
 
 func InputPassword(props InputPasswordProps) string {
-	values := map[string]interface{}{
-		"global": BuildGlobalProps(props.GlobalProps),
+	var autocomplete string
+	if props.Autocomplete != nil {
+		autocomplete = BuildProp("autocomplete", props.Autocomplete().String())
 	}
 
-	t := Mx(`<input type="password" {{global}} />`)
+	values := map[string]interface{}{
+		"global": BuildGlobalProps(props.GlobalProps),
+
+		"autocomplete": autocomplete,
+		"disabled":     BuildBooleanProp("disabled", props.Disabled),
+		"file":         BuildProp("file", props.File),
+		"maxlength":    BuildIntProp("maxlength", props.Maxlength),
+		"minlength":    BuildIntProp("minlength", props.Minlength),
+		"name":         BuildProp("name", props.Name),
+		"pattern":      BuildProp("pattern", props.Pattern),
+		"placeholder":  BuildProp("placeholder", props.Placeholder),
+		"size":         BuildIntProp("size", props.Size),
+		"value":        BuildProp("value", props.Value),
+	}
+
+	t := Mx(`<input type="password" {{global}} {{autocomplete}} {{disabled}} {{file}} {{maxlength}} {{minlength}} {{name}} {{pattern}} {{placeholder}} {{size}} {{value}}/>`)
 
 	s := Render(t, values)
 	return s
@@ -1083,14 +1283,28 @@ func InputPassword(props InputPasswordProps) string {
 /* Input Radio */
 type InputRadioProps struct {
 	GlobalProps
+
+	Checked  bool
+	Disabled bool
+	Form     string
+	Name     string
+	Required bool
+	Value    string
 }
 
 func InputRadio(props InputRadioProps) string {
 	values := map[string]interface{}{
 		"global": BuildGlobalProps(props.GlobalProps),
+
+		"checked":  BuildBooleanProp("checked", props.Checked),
+		"disabled": BuildBooleanProp("disabled", props.Disabled),
+		"form":     BuildProp("form", props.Form),
+		"name":     BuildProp("name", props.Name),
+		"required": BuildBooleanProp("required", props.Required),
+		"value":    BuildProp("value", props.Value),
 	}
 
-	t := Mx(`<input type="radio" {{global}} />`)
+	t := Mx(`<input type="radio" {{global}} {{checked}} {{disabled}} {{form}} {{name}} {{required}} {{value}}/>`)
 
 	s := Render(t, values)
 	return s
@@ -1099,14 +1313,39 @@ func InputRadio(props InputRadioProps) string {
 /* Input Range */
 type InputRangeProps struct {
 	GlobalProps
+
+	Autocomplete func() autocompleteInputOption
+	Disabled     bool
+	Form         string
+	List         string
+	Max          float64
+	Min          float64
+	Name         string
+	Step         float64
+	Value        float64
 }
 
 func InputRange(props InputRangeProps) string {
-	values := map[string]interface{}{
-		"global": BuildGlobalProps(props.GlobalProps),
+	var autocomplete string
+	if props.Autocomplete != nil {
+		autocomplete = BuildProp("autocomplete", props.Autocomplete().String())
 	}
 
-	t := Mx(`<input type="range" {{global}} />`)
+	values := map[string]interface{}{
+		"global": BuildGlobalProps(props.GlobalProps),
+
+		"autocomplate": autocomplete,
+		"disabled":     BuildBooleanProp("disabled", props.Disabled),
+		"form":         BuildProp("form", props.Form),
+		"list":         BuildProp("list", props.List),
+		"max":          BuildFloatProp("max", props.Max),
+		"min":          BuildFloatProp("min", props.Min),
+		"name":         BuildProp("name", props.Name),
+		"step":         BuildFloatProp("step", props.Step),
+		"value":        BuildFloatProp("value", props.Value),
+	}
+
+	t := Mx(`<input type="range" {{global}} {{autocomplete}} {{disabled}} {{form}} {{list}} {{max}} {{min}} {{name}} {{step}} {{value}}/>`)
 
 	s := Render(t, values)
 	return s
@@ -1115,14 +1354,24 @@ func InputRange(props InputRangeProps) string {
 /* Input Reset */
 type InputResetProps struct {
 	GlobalProps
+
+	Disabled bool
+	Form     string
+	Name     string
+	Value    string
 }
 
 func InputReset(props InputResetProps) string {
 	values := map[string]interface{}{
 		"global": BuildGlobalProps(props.GlobalProps),
+
+		"disabled": BuildBooleanProp("disabled", props.Disabled),
+		"form":     BuildProp("form", props.Form),
+		"name":     BuildProp("name", props.Name),
+		"value":    BuildProp("value", props.Value),
 	}
 
-	t := Mx(`<input type="reset" {{global}} />`)
+	t := Mx(`<input type="reset" {{global}} {{disabled}} {{form}} {{name}} {{value}}/>`)
 
 	s := Render(t, values)
 	return s
@@ -1131,14 +1380,49 @@ func InputReset(props InputResetProps) string {
 /* Input Search */
 type InputSearchProps struct {
 	GlobalProps
+
+	Autocomplete func() autocompleteInputOption
+	Dirname      string
+	Disabled     bool
+	Form         string
+	List         string
+	Maxlength    int
+	Minlength    int
+	Name         string
+	Pattern      string
+	Placeholder  string
+	Readonly     bool
+	Required     bool
+	Size         int
+	Value        string
 }
 
 func InputSearch(props InputSearchProps) string {
-	values := map[string]interface{}{
-		"global": BuildGlobalProps(props.GlobalProps),
+	var autocomplete string
+	if props.Autocomplete != nil {
+		autocomplete = BuildProp("autocomplete", props.Autocomplete().String())
 	}
 
-	t := Mx(`<input type="search" {{global}} />`)
+	values := map[string]interface{}{
+		"global": BuildGlobalProps(props.GlobalProps),
+
+		"autocomplete": autocomplete,
+		"dirname":      BuildProp("dirname", props.Dirname),
+		"disabled":     BuildBooleanProp("disabled", props.Disabled),
+		"form":         BuildProp("form", props.Form),
+		"list":         BuildProp("list", props.List),
+		"maxlength":    BuildIntProp("maxlength", props.Maxlength),
+		"minlength":    BuildIntProp("minlength", props.Minlength),
+		"name":         BuildProp("name", props.Name),
+		"pattern":      BuildProp("pattern", props.Pattern),
+		"placeholder":  BuildProp("placeholder", props.Placeholder),
+		"readonly":     BuildBooleanProp("readonly", props.Readonly),
+		"required":     BuildBooleanProp("required", props.Required),
+		"size":         BuildIntProp("size", props.Size),
+		"value":        BuildProp("value", props.Value),
+	}
+
+	t := Mx(`<input type="search" {{global}} {{autocomplete}} {{dirname}} {{disabled}} {{form}} {{list}} {{maxlength}} {{minlength}} {{name}} {{pattern}} {{placeholder}} {{readonly}} {{required}} {{size}} {{value}}/>`)
 
 	s := Render(t, values)
 	return s
@@ -1147,14 +1431,44 @@ func InputSearch(props InputSearchProps) string {
 /* Input Submit */
 type InputSubmitProps struct {
 	GlobalProps
+
+	Disabled       bool
+	Form           string
+	Formaction     string
+	Formenctype    func() formenctypeOption
+	Formmethod     func() formmethodOption
+	Formnovalidate bool
+	Formtarget     string
+	Name           string
+	Value          string
 }
 
 func InputSubmit(props InputSubmitProps) string {
-	values := map[string]interface{}{
-		"global": BuildGlobalProps(props.GlobalProps),
+	var formenctype string
+	if props.Formenctype != nil {
+		formenctype = BuildProp("formenctype", props.Formenctype().String())
 	}
 
-	t := Mx(`<input type="submit" {{global}} />`)
+	var formmethod string
+	if props.Formmethod != nil {
+		formmethod = BuildProp("formmethod", props.Formmethod().String())
+	}
+
+	values := map[string]interface{}{
+		"global": BuildGlobalProps(props.GlobalProps),
+
+		"disabled":       BuildBooleanProp("disabled", props.Disabled),
+		"form":           BuildProp("form", props.Form),
+		"formaction":     BuildProp("formaction", props.Formaction),
+		"formenctype":    formenctype,
+		"formmethod":     formmethod,
+		"formnovalidate": BuildBooleanProp("formnovalidate", props.Formnovalidate),
+		"formtarget":     BuildProp("formtarget", props.Formtarget),
+		"name":           BuildProp("name", props.Name),
+		"value":          BuildProp("value", props.Value),
+	}
+
+	t := Mx(`<input type="submit" {{global}} {{disabled}} {{form}} {{formaction}} {{formenctype}} {{formmethod}} {{formnovalidate}} {{formtarget}} {{name}} {{value}}/>`)
 
 	s := Render(t, values)
 	return s

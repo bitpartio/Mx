@@ -40,7 +40,7 @@ func Col(props ColProps) string {
 	values := map[string]interface{}{
 		"global": BuildGlobalProps(props.GlobalProps),
 
-		"span": BuildNumberProp("span", props.Span),
+		"span": BuildIntProp("span", props.Span),
 	}
 
 	t := Mx(`<col {{global}} {{span}}/>`)
@@ -64,7 +64,7 @@ func Colgroup(props ColgroupProps) string {
 	values := map[string]interface{}{
 		"global": BuildGlobalProps(props.GlobalProps),
 
-		"span": BuildNumberProp("span", props.Span),
+		"span": BuildIntProp("span", props.Span),
 
 		"innerhtml": props.InnerHTML,
 	}
