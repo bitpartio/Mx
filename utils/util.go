@@ -65,3 +65,9 @@ func BuildMarkup(tag string, values map[string]interface{}) string {
 
 	return s.String()
 }
+
+// Create a reference pointer for a value
+// From: https://stackoverflow.com/questions/30716354/how-do-i-do-a-literal-int64-in-go
+func Ptr[T any](v T) *T {
+	return &v
+}

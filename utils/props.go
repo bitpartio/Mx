@@ -54,33 +54,63 @@ func BuildBooleanProp(name string, prop bool) (s string) {
 }
 
 // BuildIntProp
-func BuildIntProp(name string, prop int) string {
+func BuildIntProp(name string, prop *int) string {
+	if prop == nil {
+		return ""
+	}
 	var s strings.Builder
 	s.WriteString(name)
 	s.WriteString(`="`)
-	s.WriteString(strconv.Itoa(prop))
+	s.WriteString(strconv.Itoa(*prop))
 	s.WriteString(`"`)
 	return s.String()
 }
 
 // BuildFloatProp
-func BuildFloatProp(name string, prop float64) string {
+func BuildFloatProp(name string, prop *float64) string {
+	if prop == nil {
+		return ""
+	}
 	var s strings.Builder
 	s.WriteString(name)
 	s.WriteString(`="`)
-	s.WriteString(strconv.FormatFloat(prop, 'f', -1, 64))
+	s.WriteString(strconv.FormatFloat(*prop, 'f', -1, 64))
 	s.WriteString(`"`)
 	return s.String()
 }
 
 // BuildChronosProp
 func BuildChronosProp(name string, prop time.Time, format string) string {
+	if prop.IsZero() {
+		return ""
+	}
 	var s strings.Builder
 	s.WriteString(name)
 	s.WriteString(`="`)
 	s.WriteString(prop.Format(format))
 	s.WriteString(`"`)
 	return s.String()
+}
+
+// BuildWeekProp
+func BuildWeekProp(name string, prop time.Time) string {
+	if prop.IsZero() {
+		return ""
+	}
+	y, w := prop.ISOWeek()
+	var s strings.Builder
+	s.WriteString(name)
+	s.WriteString(`="`)
+	s.WriteString(strconv.Itoa(y))
+	s.WriteString("-W")
+	s.WriteString(strconv.Itoa(w))
+	s.WriteString(`"`)
+	return s.String()
+}
+
+// BuildTimeProp
+func BuildTimeProp(name string, prop time.Time) string {
+	return BuildChronosProp(name, prop, "15:04")
 }
 
 // BuildDateProp

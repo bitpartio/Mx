@@ -1763,13 +1763,42 @@ func InputUrl(props InputUrlProps) string {
 /* Input Week */
 type InputWeekProps struct {
 	GlobalProps
+
+	Autocomplete func() autocompleteInputOption
+	Disabled     bool
+	Form         string
+	List         string
+	Max          time.Time
+	Min          time.Time
+	Name         string
+	Readonly     bool
+	Required     bool
+	Step         *int
+	Value        time.Time
 }
 
 func InputWeek(props InputWeekProps) string {
+	var autocomplete string
+	if props.Autocomplete != nil {
+		autocomplete = BuildProp("autocomplete", props.Autocomplete().String())
+	}
+
 	values := map[string]interface{}{
 		"global": BuildGlobalProps(props.GlobalProps),
 
 		"type": BuildProp("type", "week"),
+
+		"autocomplete": autocomplete,
+		"disabled":     BuildBooleanProp("disabled", props.Disabled),
+		"form":         BuildProp("form", props.Form),
+		"list":         BuildProp("list", props.List),
+		"max":          BuildWeekProp("max", props.Max),
+		"min":          BuildWeekProp("min", props.Min),
+		"name":         BuildProp("name", props.Name),
+		"readonly":     BuildBooleanProp("readonly", props.Readonly),
+		"required":     BuildBooleanProp("required", props.Required),
+		"step":         BuildIntProp("step", props.Step),
+		"value":        BuildWeekProp("value", props.Value),
 	}
 
 	m := BuildMarkup("input", values)
