@@ -1710,13 +1710,46 @@ func InputTime(props InputTimeProps) string {
 /* Input Url */
 type InputUrlProps struct {
 	GlobalProps
+
+	Autocomplete func() autocompleteInputOption
+	Disabled     bool
+	Form         string
+	List         string
+	Maxlength    *int
+	Minlength    *int
+	Name         string
+	Pattern      string
+	Placeholder  string
+	Readonly     bool
+	Required     bool
+	Size         *int
+	Value        string
 }
 
 func InputUrl(props InputUrlProps) string {
+	var autocomplete string
+	if props.Autocomplete != nil {
+		autocomplete = BuildProp("autocomplete", props.Autocomplete().String())
+	}
+
 	values := map[string]interface{}{
 		"global": BuildGlobalProps(props.GlobalProps),
 
 		"type": BuildProp("type", "url"),
+
+		"autocomplete": autocomplete,
+		"disabled":     BuildBooleanProp("disabled", props.Disabled),
+		"form":         BuildProp("form", props.Form),
+		"list":         BuildProp("list", props.List),
+		"maxlength":    BuildIntProp("maxlength", props.Maxlength),
+		"minlength":    BuildIntProp("minlength", props.Minlength),
+		"name":         BuildProp("name", props.Name),
+		"pattern":      BuildProp("pattern", props.Pattern),
+		"placeholder":  BuildProp("placeholder", props.Placeholder),
+		"readonly":     BuildBooleanProp("readonly", props.Readonly),
+		"required":     BuildBooleanProp("required", props.Required),
+		"size":         BuildIntProp("size", props.Size),
+		"value":        BuildProp("value", props.Value),
 	}
 
 	m := BuildMarkup("input", values)
