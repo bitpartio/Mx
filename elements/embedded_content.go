@@ -64,7 +64,9 @@ func Embed(props EmbedProps) string {
 		"width":  BuildIntProp("width", props.Width),
 	}
 
-	t := Mx(`<embed {{global}} />`)
+	m := BuildMarkup("embed", values)
+
+	t := Mx(m)
 
 	s := Render(t, values)
 	return s
@@ -131,7 +133,9 @@ func Iframe(props IframeProps) string {
 		"innerhtml": props.InnerHTML,
 	}
 
-	t := Mx(`<iframe {{global}} {{allow}} {{credentialless}} {{csp}} {{height}} {{loading}} {{name}} {{referrerpolicy}} {{sandbox}} {{src}} {{srcdoc}} {{width}}>{{innerhtml}}</iframe>`)
+	m := BuildMarkup("iframe", values)
+
+	t := Mx(m)
 
 	s := Render(t, values)
 	return s
@@ -247,7 +251,9 @@ func Object(props ObjectProps) string {
 		"innerhtml": props.InnerHTML,
 	}
 
-	t := Mx(`<object {{global}}>{{innerhtml}}</object>`)
+	m := BuildMarkup("object", values)
+
+	t := Mx(m)
 
 	s := Render(t, values)
 	return s
@@ -270,7 +276,9 @@ func Picture(props PictureProps) string {
 		"innerhtml": props.InnerHTML,
 	}
 
-	t := Mx(`<picture {{global}}>{{innerhtml}}</picture>`)
+	m := BuildMarkup("picture", values)
+
+	t := Mx(m)
 
 	s := Render(t, values)
 	return s
@@ -293,7 +301,9 @@ func Source(props SourceProps) string {
 		"global": BuildGlobalProps(props.GlobalProps),
 	}
 
-	t := Mx(`<source {{global}} />`)
+	m := BuildMarkup("source", values)
+
+	t := Mx(m)
 
 	s := Render(t, values)
 	return s

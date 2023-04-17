@@ -26,7 +26,9 @@ func Slot(props SlotProps) string {
 		"innerhtml": props.InnerHTML,
 	}
 
-	t := Mx(`<slot {{name}} {{global}}>{{innerhtml}}</slot>`)
+	m := BuildMarkup("slot", values)
+
+	t := Mx(m)
 
 	s := Render(t, values)
 	return s
@@ -50,7 +52,9 @@ func Template(props TemplateProps) string {
 		"innerhtml": props.InnerHTML,
 	}
 
-	t := Mx(`<template {{global}}>{{innerhtml}}</template>`)
+	m := BuildMarkup("template", values)
+
+	t := Mx(m)
 
 	s := Render(t, values)
 	return s

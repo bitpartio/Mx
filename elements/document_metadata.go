@@ -25,7 +25,9 @@ func Base(props BaseProps) string {
 		"target": BuildProp("target", props.Target),
 	}
 
-	t := Mx(`<base {{global}} {{href}} {{target}}/>`)
+	m := BuildMarkup("base", values)
+
+	t := Mx(m)
 
 	s := Render(t, values)
 	return s
@@ -48,7 +50,9 @@ func Head(props HeadProps) string {
 		"innerhtml": props.InnerHTML,
 	}
 
-	t := Mx(`<head {{global}}>{{innerhtml}}</head>`)
+	m := BuildMarkup("head", values)
+
+	t := Mx(m)
 
 	s := Render(t, values)
 	return s
@@ -69,7 +73,9 @@ func Link(props LinkProps) string {
 		"global": BuildGlobalProps(props.GlobalProps),
 	}
 
-	t := Mx(`<link {{global}} />`)
+	m := BuildMarkup("link", values)
+
+	t := Mx(m)
 
 	s := Render(t, values)
 	return s
@@ -91,7 +97,9 @@ func Meta(props MetaProps) string {
 		"charset": BuildProp("charset", props.Charset),
 	}
 
-	t := Mx(`<meta {{global}} {{charset}} />`)
+	m := BuildMarkup("meta", values)
+
+	t := Mx(m)
 
 	s := Render(t, values)
 	return s
@@ -115,7 +123,9 @@ func Style(props StyleProps) string {
 		"innerhtml": props.InnerHTML,
 	}
 
-	t := Mx(`<style {{global}}>{{innerhtml}}</style>`)
+	m := BuildMarkup("style", values)
+
+	t := Mx(m)
 
 	s := Render(t, values)
 	return s
@@ -138,7 +148,9 @@ func Title(props TitleProps) string {
 		"innerhtml": props.InnerHTML,
 	}
 
-	t := Mx(`<title {{global}}>{{innerhtml}}</title>`)
+	m := BuildMarkup("title", values)
+
+	t := Mx(m)
 
 	s := Render(t, values)
 	return s

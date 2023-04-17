@@ -1,8 +1,6 @@
 package main
 
 import (
-	"time"
-
 	. "github.com/bitpartio/Mx/elements"
 	. "github.com/bitpartio/Mx/utils"
 )
@@ -16,10 +14,6 @@ func buildHtmlTestPage() string {
 
 	body := Body(BodyProps{
 		InnerHTML: Stack(
-			Del(DelProps{
-				Datetime:  time.Now(),
-				InnerHTML: "Deleted text.",
-			}),
 			H1(HProps{InnerHTML: "Testing display of HTML elements"}),
 			P(PProps{InnerHTML: Stack(
 				"This page contains a bunch of HTML Elements and text. You can copy the source code and use it test out various CSS Properties. For testing purposes, you may use ",

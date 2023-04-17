@@ -28,7 +28,9 @@ func Blockquote(props BlockquoteProps) string {
 		"innerhtml": props.InnerHTML,
 	}
 
-	t := Mx(`<blockquote {{global}} {{cite}}>{{innerhtml}}</blockquote>`)
+	m := BuildMarkup("blockquote", values)
+
+	t := Mx(m)
 
 	s := Render(t, values)
 	return s
@@ -51,7 +53,9 @@ func Dd(props DdProps) string {
 		"innerhtml": props.InnerHTML,
 	}
 
-	t := Mx(`<dd {{global}}>{{innerhtml}}</dd>`)
+	m := BuildMarkup("dd", values)
+
+	t := Mx(m)
 
 	s := Render(t, values)
 	return s
@@ -76,7 +80,9 @@ func Div(props DivProps) string {
 		"innerhtml": props.InnerHTML,
 	}
 
-	t := Mx(`<div {{global}}>{{innerhtml}}</div>`)
+	m := BuildMarkup("div", values)
+
+	t := Mx(m)
 
 	s := Render(t, values)
 	return s
@@ -101,7 +107,9 @@ func Dl(props DlProps) string {
 		"innerhtml": props.InnerHTML,
 	}
 
-	t := Mx(`<dl {{global}}>{{innerhtml}}</dl>`)
+	m := BuildMarkup("dl", values)
+
+	t := Mx(m)
 
 	s := Render(t, values)
 	return s
@@ -126,7 +134,9 @@ func Dt(props DtProps) string {
 		"innerhtml": props.InnerHTML,
 	}
 
-	t := Mx(`<dt {{global}}>{{innerhtml}}</dt>`)
+	m := BuildMarkup("dt", values)
+
+	t := Mx(m)
 
 	s := Render(t, values)
 	return s
@@ -149,7 +159,9 @@ func Figcaption(props FigcaptionProps) string {
 		"innerhtml": props.InnerHTML,
 	}
 
-	t := Mx(`<figcaption {{global}}>{{innerhtml}}</figcaption>`)
+	m := BuildMarkup("figcaption", values)
+
+	t := Mx(m)
 
 	s := Render(t, values)
 	return s
@@ -173,7 +185,9 @@ func Figure(props FigureProps) string {
 		"innerhtml": props.InnerHTML,
 	}
 
-	t := Mx(`<figure {{global}}>{{innerhtml}}</figure>`)
+	m := BuildMarkup("figure", values)
+
+	t := Mx(m)
 
 	s := Render(t, values)
 	return s
@@ -193,7 +207,9 @@ func Hr(props HrProps) string {
 		"global": BuildGlobalProps(props.GlobalProps),
 	}
 
-	t := Mx(`<hr {{global}} />`)
+	m := BuildMarkup("hr", values)
+
+	t := Mx(m)
 
 	s := Render(t, values)
 	return s
@@ -219,7 +235,9 @@ func Li(props LiProps) string {
 		"innerhtml": props.InnerHTML,
 	}
 
-	t := Mx(`<li {{global}}>{{innerhtml}}</li>`)
+	m := BuildMarkup("li", values)
+
+	t := Mx(m)
 
 	s := Render(t, values)
 	return s
@@ -243,7 +261,9 @@ func Menu(props MenuProps) string {
 		"innerhtml": props.InnerHTML,
 	}
 
-	t := Mx(`<menu {{global}}>{{innerhtml}}</menu>`)
+	m := BuildMarkup("menu", values)
+
+	t := Mx(m)
 
 	s := Render(t, values)
 	return s
@@ -266,7 +286,9 @@ func Ol(props OlProps) string {
 		"innerhtml": props.InnerHTML,
 	}
 
-	t := Mx(`<ol {{global}}>{{innerhtml}}</ol>`)
+	m := BuildMarkup("ol", values)
+
+	t := Mx(m)
 
 	s := Render(t, values)
 	return s
@@ -291,7 +313,9 @@ func P(props PProps) string {
 		"innerhtml": props.InnerHTML,
 	}
 
-	t := Mx(`<p {{global}}>{{innerhtml}}</p>`)
+	m := BuildMarkup("p", values)
+
+	t := Mx(m)
 
 	s := Render(t, values)
 	return s
@@ -316,7 +340,9 @@ func Pre(props PreProps) string {
 		"innerhtml": props.InnerHTML,
 	}
 
-	t := Mx(`<pre {{global}}>{{innerhtml}}</pre>`)
+	m := BuildMarkup("pre", values)
+
+	t := Mx(m)
 
 	s := Render(t, values)
 	return s
@@ -339,7 +365,9 @@ func Ul(props UlProps) string {
 		"innerhtml": props.InnerHTML,
 	}
 
-	t := Mx(`<ul {{global}}>{{innerhtml}}</ul>`)
+	m := BuildMarkup("ul", values)
+
+	t := Mx(m)
 
 	s := Render(t, values)
 	return s

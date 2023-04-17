@@ -28,7 +28,9 @@ func HTML(props HTMLProps) string {
 		"innerhtml": props.InnerHTML,
 	}
 
-	t := Mx(`<html {{global}} {{lang}} {{xmlns}}>{{innerhtml}}</html>`)
+	m := BuildMarkup("html", values)
+
+	t := Mx(m)
 
 	s := Render(t, values)
 	return s

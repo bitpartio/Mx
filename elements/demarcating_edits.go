@@ -32,7 +32,9 @@ func Del(props DelProps) string {
 		"innerhtml": props.InnerHTML,
 	}
 
-	t := Mx(`<del {{global}} {{cite}} {{datetime}}>{{innerhtml}}</del>`)
+	m := BuildMarkup("del", values)
+
+	t := Mx(m)
 
 	s := Render(t, values)
 	return s
@@ -57,7 +59,9 @@ func Ins(props InsProps) string {
 		"innerhtml": props.InnerHTML,
 	}
 
-	t := Mx(`<ins {{global}}>{{innerhtml}}</ins>`)
+	m := BuildMarkup("ins", values)
+
+	t := Mx(m)
 
 	s := Render(t, values)
 	return s

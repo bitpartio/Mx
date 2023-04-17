@@ -27,7 +27,9 @@ func Canvas(props CanvasProps) string {
 		"innerhtml": props.InnerHTML,
 	}
 
-	t := Mx(`<canvas {{lang}} {{global}} {{height}} {{width}}>{{innerhtml}}</canvas>`)
+	m := BuildMarkup("canvas", values)
+
+	t := Mx(m)
 
 	s := Render(t, values)
 	return s
@@ -50,7 +52,9 @@ func Noscript(props NoscriptProps) string {
 		"innerhtml": props.InnerHTML,
 	}
 
-	t := Mx(`<noscript {{lang}} {{global}}>{{innerhtml}}</noscript>`)
+	m := BuildMarkup("noscript", values)
+
+	t := Mx(m)
 
 	s := Render(t, values)
 	return s
@@ -75,7 +79,9 @@ func Script(props ScriptProps) string {
 		"innerhtml": props.InnerHTML,
 	}
 
-	t := Mx(`<script {{lang}} {{global}}>{{innerhtml}}</script>`)
+	m := BuildMarkup("script", values)
+
+	t := Mx(m)
 
 	s := Render(t, values)
 	return s

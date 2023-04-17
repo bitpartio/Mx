@@ -3,6 +3,7 @@ package elements
 // Ref: https://developer.mozilla.org/en-US/docs/Web/HTML/Element#forms
 
 import (
+	"fmt"
 	"time"
 
 	. "github.com/bitpartio/Mx/utils"
@@ -192,7 +193,9 @@ func Button(props ButtonProps) string {
 		"innerhtml": props.InnerHTML,
 	}
 
-	t := Mx(`<button {{global}} {{autofocus}} {{disabled}} {{form}} {{formaction}} {{formenctype}} {{formmethod}} {{formnovalidate}} {{formtarget}} {{name}} {{type}} {{value}}>{{innerhtml}}</button>`)
+	m := BuildMarkup("button", values)
+
+	t := Mx(m)
 
 	s := Render(t, values)
 	return s
@@ -287,7 +290,9 @@ func Datalist(props DatalistProps) string {
 		"innerhtml": props.InnerHTML,
 	}
 
-	t := Mx(`<datalist {{global}}>{{innerhtml}}</datalist>`)
+	m := BuildMarkup("datalist", values)
+
+	t := Mx(m)
 
 	s := Render(t, values)
 	return s
@@ -318,7 +323,9 @@ func Fieldset(props FieldsetProps) string {
 		"innerhtml": props.InnerHTML,
 	}
 
-	t := Mx(`<fieldset {{global}} {{disabled} {{form}} {{name}}>{{innerhtml}}</fieldset>`)
+	m := BuildMarkup("fieldset", values)
+
+	t := Mx(m)
 
 	s := Render(t, values)
 	return s
@@ -374,7 +381,9 @@ func Form(props FormProps) string {
 		"innerhtml": props.InnerHTML,
 	}
 
-	t := Mx(`<form {{global}} {{accept-charset}} {{action}} {{autocomplete}} {{enctype}} {{method}} {{novalidate}} {{name}} {{rel}} {{target}}>{{innerhtml}}</form>`)
+	m := BuildMarkup("form", values)
+
+	t := Mx(m)
 
 	s := Render(t, values)
 	return s
@@ -536,13 +545,17 @@ func InputButton(props InputButtonProps) string {
 	values := map[string]interface{}{
 		"global": BuildGlobalProps(props.GlobalProps),
 
+		"type": BuildProp("type", "button"),
+
 		"disabled": BuildBooleanProp("disabled", props.Disabled),
 		"form":     BuildProp("form", props.Form),
 		"name":     BuildProp("name", props.Name),
 		"value":    BuildProp("value", props.Value),
 	}
 
-	t := Mx(`<input type="button" {{global}} {{disabled}} {{form}} {{name}} {{value}}/>`)
+	m := BuildMarkup("input", values)
+
+	t := Mx(m)
 
 	s := Render(t, values)
 	return s
@@ -788,6 +801,8 @@ func InputCheckbox(props InputCheckboxProps) string {
 	values := map[string]interface{}{
 		"global": BuildGlobalProps(props.GlobalProps),
 
+		"type": BuildProp("type", "checkbox"),
+
 		"checked":  BuildBooleanProp("checked", props.Checked),
 		"disabled": BuildBooleanProp("disabled", props.Disabled),
 		"form":     BuildProp("form", props.Form),
@@ -795,7 +810,9 @@ func InputCheckbox(props InputCheckboxProps) string {
 		"value":    BuildProp("value", props.Value),
 	}
 
-	t := Mx(`<input type="checkbox" {{global}} {{checked}} {{disabled}} {{form}} {{name}} {{value}}/>`)
+	m := BuildMarkup("input", values)
+
+	t := Mx(m)
 
 	s := Render(t, values)
 	return s
@@ -822,6 +839,8 @@ func InputColor(props InputColorProps) string {
 	values := map[string]interface{}{
 		"global": BuildGlobalProps(props.GlobalProps),
 
+		"type": BuildProp("type", "color"),
+
 		"autocomplete": autocomplete,
 		"disabled":     BuildBooleanProp("disabled", props.Disabled),
 		"form":         BuildProp("form", props.Form),
@@ -830,7 +849,9 @@ func InputColor(props InputColorProps) string {
 		"value":        BuildProp("value", props.Value),
 	}
 
-	t := Mx(`<input type="color" {{global}} {{autocomplete}} {{disabled}} {{form}} {{list}} {{name}} {{value}}/>`)
+	m := BuildMarkup("input", values)
+
+	t := Mx(m)
 
 	s := Render(t, values)
 	return s
@@ -862,6 +883,8 @@ func InputDate(props InputDateProps) string {
 	values := map[string]interface{}{
 		"global": BuildGlobalProps(props.GlobalProps),
 
+		"type": BuildProp("type", "date"),
+
 		"autocomplete": autocomplete,
 		"disabled":     BuildBooleanProp("disabled", props.Disabled),
 		"form":         BuildProp("form", props.Form),
@@ -875,7 +898,9 @@ func InputDate(props InputDateProps) string {
 		"value":        BuildProp("value", props.Value),
 	}
 
-	t := Mx(`<input type="date" {{global}} {{autocomplete}} {{disabled}} {{form}} {{list}} {{max}} {{min}} {{name}} {{readonly}} {{required}} {{step}} {{value}}/>`)
+	m := BuildMarkup("input", values)
+
+	t := Mx(m)
 
 	s := Render(t, values)
 	return s
@@ -907,6 +932,8 @@ func InputDatetimeLocal(props InputDatetimeLocalProps) string {
 	values := map[string]interface{}{
 		"global": BuildGlobalProps(props.GlobalProps),
 
+		"type": BuildProp("type", "datetime-local"),
+
 		"autocomplete": autocomplete,
 		"disabled":     BuildBooleanProp("disabled", props.Disabled),
 		"form":         BuildProp("form", props.Form),
@@ -920,7 +947,9 @@ func InputDatetimeLocal(props InputDatetimeLocalProps) string {
 		"value":        BuildProp("value", props.Value),
 	}
 
-	t := Mx(`<input type="datetime-local" {{global}} {{global}} {{autocomplete}} {{disabled}} {{form}} {{list}} {{max}} {{min}} {{name}} {{readonly}} {{required}} {{step}} {{value}}/>`)
+	m := BuildMarkup("input", values)
+
+	t := Mx(m)
 
 	s := Render(t, values)
 	return s
@@ -955,6 +984,8 @@ func InputEmail(props InputEmailProps) string {
 	values := map[string]interface{}{
 		"global": BuildGlobalProps(props.GlobalProps),
 
+		"type": BuildProp("type", "email"),
+
 		"autocomplete": autocomplete,
 		"disabled":     BuildBooleanProp("disabled", props.Disabled),
 		"form":         BuildProp("form", props.Form),
@@ -971,7 +1002,9 @@ func InputEmail(props InputEmailProps) string {
 		"value":        BuildProp("value", props.Value),
 	}
 
-	t := Mx(`<input type="email" {{global}} {{autocomplete}} {{disabled}} {{form}} {{list}} {{maxlength}} {{minlength}} {{multiple}} {{name}} {{pattern}} {{placeholder}} {{readonly}} {{required}} {{size}} {{value}}/>`)
+	m := BuildMarkup("input", values)
+
+	t := Mx(m)
 
 	s := Render(t, values)
 	return s
@@ -1008,6 +1041,8 @@ func InputFile(props InputFileProps) string {
 	values := map[string]interface{}{
 		"global": BuildGlobalProps(props.GlobalProps),
 
+		"type": BuildProp("type", "file"),
+
 		"accept":       BuildPropListWithCommas("accept", props.Accept),
 		"autocomplete": autocomplete,
 		"capture":      capture,
@@ -1021,7 +1056,9 @@ func InputFile(props InputFileProps) string {
 		"value":        BuildProp("value", props.Value),
 	}
 
-	t := Mx(`<input type="file" {{global}} {{accept}} {{autocomplete}} {{capture}} {{disabled}} {{form}} {{list}} {{multiple}} {{name}} {{readonly}} {{required}} {{value}}/>`)
+	m := BuildMarkup("input", values)
+
+	t := Mx(m)
 
 	s := Render(t, values)
 	return s
@@ -1065,6 +1102,8 @@ func InputHidden(props InputHiddenProps) string {
 	values := map[string]interface{}{
 		"global": BuildGlobalProps(props.GlobalProps),
 
+		"type": BuildProp("type", "hidden"),
+
 		"autocomplete": autocomplete,
 		"disabled":     BuildBooleanProp("disabled", props.Disabled),
 		"form":         BuildProp("form", props.Form),
@@ -1072,7 +1111,9 @@ func InputHidden(props InputHiddenProps) string {
 		"value":        BuildProp("value", props.Form),
 	}
 
-	t := Mx(`<input type="hidden" {{global}} {{autocomplete}} {{disabled}} {{form}} {{name}} {{value}}/>`)
+	m := BuildMarkup("input", values)
+
+	t := Mx(m)
 
 	s := Render(t, values)
 	return s
@@ -1119,6 +1160,8 @@ func InputImage(props InputImageProps) string {
 	values := map[string]interface{}{
 		"global": BuildGlobalProps(props.GlobalProps),
 
+		"type": BuildProp("type", "image"),
+
 		"alt":            BuildProp("alt", props.Alt),
 		"autocomplete":   autocomplete,
 		"disabled":       BuildBooleanProp("disabled", props.Disabled),
@@ -1137,7 +1180,9 @@ func InputImage(props InputImageProps) string {
 		"width":          BuildIntProp("width", props.Width),
 	}
 
-	t := Mx(`<input type="image" {{global}} {{alt}} {{autocomplete}} {{disabled}} {{form}} {{formaction}} {{formenctype}} {{formmethod}} {{formnovalidate}} {{formtarget}} {{height}} {{list}} {{name}} {{readonly}} {{required}}/>`)
+	m := BuildMarkup("input", values)
+
+	t := Mx(m)
 
 	s := Render(t, values)
 	return s
@@ -1169,6 +1214,8 @@ func InputMonth(props InputMonthProps) string {
 	values := map[string]interface{}{
 		"global": BuildGlobalProps(props.GlobalProps),
 
+		"type": BuildProp("type", "month"),
+
 		"autocomplete": autocomplete,
 		"disabled":     BuildBooleanProp("disabled", props.Disabled),
 		"form":         BuildProp("form", props.Form),
@@ -1182,7 +1229,9 @@ func InputMonth(props InputMonthProps) string {
 		"value":        BuildProp("value", props.Value),
 	}
 
-	t := Mx(`<input type="month" {{global}} {{autocomplete}} {{disabled}} {{form}} {{list}} {{max}} {{min}} {{name}} {{readonly}} {{required}} {{step}} {{value}}/>`)
+	m := BuildMarkup("input", values)
+
+	t := Mx(m)
 
 	s := Render(t, values)
 	return s
@@ -1215,6 +1264,8 @@ func InputNumber(props InputNumberProps) string {
 	values := map[string]interface{}{
 		"global": BuildGlobalProps(props.GlobalProps),
 
+		"type": BuildProp("type", "number"),
+
 		"autocomplete": autocomplete,
 		"disabled":     BuildBooleanProp("disabled", props.Disabled),
 		"form":         BuildProp("form", props.Form),
@@ -1229,7 +1280,9 @@ func InputNumber(props InputNumberProps) string {
 		"value":        BuildFloatProp("value", props.Value),
 	}
 
-	t := Mx(`<input type="number" {{global}} {{autocomplete}} {{disabled}} {{form}} {{list}} {{max}} {{min}} {{name}} {{placeholder}} {{readonly}} {{required}} {{step}} {{value}}/>`)
+	m := BuildMarkup("input", values)
+
+	t := Mx(m)
 
 	s := Render(t, values)
 	return s
@@ -1262,6 +1315,8 @@ func InputPassword(props InputPasswordProps) string {
 	values := map[string]interface{}{
 		"global": BuildGlobalProps(props.GlobalProps),
 
+		"type": BuildProp("type", "password"),
+
 		"autocomplete": autocomplete,
 		"disabled":     BuildBooleanProp("disabled", props.Disabled),
 		"file":         BuildProp("file", props.File),
@@ -1274,7 +1329,9 @@ func InputPassword(props InputPasswordProps) string {
 		"value":        BuildProp("value", props.Value),
 	}
 
-	t := Mx(`<input type="password" {{global}} {{autocomplete}} {{disabled}} {{file}} {{maxlength}} {{minlength}} {{name}} {{pattern}} {{placeholder}} {{size}} {{value}}/>`)
+	m := BuildMarkup("input", values)
+
+	t := Mx(m)
 
 	s := Render(t, values)
 	return s
@@ -1296,6 +1353,8 @@ func InputRadio(props InputRadioProps) string {
 	values := map[string]interface{}{
 		"global": BuildGlobalProps(props.GlobalProps),
 
+		"type": BuildProp("type", "radio"),
+
 		"checked":  BuildBooleanProp("checked", props.Checked),
 		"disabled": BuildBooleanProp("disabled", props.Disabled),
 		"form":     BuildProp("form", props.Form),
@@ -1304,7 +1363,9 @@ func InputRadio(props InputRadioProps) string {
 		"value":    BuildProp("value", props.Value),
 	}
 
-	t := Mx(`<input type="radio" {{global}} {{checked}} {{disabled}} {{form}} {{name}} {{required}} {{value}}/>`)
+	m := BuildMarkup("input", values)
+
+	t := Mx(m)
 
 	s := Render(t, values)
 	return s
@@ -1334,6 +1395,8 @@ func InputRange(props InputRangeProps) string {
 	values := map[string]interface{}{
 		"global": BuildGlobalProps(props.GlobalProps),
 
+		"type": BuildProp("type", "range"),
+
 		"autocomplate": autocomplete,
 		"disabled":     BuildBooleanProp("disabled", props.Disabled),
 		"form":         BuildProp("form", props.Form),
@@ -1345,7 +1408,9 @@ func InputRange(props InputRangeProps) string {
 		"value":        BuildFloatProp("value", props.Value),
 	}
 
-	t := Mx(`<input type="range" {{global}} {{autocomplete}} {{disabled}} {{form}} {{list}} {{max}} {{min}} {{name}} {{step}} {{value}}/>`)
+	m := BuildMarkup("input", values)
+
+	t := Mx(m)
 
 	s := Render(t, values)
 	return s
@@ -1365,13 +1430,17 @@ func InputReset(props InputResetProps) string {
 	values := map[string]interface{}{
 		"global": BuildGlobalProps(props.GlobalProps),
 
+		"type": BuildProp("type", "reset"),
+
 		"disabled": BuildBooleanProp("disabled", props.Disabled),
 		"form":     BuildProp("form", props.Form),
 		"name":     BuildProp("name", props.Name),
 		"value":    BuildProp("value", props.Value),
 	}
 
-	t := Mx(`<input type="reset" {{global}} {{disabled}} {{form}} {{name}} {{value}}/>`)
+	m := BuildMarkup("input", values)
+
+	t := Mx(m)
 
 	s := Render(t, values)
 	return s
@@ -1406,6 +1475,8 @@ func InputSearch(props InputSearchProps) string {
 	values := map[string]interface{}{
 		"global": BuildGlobalProps(props.GlobalProps),
 
+		"type": BuildProp("type", "search"),
+
 		"autocomplete": autocomplete,
 		"dirname":      BuildProp("dirname", props.Dirname),
 		"disabled":     BuildBooleanProp("disabled", props.Disabled),
@@ -1422,7 +1493,9 @@ func InputSearch(props InputSearchProps) string {
 		"value":        BuildProp("value", props.Value),
 	}
 
-	t := Mx(`<input type="search" {{global}} {{autocomplete}} {{dirname}} {{disabled}} {{form}} {{list}} {{maxlength}} {{minlength}} {{name}} {{pattern}} {{placeholder}} {{readonly}} {{required}} {{size}} {{value}}/>`)
+	m := BuildMarkup("input", values)
+
+	t := Mx(m)
 
 	s := Render(t, values)
 	return s
@@ -1457,6 +1530,8 @@ func InputSubmit(props InputSubmitProps) string {
 	values := map[string]interface{}{
 		"global": BuildGlobalProps(props.GlobalProps),
 
+		"type": BuildProp("type", "submit"),
+
 		"disabled":       BuildBooleanProp("disabled", props.Disabled),
 		"form":           BuildProp("form", props.Form),
 		"formaction":     BuildProp("formaction", props.Formaction),
@@ -1468,7 +1543,9 @@ func InputSubmit(props InputSubmitProps) string {
 		"value":          BuildProp("value", props.Value),
 	}
 
-	t := Mx(`<input type="submit" {{global}} {{disabled}} {{form}} {{formaction}} {{formenctype}} {{formmethod}} {{formnovalidate}} {{formtarget}} {{name}} {{value}}/>`)
+	m := BuildMarkup("input", values)
+
+	t := Mx(m)
 
 	s := Render(t, values)
 	return s
@@ -1477,14 +1554,51 @@ func InputSubmit(props InputSubmitProps) string {
 /* Input Tel */
 type InputTelProps struct {
 	GlobalProps
+
+	Autocomplete func() autocompleteInputOption
+	Disabled     bool
+	Form         string
+	List         string
+	Maxlength    int
+	Minlength    int
+	Name         string
+	Pattern      string
+	Placeholder  string
+	Readonly     bool
+	Required     bool
+	Size         int
+	Value        string
 }
 
 func InputTel(props InputTelProps) string {
-	values := map[string]interface{}{
-		"global": BuildGlobalProps(props.GlobalProps),
+	var autocomplete string
+	if props.Autocomplete != nil {
+		autocomplete = BuildProp("autocomplete", props.Autocomplete().String())
 	}
 
-	t := Mx(`<input type="tel" {{global}} />`)
+	values := map[string]interface{}{
+		"global": BuildGlobalProps(props.GlobalProps),
+
+		"type": BuildProp("type", "tel"),
+
+		"autocomplete": autocomplete,
+		"disabled":     BuildBooleanProp("disabled", props.Disabled),
+		"form":         BuildProp("form", props.Form),
+		"list":         BuildProp("list", props.List),
+		"maxlength":    BuildIntProp("maxlength", props.Maxlength),
+		"minlength":    BuildIntProp("minlength", props.Minlength),
+		"name":         BuildProp("name", props.Name),
+		"pattern":      BuildProp("pattern", props.Pattern),
+		"placeholder":  BuildProp("placeholder", props.Placeholder),
+		"readonly":     BuildBooleanProp("readonly", props.Readonly),
+		"required":     BuildBooleanProp("required", props.Required),
+		"size":         BuildIntProp("size", props.Size),
+		"value":        BuildProp("value", props.Value),
+	}
+
+	m := BuildMarkup("input", values)
+
+	t := Mx(m)
 
 	s := Render(t, values)
 	return s
@@ -1493,16 +1607,58 @@ func InputTel(props InputTelProps) string {
 /* Input Text */
 type InputTextProps struct {
 	GlobalProps
+
+	Autocomplete func() autocompleteInputOption
+	Dirname      string
+	Disabled     bool
+	Form         string
+	List         string
+	Maxlength    int
+	Minlength    int
+	Name         string
+	Pattern      string
+	Placeholder  string
+	Readonly     bool
+	Required     bool
+	Size         int
+	Value        string
 }
 
 func InputText(props InputTextProps) string {
-	values := map[string]interface{}{
-		"global": BuildGlobalProps(props.GlobalProps),
+	var autocomplete string
+	if props.Autocomplete != nil {
+		autocomplete = BuildProp("autocomplete", props.Autocomplete().String())
 	}
 
-	t := Mx(`<input type="text" {{global}} />`)
+	values := map[string]interface{}{
+		"global": BuildGlobalProps(props.GlobalProps),
+
+		"type": BuildProp("type", "text"),
+
+		"autocomplete": autocomplete,
+		"dirname":      BuildProp("dirname", props.Dirname),
+		"disabled":     BuildBooleanProp("disabled", props.Disabled),
+		"form":         BuildProp("form", props.Form),
+		"list":         BuildProp("list", props.List),
+		"maxlength":    BuildIntProp("maxlength", props.Maxlength),
+		"minlength":    BuildIntProp("minlength", props.Minlength),
+		"name":         BuildProp("name", props.Name),
+		"pattern":      BuildProp("pattern", props.Pattern),
+		"placeholder":  BuildProp("placeholder", props.Placeholder),
+		"readonly":     BuildBooleanProp("readonly", props.Readonly),
+		"required":     BuildBooleanProp("required", props.Required),
+		"size":         BuildIntProp("size", props.Size),
+		"value":        BuildProp("value", props.Value),
+	}
+
+	m := BuildMarkup("input", values)
+
+	fmt.Println(m)
+
+	t := Mx(m)
 
 	s := Render(t, values)
+	fmt.Println(s)
 	return s
 }
 
@@ -1514,9 +1670,13 @@ type InputTimeProps struct {
 func InputTime(props InputTimeProps) string {
 	values := map[string]interface{}{
 		"global": BuildGlobalProps(props.GlobalProps),
+
+		"type": BuildProp("type", "time"),
 	}
 
-	t := Mx(`<input type="time" {{global}} />`)
+	m := BuildMarkup("input", values)
+
+	t := Mx(m)
 
 	s := Render(t, values)
 	return s
@@ -1530,9 +1690,13 @@ type InputUrlProps struct {
 func InputUrl(props InputUrlProps) string {
 	values := map[string]interface{}{
 		"global": BuildGlobalProps(props.GlobalProps),
+
+		"type": BuildProp("type", "url"),
 	}
 
-	t := Mx(`<input type="url" {{global}} />`)
+	m := BuildMarkup("input", values)
+
+	t := Mx(m)
 
 	s := Render(t, values)
 	return s
@@ -1546,9 +1710,13 @@ type InputWeekProps struct {
 func InputWeek(props InputWeekProps) string {
 	values := map[string]interface{}{
 		"global": BuildGlobalProps(props.GlobalProps),
+
+		"type": BuildProp("type", "week"),
 	}
 
-	t := Mx(`<input type="week" {{global}} />`)
+	m := BuildMarkup("input", values)
+
+	t := Mx(m)
 
 	s := Render(t, values)
 	return s
@@ -1570,7 +1738,9 @@ func Label(props LabelProps) string {
 		"innerhtml": props.InnerHTML,
 	}
 
-	t := Mx(`<label {{global}}>{{innerhtml}}</label>`)
+	m := BuildMarkup("label", values)
+
+	t := Mx(m)
 
 	s := Render(t, values)
 	return s
@@ -1592,7 +1762,9 @@ func Legend(props LegendProps) string {
 		"innerhtml": props.InnerHTML,
 	}
 
-	t := Mx(`<legend {{global}}>{{innerhtml}}</legend>`)
+	m := BuildMarkup("legend", values)
+
+	t := Mx(m)
 
 	s := Render(t, values)
 	return s
@@ -1615,7 +1787,9 @@ func Meter(props MeterProps) string {
 		"innerhtml": props.InnerHTML,
 	}
 
-	t := Mx(`<meter {{global}}>{{innerhtml}}</meter>`)
+	m := BuildMarkup("meter", values)
+
+	t := Mx(m)
 
 	s := Render(t, values)
 	return s
@@ -1637,7 +1811,9 @@ func Optgroup(props OptgroupProps) string {
 		"innerhtml": props.InnerHTML,
 	}
 
-	t := Mx(`<optgroup {{global}}>{{innerhtml}}</optgroup>`)
+	m := BuildMarkup("optgroup", values)
+
+	t := Mx(m)
 
 	s := Render(t, values)
 	return s
@@ -1661,7 +1837,9 @@ func Option(props OptionProps) string {
 		"innerhtml": props.InnerHTML,
 	}
 
-	t := Mx(`<option {{global}}>{{innerhtml}}</option>`)
+	m := BuildMarkup("option", values)
+
+	t := Mx(m)
 
 	s := Render(t, values)
 	return s
@@ -1684,7 +1862,9 @@ func Output(props OutputProps) string {
 		"innerhtml": props.InnerHTML,
 	}
 
-	t := Mx(`<output {{global}}>{{innerhtml}}</output>`)
+	m := BuildMarkup("output", values)
+
+	t := Mx(m)
 
 	s := Render(t, values)
 	return s
@@ -1707,7 +1887,9 @@ func Progress(props ProgressProps) string {
 		"innerhtml": props.InnerHTML,
 	}
 
-	t := Mx(`<progress {{global}}>{{innerhtml}}</progress>`)
+	m := BuildMarkup("progress", values)
+
+	t := Mx(m)
 
 	s := Render(t, values)
 	return s
@@ -1729,7 +1911,9 @@ func Select(props SelectProps) string {
 		"innerhtml": props.InnerHTML,
 	}
 
-	t := Mx(`<select {{global}}>{{innerhtml}}</select>`)
+	m := BuildMarkup("select", values)
+
+	t := Mx(m)
 
 	s := Render(t, values)
 	return s
@@ -1753,7 +1937,9 @@ func Textarea(props TextareaProps) string {
 		"innerhtml": props.InnerHTML,
 	}
 
-	t := Mx(`<textarea {{global}}>{{innerhtml}}</textarea>`)
+	m := BuildMarkup("textarea", values)
+
+	t := Mx(m)
 
 	s := Render(t, values)
 	return s

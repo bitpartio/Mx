@@ -2,7 +2,9 @@ package elements
 
 // Ref: https://developer.mozilla.org/en-US/docs/Web/HTML/Element#content_sectioning
 
-import . "github.com/bitpartio/Mx/utils"
+import (
+	. "github.com/bitpartio/Mx/utils"
+)
 
 /*
  * Indicates that the enclosed HTML provides contact information for a
@@ -21,7 +23,9 @@ func Address(props AddressProps) string {
 		"innerhtml": props.InnerHTML,
 	}
 
-	t := Mx(`<address {{global}}>{{innerhtml}}</address>`)
+	m := BuildMarkup("address", values)
+
+	t := Mx(m)
 
 	s := Render(t, values)
 	return s
@@ -48,7 +52,9 @@ func Article(props ArticleProps) string {
 		"innerhtml": props.InnerHTML,
 	}
 
-	t := Mx(`<article {{global}}>{{innerhtml}}</article>`)
+	m := BuildMarkup("article", values)
+
+	t := Mx(m)
 
 	s := Render(t, values)
 	return s
@@ -72,7 +78,9 @@ func Aside(props AsideProps) string {
 		"innerhtml": props.InnerHTML,
 	}
 
-	t := Mx(`<aside {{global}}>{{innerhtml}}</aside>`)
+	m := BuildMarkup("aside", values)
+
+	t := Mx(m)
 
 	s := Render(t, values)
 	return s
@@ -97,7 +105,9 @@ func Footer(props FooterProps) string {
 		"innerhtml": props.InnerHTML,
 	}
 
-	t := Mx(`<footer {{global}}>{{innerhtml}}</footer>`)
+	m := BuildMarkup("footer", values)
+
+	t := Mx(m)
 
 	s := Render(t, values)
 	return s
@@ -121,7 +131,9 @@ func Header(props HeaderProps) string {
 		"innerhtml": props.InnerHTML,
 	}
 
-	t := Mx(`<header {{global}}>{{innerhtml}}</header>`)
+	m := BuildMarkup("header", values)
+
+	t := Mx(m)
 
 	s := Render(t, values)
 	return s
@@ -144,7 +156,9 @@ func H1(props HProps) string {
 		"innerhtml": props.InnerHTML,
 	}
 
-	t := Mx(`<h1 {{global}}>{{innerhtml}}</h1>`)
+	m := BuildMarkup("h1", values)
+
+	t := Mx(m)
 
 	s := Render(t, values)
 	return s
@@ -157,7 +171,9 @@ func H2(props HProps) string {
 		"innerhtml": props.InnerHTML,
 	}
 
-	t := Mx(`<h2 {{global}}>{{innerhtml}}</h2>`)
+	m := BuildMarkup("h2", values)
+
+	t := Mx(m)
 
 	s := Render(t, values)
 	return s
@@ -170,7 +186,9 @@ func H3(props HProps) string {
 		"innerhtml": props.InnerHTML,
 	}
 
-	t := Mx(`<h3 {{global}}>{{innerhtml}}</h3>`)
+	m := BuildMarkup("h3", values)
+
+	t := Mx(m)
 
 	s := Render(t, values)
 	return s
@@ -183,7 +201,9 @@ func H4(props HProps) string {
 		"innerhtml": props.InnerHTML,
 	}
 
-	t := Mx(`<h4 {{global}}>{{innerhtml}}</h4>`)
+	m := BuildMarkup("h4", values)
+
+	t := Mx(m)
 
 	s := Render(t, values)
 	return s
@@ -196,7 +216,9 @@ func H5(props HProps) string {
 		"innerhtml": props.InnerHTML,
 	}
 
-	t := Mx(`<h5 {{global}}>{{innerhtml}}</h5>`)
+	m := BuildMarkup("h5", values)
+
+	t := Mx(m)
 
 	s := Render(t, values)
 	return s
@@ -209,7 +231,9 @@ func H6(props HProps) string {
 		"innerhtml": props.InnerHTML,
 	}
 
-	t := Mx(`<h6 {{global}}>{{innerhtml}}</h6>`)
+	m := BuildMarkup("h6", values)
+
+	t := Mx(m)
 
 	s := Render(t, values)
 	return s
@@ -234,7 +258,9 @@ func Main(props MainProps) string {
 		"innerhtml": props.InnerHTML,
 	}
 
-	t := Mx(`<main {{global}}>{{innerhtml}}</main>`)
+	m := BuildMarkup("main", values)
+
+	t := Mx(m)
 
 	s := Render(t, values)
 	return s
@@ -259,7 +285,9 @@ func Nav(props NavProps) string {
 		"innerhtml": props.InnerHTML,
 	}
 
-	t := Mx(`<nav {{global}}>{{innerhtml}}</nav>`)
+	m := BuildMarkup("nav", values)
+
+	t := Mx(m)
 
 	s := Render(t, values)
 	return s
@@ -283,7 +311,9 @@ func Section(props SectionProps) string {
 		"innerhtml": props.InnerHTML,
 	}
 
-	t := Mx(`<section {{global}}>{{innerhtml}}</section>`)
+	m := BuildMarkup("section", values)
+
+	t := Mx(m)
 
 	s := Render(t, values)
 	return s

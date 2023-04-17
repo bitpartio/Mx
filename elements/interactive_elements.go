@@ -26,7 +26,9 @@ func Details(props DetailsProps) string {
 		"innerhtml": props.InnerHTML,
 	}
 
-	t := Mx(`<details {{global}} {{open}}>{{innerhtml}}</details>`)
+	m := BuildMarkup("details", values)
+
+	t := Mx(m)
 
 	s := Render(t, values)
 	return s
@@ -53,7 +55,9 @@ func Dialog(props DialogProps) string {
 		"innerhtml": props.InnerHTML,
 	}
 
-	t := Mx(`<dialog {{global}} {{open}}>{{innerhtml}}</dialog>`)
+	m := BuildMarkup("dialog", values)
+
+	t := Mx(m)
 
 	s := Render(t, values)
 	return s
@@ -77,7 +81,9 @@ func Summary(props SummaryProps) string {
 		"innerhtml": props.InnerHTML,
 	}
 
-	t := Mx(`<summary {{global}}>{{innerhtml}}</summary>`)
+	m := BuildMarkup("summary", values)
+
+	t := Mx(m)
 
 	s := Render(t, values)
 	return s

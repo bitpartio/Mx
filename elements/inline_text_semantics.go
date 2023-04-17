@@ -72,7 +72,9 @@ func A(props AProps) string {
 		"innerhtml": props.InnerHTML,
 	}
 
-	t := Mx(`<a {{global}} {{download}} {{href}} {{hreflang}} {{ping}} {{referrerpolicy}} {{rel}} {{target}} {{type}}>{{innerhtml}}</a>`)
+	m := BuildMarkup("a", values)
+
+	t := Mx(m)
 
 	s := Render(t, values)
 	return s
@@ -181,7 +183,9 @@ func Abbr(props AbbrProps) string {
 		"innerhtml": props.InnerHTML,
 	}
 
-	t := Mx(`<abbr {{global}}>{{innerhtml}}</abbr>`)
+	m := BuildMarkup("abbr", values)
+
+	t := Mx(m)
 
 	s := Render(t, values)
 	return s
@@ -209,7 +213,9 @@ func B(props BProps) string {
 		"innerhtml": props.InnerHTML,
 	}
 
-	t := Mx(`<b {{global}}>{{innerhtml}}</b>`)
+	m := BuildMarkup("b", values)
+
+	t := Mx(m)
 
 	s := Render(t, values)
 	return s
@@ -234,7 +240,9 @@ func Bdi(props BdiProps) string {
 		"innerhtml": props.InnerHTML,
 	}
 
-	t := Mx(`<bdi {{global}}>{{innerhtml}}</bdi>`)
+	m := BuildMarkup("bdi", values)
+
+	t := Mx(m)
 
 	s := Render(t, values)
 	return s
@@ -257,7 +265,9 @@ func Bdo(props BdoProps) string {
 		"innerhtml": props.InnerHTML,
 	}
 
-	t := Mx(`<bdo {{global}}>{{innerhtml}}</bdo>`)
+	m := BuildMarkup("bdo", values)
+
+	t := Mx(m)
 
 	s := Render(t, values)
 	return s
@@ -276,7 +286,9 @@ func Br(props BrProps) string {
 		"global": BuildGlobalProps(props.GlobalProps),
 	}
 
-	t := Mx(`<br {{global}} />`)
+	m := BuildMarkup("br", values)
+
+	t := Mx(m)
 
 	s := Render(t, values)
 	return s
@@ -300,7 +312,9 @@ func Cite(props CiteProps) string {
 		"innerhtml": props.InnerHTML,
 	}
 
-	t := Mx(`<cite {{global}}>{{innerhtml}}</cite>`)
+	m := BuildMarkup("cite", values)
+
+	t := Mx(m)
 
 	s := Render(t, values)
 	return s
@@ -324,7 +338,9 @@ func Code(props CodeProps) string {
 		"innerhtml": props.InnerHTML,
 	}
 
-	t := Mx(`<code {{global}}>{{innerhtml}}</code>`)
+	m := BuildMarkup("code", values)
+
+	t := Mx(m)
 
 	s := Render(t, values)
 	return s
@@ -351,7 +367,9 @@ func Data(props DataProps) string {
 		"innerhtml": props.InnerHTML,
 	}
 
-	t := Mx(`<data {{global}} {{value}}>{{innerhtml}}</data>`)
+	m := BuildMarkup("data", values)
+
+	t := Mx(m)
 
 	s := Render(t, values)
 	return s
@@ -376,7 +394,9 @@ func Dfn(props DfnProps) string {
 		"innerhtml": props.InnerHTML,
 	}
 
-	t := Mx(`<dfn {{global}}>{{innerhtml}}</dfn>`)
+	m := BuildMarkup("dfn", values)
+
+	t := Mx(m)
 
 	s := Render(t, values)
 	return s
@@ -399,7 +419,9 @@ func Em(props EmProps) string {
 		"innerhtml": props.InnerHTML,
 	}
 
-	t := Mx(`<em {{global}}>{{innerhtml}}</em>`)
+	m := BuildMarkup("em", values)
+
+	t := Mx(m)
 
 	s := Render(t, values)
 	return s
@@ -424,7 +446,9 @@ func I(props IProps) string {
 		"innerhtml": props.InnerHTML,
 	}
 
-	t := Mx(`<i {{global}}>{{innerhtml}}</i>`)
+	m := BuildMarkup("i", values)
+
+	t := Mx(m)
 
 	s := Render(t, values)
 	return s
@@ -450,7 +474,9 @@ func Kbd(props KbdProps) string {
 		"innerhtml": props.InnerHTML,
 	}
 
-	t := Mx(`<kbd {{global}}>{{innerhtml}}</kbd>`)
+	m := BuildMarkup("kbd", values)
+
+	t := Mx(m)
 
 	s := Render(t, values)
 	return s
@@ -474,7 +500,9 @@ func Mark(props MarkProps) string {
 		"innerhtml": props.InnerHTML,
 	}
 
-	t := Mx(`<mark {{global}}>{{innerhtml}}</mark>`)
+	m := BuildMarkup("mark", values)
+
+	t := Mx(m)
 
 	s := Render(t, values)
 	return s
@@ -499,7 +527,9 @@ func Q(props QProps) string {
 		"innerhtml": props.InnerHTML,
 	}
 
-	t := Mx(`<q {{global}}>{{innerhtml}}</q>`)
+	m := BuildMarkup("q", values)
+
+	t := Mx(m)
 
 	s := Render(t, values)
 	return s
@@ -524,7 +554,9 @@ func Rp(props RpProps) string {
 		"innerhtml": props.InnerHTML,
 	}
 
-	t := Mx(`<rp {{global}}>{{innerhtml}}</rp>`)
+	m := BuildMarkup("rp", values)
+
+	t := Mx(m)
 
 	s := Render(t, values)
 	return s
@@ -549,7 +581,9 @@ func Rt(props RtProps) string {
 		"innerhtml": props.InnerHTML,
 	}
 
-	t := Mx(`<rt {{global}}>{{innerhtml}}</rt>`)
+	m := BuildMarkup("rt", values)
+
+	t := Mx(m)
 
 	s := Render(t, values)
 	return s
@@ -574,7 +608,9 @@ func Ruby(props RubyProps) string {
 		"innerhtml": props.InnerHTML,
 	}
 
-	t := Mx(`<ruby {{global}}>{{innerhtml}}</ruby>`)
+	m := BuildMarkup("ruby", values)
+
+	t := Mx(m)
 
 	s := Render(t, values)
 	return s
@@ -599,7 +635,9 @@ func S(props SProps) string {
 		"innerhtml": props.InnerHTML,
 	}
 
-	t := Mx(`<s {{global}}>{{innerhtml}}</s>`)
+	m := BuildMarkup("s", values)
+
+	t := Mx(m)
 
 	s := Render(t, values)
 	return s
@@ -623,7 +661,9 @@ func Samp(props SampProps) string {
 		"innerhtml": props.InnerHTML,
 	}
 
-	t := Mx(`<samp {{global}}>{{innerhtml}}</samp>`)
+	m := BuildMarkup("samp", values)
+
+	t := Mx(m)
 
 	s := Render(t, values)
 	return s
@@ -647,7 +687,9 @@ func Small(props SmallProps) string {
 		"innerhtml": props.InnerHTML,
 	}
 
-	t := Mx(`<small {{global}}>{{innerhtml}}</small>`)
+	m := BuildMarkup("small", values)
+
+	t := Mx(m)
 
 	s := Render(t, values)
 	return s
@@ -675,7 +717,9 @@ func Span(props SpanProps) string {
 		"innerhtml": props.InnerHTML,
 	}
 
-	t := Mx(`<span {{global}}>{{innerhtml}}</span>`)
+	m := BuildMarkup("span", values)
+
+	t := Mx(m)
 
 	s := Render(t, values)
 	return s
@@ -698,7 +742,9 @@ func Strong(props StrongProps) string {
 		"innerhtml": props.InnerHTML,
 	}
 
-	t := Mx(`<strong {{global}}>{{innerhtml}}</strong>`)
+	m := BuildMarkup("strong", values)
+
+	t := Mx(m)
 
 	s := Render(t, values)
 	return s
@@ -722,7 +768,9 @@ func Sub(props SubProps) string {
 		"innerhtml": props.InnerHTML,
 	}
 
-	t := Mx(`<sub {{global}}>{{innerhtml}}</sub>`)
+	m := BuildMarkup("sub", values)
+
+	t := Mx(m)
 
 	s := Render(t, values)
 	return s
@@ -746,7 +794,9 @@ func Sup(props SupProps) string {
 		"innerhtml": props.InnerHTML,
 	}
 
-	t := Mx(`<sup {{global}}>{{innerhtml}}</sup>`)
+	m := BuildMarkup("sup", values)
+
+	t := Mx(m)
 
 	s := Render(t, values)
 	return s
@@ -770,7 +820,9 @@ func Time(props TimeProps) string {
 		"innerhtml": props.InnerHTML,
 	}
 
-	t := Mx(`<time {{global}}>{{innerhtml}}</time>`)
+	m := BuildMarkup("time", values)
+
+	t := Mx(m)
 
 	s := Render(t, values)
 	return s
@@ -794,7 +846,9 @@ func U(props UProps) string {
 		"innerhtml": props.InnerHTML,
 	}
 
-	t := Mx(`<u {{global}}>{{innerhtml}}</u>`)
+	m := BuildMarkup("u", values)
+
+	t := Mx(m)
 
 	s := Render(t, values)
 	return s
@@ -818,7 +872,9 @@ func Var(props VarProps) string {
 		"innerhtml": props.InnerHTML,
 	}
 
-	t := Mx(`<var {{global}}>{{innerhtml}}</var>`)
+	m := BuildMarkup("var", values)
+
+	t := Mx(m)
 
 	s := Render(t, values)
 	return s
@@ -838,7 +894,9 @@ func Wbr(props WbrProps) string {
 		"global": BuildGlobalProps(props.GlobalProps),
 	}
 
-	t := Mx(`<wbr {{global}} />`)
+	m := BuildMarkup("wbr", values)
+
+	t := Mx(m)
 
 	s := Render(t, values)
 	return s

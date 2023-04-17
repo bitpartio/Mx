@@ -20,7 +20,9 @@ func Caption(props CaptionProps) string {
 		"innerhtml": props.InnerHTML,
 	}
 
-	t := Mx(`<caption {{global}}>{{innerhtml}}</caption>`)
+	m := BuildMarkup("caption", values)
+
+	t := Mx(m)
 
 	s := Render(t, values)
 	return s
@@ -43,7 +45,9 @@ func Col(props ColProps) string {
 		"span": BuildIntProp("span", props.Span),
 	}
 
-	t := Mx(`<col {{global}} {{span}}/>`)
+	m := BuildMarkup("col", values)
+
+	t := Mx(m)
 
 	s := Render(t, values)
 	return s
@@ -69,7 +73,9 @@ func Colgroup(props ColgroupProps) string {
 		"innerhtml": props.InnerHTML,
 	}
 
-	t := Mx(`<colgroup {{global}} {{span}}>{{innerhtml}}</colgroup>`)
+	m := BuildMarkup("colgroup", values)
+
+	t := Mx(m)
 
 	s := Render(t, values)
 	return s
@@ -93,7 +99,9 @@ func Table(props TableProps) string {
 		"innerhtml": props.InnerHTML,
 	}
 
-	t := Mx(`<table {{global}}>{{innerhtml}}</table>`)
+	m := BuildMarkup("table", values)
+
+	t := Mx(m)
 
 	s := Render(t, values)
 	return s
@@ -116,7 +124,9 @@ func Tbody(props TbodyProps) string {
 		"innerhtml": props.InnerHTML,
 	}
 
-	t := Mx(`<tbody {{global}}>{{innerhtml}}</tbody>`)
+	m := BuildMarkup("tbody", values)
+
+	t := Mx(m)
 
 	s := Render(t, values)
 	return s
@@ -139,7 +149,9 @@ func Td(props TdProps) string {
 		"innerhtml": props.InnerHTML,
 	}
 
-	t := Mx(`<td {{global}}>{{innerhtml}}</td>`)
+	m := BuildMarkup("td", values)
+
+	t := Mx(m)
 
 	s := Render(t, values)
 	return s
@@ -161,7 +173,9 @@ func Tfoot(props TfootProps) string {
 		"innerhtml": props.InnerHTML,
 	}
 
-	t := Mx(`<tfoot {{global}}>{{innerhtml}}</tfoot>`)
+	m := BuildMarkup("tfoot", values)
+
+	t := Mx(m)
 	s := Render(t, values)
 	return s
 }
@@ -183,7 +197,9 @@ func Th(props ThProps) string {
 		"innerhtml": props.InnerHTML,
 	}
 
-	t := Mx(`<th {{global}}>{{innerhtml}}</th>`)
+	m := BuildMarkup("th", values)
+
+	t := Mx(m)
 
 	s := Render(t, values)
 	return s
@@ -205,7 +221,9 @@ func Thead(props TheadProps) string {
 		"innerhtml": props.InnerHTML,
 	}
 
-	t := Mx(`<thead {{global}}>{{innerhtml}}</thead>`)
+	m := BuildMarkup("thead", values)
+
+	t := Mx(m)
 
 	s := Render(t, values)
 	return s
@@ -229,7 +247,9 @@ func Tr(props TrProps) string {
 		"innerhtml": props.InnerHTML,
 	}
 
-	t := Mx(`<tr {{global}}>{{innerhtml}}</tr>`)
+	m := BuildMarkup("tr", values)
+
+	t := Mx(m)
 
 	s := Render(t, values)
 	return s

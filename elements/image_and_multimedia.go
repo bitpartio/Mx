@@ -133,7 +133,9 @@ func Area(props AreaProps) string {
 		"target":         BuildProp("target", props.Target),
 	}
 
-	t := Mx(`<area {{global}} {{alt}} {{coords}} {{href}} {{hreflang}} {{ping}} {{shape}} {{target}}/>`)
+	m := BuildMarkup("area", values)
+
+	t := Mx(m)
 
 	s := Render(t, values)
 	return s
@@ -338,7 +340,9 @@ func Audio(props AudioProps) string {
 		"innerhtml": props.InnerHTML,
 	}
 
-	t := Mx(`<audio {{global}} {{autoplay}} {{controls}} {{controlslist}} {{disableremoteplayback}} {{loop}} {{muted}} {{preload}} {{src}}>{{innerhtml}}</audio>`)
+	m := BuildMarkup("audio", values)
+
+	t := Mx(m)
 
 	s := Render(t, values)
 	return s
@@ -440,7 +444,9 @@ func Img(props ImgProps) string {
 		"usemap":         BuildProp("usemap", props.Usemap),
 	}
 
-	t := Mx(`<img {{global}} {{alt}} {{crossorigin}} {{decoding}} {{elementtiming}} {{fetchpriority}} {{height}} {{ismap}} {{loading}} {{referrerpolicy}} {{sizes}} {{src}} {{srcset}} {{width}} {{usemap}}/>`)
+	m := BuildMarkup("img", values)
+
+	t := Mx(m)
 
 	s := Render(t, values)
 	return s
@@ -519,7 +525,9 @@ func Map(props mapProps) string {
 		"innerhtml": props.innerhtml,
 	}
 
-	t := Mx(`<map {{global}}>{{innerhtml}}</map>`)
+	m := BuildMarkup("map", values)
+
+	t := Mx(m)
 
 	s := Render(t, values)
 	return s
@@ -540,7 +548,9 @@ func Track(props TrackProps) string {
 		"global": BuildGlobalProps(props.GlobalProps),
 	}
 
-	t := Mx(`<track {{global}} />`)
+	m := BuildMarkup("track", values)
+
+	t := Mx(m)
 
 	s := Render(t, values)
 	return s
@@ -564,7 +574,9 @@ func Video(props VideoProps) string {
 		"innerhtml": props.InnerHTML,
 	}
 
-	t := Mx(`<video {{global}}>{{innerhtml}}</video>`)
+	m := BuildMarkup("video", values)
+
+	t := Mx(m)
 
 	s := Render(t, values)
 	return s

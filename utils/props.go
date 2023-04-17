@@ -53,12 +53,22 @@ func BuildBooleanProp(name string, prop bool) (s string) {
 	return s
 }
 
-// BuildNumberProp
-func BuildNumberProp(name string, prop int) string {
+// BuildIntProp
+func BuildIntProp(name string, prop int) string {
 	var s strings.Builder
 	s.WriteString(name)
 	s.WriteString(`="`)
 	s.WriteString(strconv.Itoa(prop))
+	s.WriteString(`"`)
+	return s.String()
+}
+
+// BuildFloatProp
+func BuildFloatProp(name string, prop float64) string {
+	var s strings.Builder
+	s.WriteString(name)
+	s.WriteString(`="`)
+	s.WriteString(strconv.FormatFloat(prop, 'f', -1, 64))
 	s.WriteString(`"`)
 	return s.String()
 }
@@ -76,6 +86,11 @@ func BuildChronosProp(name string, prop time.Time, format string) string {
 // BuildDateProp
 func BuildDateProp(name string, prop time.Time) string {
 	return BuildChronosProp(name, prop, "2006-01-02")
+}
+
+// BuildDateMonthProp
+func BuildDateMonthProp(name string, prop time.Time) string {
+	return BuildChronosProp(name, prop, "2006-01")
 }
 
 // BuildDateTimeProp
