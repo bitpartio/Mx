@@ -11,8 +11,8 @@ import . "github.com/bitpartio/Mx/utils"
 type CanvasProps struct {
 	GlobalProps
 
-	Height int
-	Width  int
+	Height *int
+	Width  *int
 
 	InnerHTML string
 }

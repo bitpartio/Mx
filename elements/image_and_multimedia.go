@@ -412,14 +412,14 @@ type ImgProps struct {
 	Decoding       func() decodingOption
 	Elementtiming  string
 	Fetchpriority  func() fetchpriorityOption
-	Height         int
+	Height         *int
 	Ismap          bool
 	Loading        func() loadingOption
 	Referrerpolicy func() referrerpolicyOption
 	Sizes          []string
 	Src            string
 	Srcset         []string
-	Width          int
+	Width          *int
 	Usemap         string
 
 	GlobalProps

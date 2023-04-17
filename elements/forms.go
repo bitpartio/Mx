@@ -3,7 +3,6 @@ package elements
 // Ref: https://developer.mozilla.org/en-US/docs/Web/HTML/Element#forms
 
 import (
-	"fmt"
 	"time"
 
 	. "github.com/bitpartio/Mx/utils"
@@ -870,7 +869,7 @@ type InputDateProps struct {
 	Name         string
 	Readonly     bool
 	Required     bool
-	Step         int
+	Step         *int
 	Value        string
 }
 
@@ -890,7 +889,7 @@ func InputDate(props InputDateProps) string {
 		"form":         BuildProp("form", props.Form),
 		"list":         BuildProp("list", props.List),
 		"max":          BuildDateProp("max", props.Max),
-		"min":          BuildDateProp("max", props.Min),
+		"min":          BuildDateProp("min", props.Min),
 		"name":         BuildProp("name", props.Name),
 		"readonly":     BuildBooleanProp("readonly", props.Readonly),
 		"required":     BuildBooleanProp("required", props.Required),
@@ -919,7 +918,7 @@ type InputDatetimeLocalProps struct {
 	Name         string
 	Readonly     bool
 	Required     bool
-	Step         int
+	Step         *int
 	Value        string
 }
 
@@ -963,15 +962,15 @@ type InputEmailProps struct {
 	Disabled     bool
 	Form         string
 	List         string
-	Maxlength    int
-	Minlength    int
+	Maxlength    *int
+	Minlength    *int
 	Multiple     bool
 	Name         string
 	Pattern      string
 	Placeholder  string
 	Readonly     bool
 	Required     bool
-	Size         int
+	Size         *int
 	Value        string
 }
 
@@ -1132,13 +1131,13 @@ type InputImageProps struct {
 	Formmethod     func() formmethodOption
 	Formnovalidate bool
 	Formtarget     string
-	Height         int
+	Height         *int
 	List           string
 	Name           string
 	Readonly       bool
 	Required       bool
 	Src            string
-	Width          int
+	Width          *int
 }
 
 func InputImage(props InputImageProps) string {
@@ -1201,7 +1200,7 @@ type InputMonthProps struct {
 	Name         string
 	Readonly     bool
 	Required     bool
-	Step         int
+	Step         *int
 	Value        string
 }
 
@@ -1245,14 +1244,14 @@ type InputNumberProps struct {
 	Disabled     bool
 	Form         string
 	List         string
-	Max          float64
-	Min          float64
+	Max          *float64
+	Min          *float64
 	Name         string
 	Placeholder  string
 	Readonly     bool
 	Required     bool
-	Step         float64
-	Value        float64
+	Step         *float64
+	Value        *float64
 }
 
 func InputNumber(props InputNumberProps) string {
@@ -1295,14 +1294,14 @@ type InputPasswordProps struct {
 	Autocomplete func() autocompleteInputOption
 	Disabled     bool
 	File         string
-	Maxlength    int
-	Minlength    int
+	Maxlength    *int
+	Minlength    *int
 	Name         string
 	Pattern      string
 	Placeholder  string
 	Readonly     bool
 	Required     bool
-	Size         int
+	Size         *int
 	Value        string
 }
 
@@ -1379,11 +1378,11 @@ type InputRangeProps struct {
 	Disabled     bool
 	Form         string
 	List         string
-	Max          float64
-	Min          float64
+	Max          *float64
+	Min          *float64
 	Name         string
-	Step         float64
-	Value        float64
+	Step         *float64
+	Value        *float64
 }
 
 func InputRange(props InputRangeProps) string {
@@ -1455,14 +1454,14 @@ type InputSearchProps struct {
 	Disabled     bool
 	Form         string
 	List         string
-	Maxlength    int
-	Minlength    int
+	Maxlength    *int
+	Minlength    *int
 	Name         string
 	Pattern      string
 	Placeholder  string
 	Readonly     bool
 	Required     bool
-	Size         int
+	Size         *int
 	Value        string
 }
 
@@ -1559,14 +1558,14 @@ type InputTelProps struct {
 	Disabled     bool
 	Form         string
 	List         string
-	Maxlength    int
-	Minlength    int
+	Maxlength    *int
+	Minlength    *int
 	Name         string
 	Pattern      string
 	Placeholder  string
 	Readonly     bool
 	Required     bool
-	Size         int
+	Size         *int
 	Value        string
 }
 
@@ -1613,14 +1612,14 @@ type InputTextProps struct {
 	Disabled     bool
 	Form         string
 	List         string
-	Maxlength    int
-	Minlength    int
+	Maxlength    *int
+	Minlength    *int
 	Name         string
 	Pattern      string
 	Placeholder  string
 	Readonly     bool
 	Required     bool
-	Size         int
+	Size         *int
 	Value        string
 }
 
@@ -1653,25 +1652,51 @@ func InputText(props InputTextProps) string {
 
 	m := BuildMarkup("input", values)
 
-	fmt.Println(m)
-
 	t := Mx(m)
 
 	s := Render(t, values)
-	fmt.Println(s)
 	return s
 }
 
 /* Input Time */
 type InputTimeProps struct {
 	GlobalProps
+
+	Autocomplete func() autocompleteInputOption
+	Disabled     bool
+	Form         string
+	List         string
+	Max          time.Time
+	Min          time.Time
+	Name         string
+	Readonly     bool
+	Required     bool
+	Step         *int
+	Value        time.Time
 }
 
 func InputTime(props InputTimeProps) string {
+	var autocomplete string
+	if props.Autocomplete != nil {
+		autocomplete = BuildProp("autocomplete", props.Autocomplete().String())
+	}
+
 	values := map[string]interface{}{
 		"global": BuildGlobalProps(props.GlobalProps),
 
 		"type": BuildProp("type", "time"),
+
+		"autocomplete": autocomplete,
+		"disabled":     BuildBooleanProp("disabled", props.Disabled),
+		"form":         BuildProp("form", props.Form),
+		"list":         BuildProp("list", props.List),
+		"max":          BuildTimeProp("max", props.Max),
+		"min":          BuildTimeProp("min", props.Min),
+		"name":         BuildProp("name", props.Name),
+		"readonly":     BuildBooleanProp("readonly", props.Readonly),
+		"required":     BuildBooleanProp("required", props.Required),
+		"step":         BuildIntProp("step", props.Step),
+		"value":        BuildTimeProp("value", props.Value),
 	}
 
 	m := BuildMarkup("input", values)

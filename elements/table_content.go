@@ -35,7 +35,7 @@ func Caption(props CaptionProps) string {
 type ColProps struct {
 	GlobalProps
 
-	Span int
+	Span *int
 }
 
 func Col(props ColProps) string {
@@ -59,7 +59,7 @@ func Col(props ColProps) string {
 type ColgroupProps struct {
 	GlobalProps
 
-	Span int
+	Span *int
 
 	InnerHTML string
 }

@@ -48,10 +48,10 @@ func init() {
 type EmbedProps struct {
 	GlobalProps
 
-	Height int
+	Height *int
 	Src    string
 	Type   string
-	Width  int
+	Width  *int
 }
 
 func Embed(props EmbedProps) string {
@@ -82,14 +82,14 @@ type IframeProps struct {
 	Allow          string
 	Credentialless bool
 	Csp            string
-	Height         int
+	Height         *int
 	Loading        func() loadingOption
 	Name           string
 	Referrerpolicy func() referrerpolicyOption
 	Sandbox        []func() sandboxOption
 	Src            string
 	Srcdoc         string
-	Width          int
+	Width          *int
 
 	InnerHTML string
 }
