@@ -1815,12 +1815,16 @@ func InputWeek(props InputWeekProps) string {
 type LabelProps struct {
 	GlobalProps
 
+	For string
+
 	InnerHTML string
 }
 
 func Label(props LabelProps) string {
 	values := map[string]interface{}{
 		"global": BuildGlobalProps(props.GlobalProps),
+
+		"for": BuildProp("for", props.For),
 
 		"innerhtml": props.InnerHTML,
 	}
@@ -1864,12 +1868,26 @@ func Legend(props LegendProps) string {
 type MeterProps struct {
 	GlobalProps
 
+	High    *float64
+	Low     *float64
+	Max     *float64
+	Min     *float64
+	Optimum *float64
+	Value   string
+
 	InnerHTML string
 }
 
 func Meter(props MeterProps) string {
 	values := map[string]interface{}{
 		"global": BuildGlobalProps(props.GlobalProps),
+
+		"high":    BuildFloatProp("high", props.Max),
+		"low":     BuildFloatProp("low", props.Min),
+		"max":     BuildFloatProp("max", props.Max),
+		"min":     BuildFloatProp("min", props.Min),
+		"optimum": BuildFloatProp("optimum", props.Min),
+		"value":   BuildProp("value", props.Value),
 
 		"innerhtml": props.InnerHTML,
 	}
@@ -1888,12 +1906,18 @@ func Meter(props MeterProps) string {
 type OptgroupProps struct {
 	GlobalProps
 
+	Disabled bool
+	Label    string
+
 	InnerHTML string
 }
 
 func Optgroup(props OptgroupProps) string {
 	values := map[string]interface{}{
 		"global": BuildGlobalProps(props.GlobalProps),
+
+		"disabled": BuildBooleanProp("disabled", props.Disabled),
+		"label":    BuildProp("label", props.Label),
 
 		"innerhtml": props.InnerHTML,
 	}
@@ -1914,12 +1938,22 @@ func Optgroup(props OptgroupProps) string {
 type OptionProps struct {
 	GlobalProps
 
+	Disabled bool
+	Label    string
+	Selected bool
+	Value    string
+
 	InnerHTML string
 }
 
 func Option(props OptionProps) string {
 	values := map[string]interface{}{
 		"global": BuildGlobalProps(props.GlobalProps),
+
+		"disabled": BuildBooleanProp("disabled", props.Disabled),
+		"label":    BuildProp("label", props.Label),
+		"selected": BuildBooleanProp("selected", props.Selected),
+		"value":    BuildProp("value", props.Value),
 
 		"innerhtml": props.InnerHTML,
 	}
@@ -1939,12 +1973,20 @@ func Option(props OptionProps) string {
 type OutputProps struct {
 	GlobalProps
 
+	For  string
+	Form string
+	Name string
+
 	InnerHTML string
 }
 
 func Output(props OutputProps) string {
 	values := map[string]interface{}{
 		"global": BuildGlobalProps(props.GlobalProps),
+
+		"for":  BuildProp("for", props.For),
+		"form": BuildProp("form", props.Form),
+		"name": BuildProp("name", props.Name),
 
 		"innerhtml": props.InnerHTML,
 	}
@@ -1964,12 +2006,18 @@ func Output(props OutputProps) string {
 type ProgressProps struct {
 	GlobalProps
 
+	Max   *float64
+	Value string
+
 	InnerHTML string
 }
 
 func Progress(props ProgressProps) string {
 	values := map[string]interface{}{
 		"global": BuildGlobalProps(props.GlobalProps),
+
+		"max":   BuildFloatProp("max", props.Max),
+		"value": BuildProp("value", props.Value),
 
 		"innerhtml": props.InnerHTML,
 	}
@@ -1988,12 +2036,33 @@ func Progress(props ProgressProps) string {
 type SelectProps struct {
 	GlobalProps
 
+	Autocomplete func() autocompleteFormOption
+	Autofocus    bool
+	Disabled     bool
+	Multiple     bool
+	Name         string
+	Required     bool
+	Size         *int
+
 	InnerHTML string
 }
 
 func Select(props SelectProps) string {
+	var autocomplete string
+	if props.Autocomplete != nil {
+		autocomplete = BuildProp("autocomplete", props.Autocomplete().String())
+	}
+
 	values := map[string]interface{}{
 		"global": BuildGlobalProps(props.GlobalProps),
+
+		"autocomplete": autocomplete,
+		"autofocus":    BuildBooleanProp("autofocus", props.Autofocus),
+		"disabled":     BuildBooleanProp("disabled", props.Disabled),
+		"multiple":     BuildBooleanProp("multiple", props.Multiple),
+		"name":         BuildProp("name", props.Name),
+		"required":     BuildBooleanProp("required", props.Required),
+		"size":         BuildIntProp("size", props.Size),
 
 		"innerhtml": props.InnerHTML,
 	}
