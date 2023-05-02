@@ -134,6 +134,17 @@ func init() {
 			User: captureOptionUser,
 		},
 	}
+	TextareaOptions = textareaOptions{
+		Spellcheck: spellcheckOptions{
+			Default: spellcheckOptionDefault,
+			False:   spellcheckOptionFalse,
+			True:    spellcheckOptionTrue,
+		},
+		Wrap: wrapOptions{
+			Hard: wrapOptionHard,
+			Soft: wrapOptionSoft,
+		},
+	}
 }
 
 /*
@@ -2083,12 +2094,49 @@ func Select(props SelectProps) string {
 type TextareaProps struct {
 	GlobalProps
 
+	Autocomplete func() autocompleteFormOption
+	Autofocus    bool
+	Cols         *int
+	Disabled     bool
+	Form         string
+	Maxlength    *int
+	Minlength    *int
+	Name         string
+	Placeholder  string
+	Readonly     bool
+	Required     bool
+	Rows         *int
+	Spellcheck   func() spellcheckOption
+
 	InnerHTML string
 }
 
 func Textarea(props TextareaProps) string {
+	var autocomplete string
+	if props.Autocomplete != nil {
+		autocomplete = BuildProp("autocomplete", props.Autocomplete().String())
+	}
+
+	var spellcheck string
+	if props.Spellcheck != nil {
+		spellcheck = BuildProp("spellcheck", props.Spellcheck().String())
+	}
 	values := map[string]interface{}{
 		"global": BuildGlobalProps(props.GlobalProps),
+
+		"autocomplete": autocomplete,
+		"autofocus":    BuildBooleanProp("autofocus", props.Autofocus),
+		"cols":         BuildIntProp("cols", props.Cols),
+		"disabled":     BuildBooleanProp("disabled", props.Disabled),
+		"form":         BuildProp("form", props.Form),
+		"maxlength":    BuildIntProp("maxlength", props.Maxlength),
+		"minlength":    BuildIntProp("minlength", props.Minlength),
+		"name":         BuildProp("name", props.Name),
+		"placeholder":  BuildProp("placeholder", props.Placeholder),
+		"readonly":     BuildBooleanProp("readonly", props.Readonly),
+		"required":     BuildBooleanProp("required", props.Required),
+		"rows":         BuildIntProp("rows", props.Rows),
+		"spellcheck":   spellcheck,
 
 		"innerhtml": props.InnerHTML,
 	}
@@ -2099,4 +2147,52 @@ func Textarea(props TextareaProps) string {
 
 	s := Render(t, values)
 	return s
+}
+
+var TextareaOptions textareaOptions
+
+type textareaOptions struct {
+	Spellcheck spellcheckOptions
+	Wrap       wrapOptions
+}
+
+/* Spellcheck */
+type spellcheckOption struct{ string }
+
+func (o spellcheckOption) String() string { return o.string }
+
+func spellcheckOptionDefault() spellcheckOption {
+	return spellcheckOption{"default"}
+}
+
+func spellcheckOptionFalse() spellcheckOption {
+	return spellcheckOption{"false"}
+}
+
+func spellcheckOptionTrue() spellcheckOption {
+	return spellcheckOption{"true"}
+}
+
+type spellcheckOptions struct {
+	Default func() spellcheckOption
+	False   func() spellcheckOption
+	True    func() spellcheckOption
+}
+
+/* Wrap */
+type wrapOption struct{ string }
+
+func (o wrapOption) String() string { return o.string }
+
+func wrapOptionHard() wrapOption {
+	return wrapOption{"hard"}
+}
+
+func wrapOptionSoft() wrapOption {
+	return wrapOption{"soft"}
+}
+
+type wrapOptions struct {
+	Hard func() wrapOption
+	Soft func() wrapOption
 }
