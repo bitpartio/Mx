@@ -92,6 +92,15 @@ func init() {
 			Unsafe:              referrerpolicyOptionUnsafe,
 		},
 	}
+	TrackOptions = trackOptions{
+		Kind: kindOptions{
+			Subtitles:    kindOptionSubtitles,
+			Captions:     kindOptionCaptions,
+			Descriptions: kindOptionDescriptions,
+			Chapters:     kindOptionChapters,
+			Metadata:     kindOptionMetadata,
+		},
+	}
 }
 
 /*
@@ -103,7 +112,7 @@ type AreaProps struct {
 	GlobalProps
 
 	Alt            string
-	Coords         coordsOption
+	Coords         func() coordsOption
 	Download       string
 	Href           string
 	Hreflang       string // Limited values but too complex for enum. Ref: https://datatracker.ietf.org/doc/html/rfc5646
@@ -114,9 +123,17 @@ type AreaProps struct {
 }
 
 func Area(props AreaProps) string {
+	var coords string
+	if props.Coords != nil {
+		coords = BuildProp("coords", props.Coords().String())
+	}
 	var referrerpolicy string
 	if props.Referrerpolicy != nil {
 		referrerpolicy = BuildProp("referrerpolicy", props.Referrerpolicy().String())
+	}
+	var shape string
+	if props.Shape != nil {
+		referrerpolicy = BuildProp("shape", props.Shape().String())
 	}
 
 	values := map[string]interface{}{
@@ -124,12 +141,12 @@ func Area(props AreaProps) string {
 
 		"alt":            BuildProp("alt", props.Alt),
 		"download":       BuildProp("download", props.Download),
-		"coords":         BuildProp("coords", props.Coords.String()),
+		"coords":         coords,
 		"href":           BuildProp("href", props.Href),
 		"hreflang":       BuildProp("hreflang", props.Hreflang),
 		"ping":           BuildPropListWithSpaces("ping", props.Ping),
 		"referrerpolicy": referrerpolicy,
-		"shape":          BuildProp("shape", props.Shape().String()),
+		"shape":          shape,
 		"target":         BuildProp("target", props.Target),
 	}
 
@@ -324,17 +341,30 @@ type AudioProps struct {
 }
 
 func Audio(props AudioProps) string {
+	var controlslist string
+	if props.Controlslist != nil {
+		controlslist = BuildProp("shape", props.Controlslist().String())
+	}
+	var crossorigin string
+	if props.Crossorigin != nil {
+		crossorigin = BuildProp("crossorigin", props.Crossorigin().String())
+	}
+	var preload string
+	if props.Preload != nil {
+		preload = BuildProp("preload", props.Preload().String())
+	}
+
 	values := map[string]interface{}{
 		"global": BuildGlobalProps(props.GlobalProps),
 
 		"autoplay":              BuildBooleanProp("autoplay", props.Autoplay),
 		"controls":              BuildBooleanProp("controls", props.Controls),
-		"controlslist":          BuildProp("controlslist", props.Controlslist().String()),
-		"crossorigin":           BuildProp("crossorigin", props.Crossorigin().String()),
+		"controlslist":          controlslist,
+		"crossorigin":           crossorigin,
 		"disableremoteplayback": BuildBooleanProp("disableremoteplayback", props.Disableremoteplayback),
 		"loop":                  BuildBooleanProp("loop", props.Loop),
 		"muted":                 BuildBooleanProp("muted", props.Muted),
-		"preload":               BuildProp("preload", props.Preload().String()),
+		"preload":               preload,
 		"src":                   BuildProp("src", props.Src),
 
 		"innerhtml": props.InnerHTML,
@@ -426,17 +456,38 @@ type ImgProps struct {
 }
 
 func Img(props ImgProps) string {
+	var crossorigin string
+	if props.Crossorigin != nil {
+		crossorigin = BuildProp("crossorigin", props.Crossorigin().String())
+	}
+	var decoding string
+	if props.Decoding != nil {
+		decoding = BuildProp("decoding", props.Decoding().String())
+	}
+	var fetchpriority string
+	if props.Fetchpriority != nil {
+		fetchpriority = BuildProp("fetchpriority", props.Fetchpriority().String())
+	}
+	var loading string
+	if props.Loading != nil {
+		loading = BuildProp("loading", props.Loading().String())
+	}
+	var referrerpolicy string
+	if props.Referrerpolicy != nil {
+		referrerpolicy = BuildProp("referrerpolicy", props.Referrerpolicy().String())
+	}
+
 	values := map[string]interface{}{
 		"global":         BuildGlobalProps(props.GlobalProps),
 		"alt":            BuildProp("alt", props.Alt),
-		"crossorigin":    BuildProp("crossorigin", props.Crossorigin().String()),
-		"decoding":       BuildProp("decoding", props.Decoding().String()),
+		"crossorigin":    crossorigin,
+		"decoding":       decoding,
 		"elementtiming":  BuildProp("elementtiming", props.Elementtiming),
-		"fetchpriority":  BuildProp("fetchpriority", props.Fetchpriority().String()),
+		"fetchpriority":  fetchpriority,
 		"height":         BuildIntProp("height", props.Height),
 		"ismap":          BuildBooleanProp("ismap", props.Ismap),
-		"loading":        BuildProp("loading", props.Loading().String()),
-		"referrerpolicy": BuildProp("referrerpolicy", props.Referrerpolicy().String()),
+		"loading":        loading,
+		"referrerpolicy": referrerpolicy,
 		"sizes":          BuildPropListWithCommas("referrerpolicy", props.Sizes),
 		"src":            BuildProp("src", props.Src),
 		"srcset":         BuildPropListWithCommas("srcset", props.Srcset),
@@ -515,14 +566,18 @@ var ImgOptions imgOptions
 type mapProps struct {
 	GlobalProps
 
-	innerhtml string
+	Name string
+
+	InnerHTML string
 }
 
 func Map(props mapProps) string {
 	values := map[string]interface{}{
 		"global": buildGlobalProps(props.GlobalProps),
 
-		"innerhtml": props.innerhtml,
+		"name": BuildProp("name", props.Name),
+
+		"innerhtml": props.InnerHTML,
 	}
 
 	m := BuildMarkup("map", values)
@@ -541,11 +596,27 @@ func Map(props mapProps) string {
  */
 type TrackProps struct {
 	GlobalProps
+
+	Default bool
+	Kind    func() kindOption
+	Label   string
+	Src     string
+	Srclang string
 }
 
 func Track(props TrackProps) string {
+	var kind string
+	if props.Kind != nil {
+		kind = BuildProp("kind", props.Kind().String())
+	}
+
 	values := map[string]interface{}{
 		"global": BuildGlobalProps(props.GlobalProps),
+
+		"kind":    kind,
+		"label":   BuildProp("label", props.Label),
+		"src":     BuildProp("src", props.Src),
+		"srclang": BuildProp("srclang", props.Srclang),
 	}
 
 	m := BuildMarkup("track", values)
@@ -555,6 +626,46 @@ func Track(props TrackProps) string {
 	s := Render(t, values)
 	return s
 }
+
+/* kind */
+type kindOption struct{ string }
+
+func (o kindOption) String() string { return o.string }
+
+func kindOptionSubtitles() kindOption {
+	return kindOption{"subtitles"}
+}
+
+func kindOptionCaptions() kindOption {
+	return kindOption{"captions"}
+}
+
+func kindOptionDescriptions() kindOption {
+	return kindOption{"descriptions"}
+}
+
+func kindOptionChapters() kindOption {
+	return kindOption{"chapters"}
+}
+
+func kindOptionMetadata() kindOption {
+	return kindOption{"metadata"}
+}
+
+type kindOptions struct {
+	Subtitles    func() kindOption
+	Captions     func() kindOption
+	Descriptions func() kindOption
+	Chapters     func() kindOption
+	Metadata     func() kindOption
+}
+
+/* Track Options */
+type trackOptions struct {
+	Kind kindOptions
+}
+
+var TrackOptions trackOptions
 
 /*
  * Embeds a media player which supports video playback into the document.
